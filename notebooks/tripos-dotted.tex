@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=2cm]{geometry}
+
+\usepackage{tikz}
+
+\definecolor{dotblue}{RGB}{189, 204, 224}
+
+\tikzset{
+	mark coordinate/.style={
+		inner sep=0pt,
+		outer sep=0pt,
+		minimum size=2pt,
+		fill=dotblue,
+		circle}
+}
+
+\begin{document}
+	
+	\pagestyle{empty}
+
+	\begin{center}
+	\begin{tikzpicture}
+
+		\draw (0,0) rectangle (16.2,-0.9);
+		\foreach \s in {1.8,14.4,12.6,10.8} {\draw (\s,0) -- (\s,-0.9);}
+
+		\foreach \s in {0,...,18} {
+			\foreach \t in {2,...,28}
+				{
+					\coordinate [mark coordinate] (\s \t) at (\s*0.9,-\t*0.9);
+				}
+		}
+
+	\end{tikzpicture}
+	\end{center}
+
+		\pagebreak
+
+	\begin{center}
+	\begin{tikzpicture}
+
+		\foreach \s in {0,...,18} {
+			\foreach \t in {0,...,28}
+				{
+					\coordinate [mark coordinate] (\s \t) at (\s*0.9,-\t*0.9);
+				}
+		}
+
+	\end{tikzpicture}
+	\end{center}
+
+\end{document}

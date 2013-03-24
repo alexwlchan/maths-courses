@@ -1,0 +1,531 @@
+%!TEX root = geometry.tex
+\stepcounter{lecture}
+\setcounter{lecture}{4}
+\sektion{Riemannian geometry}
+
+\lecturemarker{9}{18 Feb}
+All the functions we will encounter in this chapter are smooth (that is, infinitely differentiable) unless otherwise stated.
+
+\subsection{Parameterised spaces} % (fold)
+\label{sub:parameterised_spaces}
+
+\begin{definition}
+	A \emph{parametrised surface} $S\subset\R^3$ is a map $\sigma:U\to\R^3$, where $U$ is an open subset of $\R^2$ such that
+	\begin{enumerate}
+		\shortskip
+		\item $\sigma$ is injective and $\Image(\sigma)=\sigma$;
+		\item For each $\pp\in U$, $\ddif{\sigma}{\pp}$ is injective.
+	\end{enumerate}
+	This condition is actually slightly more restrictive than it needs to be.
+
+	If $S$ satisfies (ii), then we say that it is \emph{smoothly embedded}.
+\end{definition}
+
+Recall that if $\sigma=(\sigma_1,\sigma_2,\sigma_3)$, then $\ddif{\sigma}{\pp}:\R^2\to\R^3$ has matrix representation
+$$\mat{\ssig{1x} & \ssig{1y} \\
+\ssig{2x} & \ssig{2y} \\
+\ssig{3x} & \ssig{3y}}, \qquad
+\text{where $\sigma_{ix} = \dpd{\sigma_i}{x}$.}$$
+
+\begin{example}
+	Consider the following two parametrisations of $S^{\,2}$. First, spherical coordinates:
+	\begin{equation*}
+		\fullfunction{\sigma}{(0,2\pi) \times (0,\pi)}{\R^3}{(\theta,\phi)}{(\cos\theta \sin\phi, \sin\theta\sin\phi, \cos\phi)},
+	\end{equation*}
+	Alternatively, consider the inverse of stereographic projection:
+	\begin{equation*}
+		\fullfunction{\sigma}{\R^2}{\R^3}{(x,y)}{\left( \f{2x}{1+x^2+y^2}, \f{2y}{1+x^2+y^2}, \f{x^2+y^2-1}{1+x^2+y^2} \right)}.
+	\end{equation*}
+\end{example}
+
+We can construct paths on parametrised surfaces in the obvious way: if $\gamma:[0,1] \to U$ is a path in $U$, then $\Gamma = \sigma \circ \gamma$ is a path in $S$.
+
+The chain rule holds as we would expect:
+\begin{equation*}
+	\Gamma\p(t) = \ddif{\sigma}{\gamma(t)}[\gamma\p(t)].
+\end{equation*}
+
+\begin{definition}
+	The \emph{tangent space} to $S$ at $\sigma(\pp)$ is
+	\begin{equation*}
+		T_{\sigma(\pp)} S := \Image \ddif{\sigma}{\pp},
+	\end{equation*}
+	which is a linear subspace of $\R^3$.
+\end{definition}
+
+As with spherical geometry, the derivative of a path at a point is in the tangent space:
+\begin{equation*}
+	\Gamma\p(t) = \ddif{\sigma}{\gamma(t)} [\gamma\p(t)] \in T_{\Gamma(t)}.
+\end{equation*}
+This leads to the following fact, which we shall return to later:
+\begin{equation*}
+	\left.\vert \Gamma\p(t) \vert\right.^2 = \ddif{\sigma}{\gamma(t)} [\gamma\p(t)] \cdot \ddif{\sigma}{\gamma(t)} [\gamma\p(t)].
+\end{equation*}
+
+% subsection parameterised_spaces (end)
+
+\subsection{Riemannian metrics} % (fold)
+\label{sub:riemannian_metrics}
+
+\begin{definition}
+	If $U\subset\R^2$ is open, then a \emph{Riemannian metric} $g$ on $U$ is a smooth map $g:U\to\Mat_2(\R)$ such that for each $\pp\in U$, $g_{\pp} := g(\pp)$ is symmetric and positive definite. That is,
+	\begin{equation*}
+		g_\pp = \mat{E(x,y) & F(x,y) \\ F(x,y) & G(x,y)} \text{ with } E(x,y)>0, EG-F^2>0.
+	\end{equation*}
+\end{definition}
+
+We saw in \emph{Linear Algebra} that a symmetric, positive definite matrix is analogous to an inner product, and that's what we really care about.
+
+For each $\pp\in U$, $g_\pp$ defines an inner product on $\R^2$ 
+\begin{equation*}
+	\left\langle \va,\vb \right\rangle = \va^\Trans \mat{E & F \\ F & G} \vb =: g_\pp(\va,\vb).
+\end{equation*}
+If $\sigma:U\to\R^3$ is a parameterised surface, then define $g$ by
+\begin{equation*}
+	g_\pp(\va,\vb) = \ddif{\sigma}{\pp}(\va) \cdot \ddif{\sigma}{\pp}(\vb),
+\end{equation*}
+which is the usual inner product on $\R^3$.
+
+\begin{note}
+	If $\Gamma=\sigma\circ\gamma$, then
+	\begin{equation*}
+		\Gamma\p(t) \cdot \Gamma\p(t) = g_{\gamma(t)}(\gamma\p(t),\gamma\p(t)).
+	\end{equation*}
+\end{note}
+
+Now if we have
+\begin{equation*}
+	A
+	= \ddif{\bsig}{\pp}
+	= \mat{\sigma_{1x} & \sigma_{1y} \\ \sigma_{2x} & \sigma_{2y} \\ \sigma_{3x} & \sigma_{3y}}
+	= \mat{\bsig_x & \bsig_y},
+\end{equation*}
+then we can write
+\begin{equation*}
+	\ddif{\sigma}{\pp}(\va) \cdot \ddif{\sigma}{\pp}(\vb) = A\va \cdot A\vb = \va^\Trans A^\Trans A \vb.
+\end{equation*}
+This gives us
+\begin{equation*}
+	g 
+	= A^\Trans a
+	= \mat{\bsig_x \\ \bsig_y} \mat{\bsig_x \bsig_y}
+	= \mat{\bsig_x \cdot \bsig_x & \bsig_x \cdot \bsig_y \\ \bsig_y \cdot \bsig_x & \bsig_y \cdot \bsig_y}.
+\end{equation*}
+Now we must show that this really is a metric:
+
+\begin{lemma}
+	As defined above, $g$ is a Riemannian metric.
+\end{lemma}
+
+\begin{proof}
+	As $\bsig_x \cdot \bsig_y = \bsig_y \cdot \bsig_x$, the matrix is symmetric.
+
+	To show that it is positive definite, write
+	\begin{equation*}
+		g_\pp(\va,\va) = \ddif{\sigma}{\pp}(\va) \cdot \ddif{\sigma}{\pp}(\va)\geq 0,
+	\end{equation*}
+	with equality if and only if $\ddif{\sigma}{\pp}(\va)=0$, which is true if and only if $\va=0$, since $\dif{\sigma}$ is injective. (This is where our embedding hypothesis comes in.)
+\end{proof}
+
+\emph{Notation.} We don't usually write $g$ as a $2\times 2$ matrix; instead we write $g=E\dif{x^2} + 2F \dif{x} \dif{y} + G \dif{y^2}$, where
+\begin{equation*}
+	E = \bsig_x \cdot \bsig_x, \qquad F = \bsig_x \cdot \bsig_y, \qquad G = \bsig_y \cdot \bsig_y.
+\end{equation*}
+We say that this $g$ is the Riemannian metric on $U$ \emph{induced} by $\sigma$.
+
+Note that not every Riemannian metric arises in this way.
+
+	\pagebreak
+
+\begin{example}
+	The Euclidean metric on $\R^2$ is $\dif{x^2}+\dif{y^2}$.
+
+	The Euclidean metric on $\R^3$ is $\dif{u_1^2} + \dif{u_2^2} + \dif{u_3^2}$, for coordinates $(u_1,u_2,u_3)$ on $\R^3$. We write
+	\begin{equation*}
+		\dif{u_i} = \pd{\sigma_i}{x} \dif{x} + \pd{\sigma_i}{y} \dif{y},
+	\end{equation*}
+	then the metric induced by $\sigma$ is $\dif{u_1^2} + \dif{u_2^2} + \dif{u_3^2}$.
+\end{example}
+
+Now let's look at a more complicated example:
+
+\begin{example}
+	Consider
+	\begin{equation*}
+		\sigma(x,y) = \left( \f{2x}{1+x^2+y^2}, \f{2y}{1+x^2+y^2}, \f{x^2+y^2-1}{1+x^2+y^2} \right), \qquad \alpha=1+x^2+y^2.
+	\end{equation*}
+	Then we have
+	\begin{align*}
+		\dif{\sigma_1}
+		&= \left( \f{2}{\alpha} - \f{4x^2}{\alpha^2} \right) \dif{x} - \f{4xy}{\alpha^2} \dif{y}
+		 = 2 \left( \f{1+y^2-x^2}{\alpha^2} \dif{x} - \f{2xy}{\alpha^2} \dif{y} \right) \\
+		\dif{\sigma_2}
+		&= 2 \left( \f{1+x^2-y^2}{\alpha^2} \dif{y} - \f{2xy}{\alpha^2} \dif{x} \right) \\
+		\dif{\sigma_3}
+		&= \f{4x}{\alpha^2} \dif{x} + \f{4y}{\alpha^2} \dif{y}.
+	\end{align*}
+	So we have
+	\begin{align*}
+		g
+		&= \left( \dif{\sigma_1} \right)^2 + \left( \dif{\sigma_2} \right)^2 + \left( \dif{\sigma_3} \right)^2 \\
+		&= \f{4}{\alpha^4} \left[ \left[ \left( 1+y^2-x^2 \right)^2 + 4x^2 y^2 + 4x^2 \right] \dif{x^2} \right. \\
+		&  \qquad + \left[ -2xy-2xy+4xy \right] \dif{x} \dif{y} \\
+		&  \qquad\qquad \left.+ \left[ \left( 1+x^2 - y^2 \right)^2 + 4x^2 y^2 + 4y^2 \right] \dif{y}^2 \right] \\
+		&= \f{4}{\alpha^4} \left( \alpha^2 \dif{x^2} + \alpha^2 \dif{y^2} \right) \\
+		&= \f{4\left( \dif{x^2} + \dif{y^2} \right)}{\left( 1+x^2+y^2 \right)^2}.
+	\end{align*}
+	Notice in particular that this is a function of the standard Euclidean metric.
+\end{example}
+
+% subsection riemannian_metrics (end)
+
+	\pagebreak
+
+\subsection{Geometry with the Riemannian metric} % (fold) % formerly Riemannian geometry
+\label{sub:geometry_with_the_riemannian_metric}
+
+Let $g$ be a Riemannian metric on $U\subset\R^2$.
+
+\begin{definition}
+	A path $\gamma:[0,1]\to\R^2$ is \emph{piecewise smooth} if it is continuous on $[0,1]$ and smooth except at finitely many points $0=t_0<t_1<t_2<\cdots<t_n=1$.
+
+	This gives us a way to define \emph{length}. If $\gamma:[0,1]\to U$ is a piecewise smooth curve, then we define
+	\begin{equation*}
+		L_g(\gamma) = \sum_{i=0}^{n-1} \int_{t_i}^{t_i+1} \sqrt{g_{\gamma(t)} (\gamma\p(t), \gamma\p(t))} \dif{t}.
+	\end{equation*}
+\end{definition}
+
+Now, if $g$ is induced by $\sigma$, and $\Gamma=\sigma\circ\gamma$, then
+\begin{equation*}
+	|\Gamma\p(t)| = \sqrt{g_{\gamma(t)} (\gamma\p(t),\gamma\p(t))},
+\end{equation*}
+and so $L_g(\gamma)=L(\Gamma)$, the Euclidean length. This feels intuitively correct.
+
+Now we have a notion of length, we can define distance: if $\pp,\qq\in U$, then define
+\begin{equation*}
+	d(\pp,\qq) = \inf\left\{L_g(\gamma) \mid \gamma:[0,1] \to U \text{ piecewise smooth}, \gamma(0) = \pp, \gamma(1) = \qq\right\}.
+\end{equation*}
+Note, however, that the infinum need not be obtained by any $\gamma$. Consider:
+
+\begin{example}
+	Let $U=\R^2\backslash\{\vec{0}\}$. Take $g=\dif{x^2} + \dif{y^2}$, and $\pp=(-1,0)$, $\qq=(1,0)$.
+
+	Then the infinum is the straight line between them, but this is disallowed since $\vec{0}$ has been excluded. Thus the infinum is never attained.
+\end{example}
+
+Once we have distance, then we can define surface area. If $A\subset U$, then define
+\begin{equation*}
+	\Area(A) = \iint_A \sqrt{EG-F^2} \dif{x} \dif{y} = \iint_A \sqrt{\det g} \dif{x} \dif{y},
+\end{equation*}
+if this integral is defined, and otherwise we say that the area of $A$ is undefined.
+
+\lecturemarker{10}{20 Feb}
+Now we want to show that our notion of distance really is a metric in Riemannian space.
+
+\begin{proposition}
+	As defined above, $d$ is a metric.
+\end{proposition}
+
+\begin{proof*}
+	We must check that:
+	\begin{enumerate}
+		\shortskip
+		\item $d(\pp,\qq) \geq 0$, with equality if and only if $\pp=\qq$;
+		\item $d(\pp,\qq) = d(\qq,\pp)$;
+		\item $d(\pp,\qq) + d(\qq,\rr) \geq d(\pp,\rr)$.
+	\end{enumerate}
+	Unlike previous metrics, it turns out that (i) will be the hardest condition to prove. We need a lemma:
+\end{proof*}
+
+\begin{lemma}
+	Given $\pp\p\in U$ and $r>0$ so that $B_r(\pp\p)\in U$, there is $c>0$ such that if $\gamma:[0,1] \to B_r(\pp\p)$ is a path, then $L_g(\gamma) \geq c\left\vert \gamma(0)-\gamma(1) \right\vert$ (Euclidean distance).
+\end{lemma}
+
+\begin{proof}
+	[Proof of lemma] Consider the general form of $g_\pp$:
+	\begin{equation*}
+		g_\pp = \mat{E & F \\ F & G}.
+	\end{equation*}
+	This is symmetric and positive definite, so it has strictly positive eigenvalues $\lambda_1(\pp), \lambda_2(\pp)$ and eigenvectors $\vv_1(\pp), \vv_2(\pp)$ which form an orthonormal basis of $\R^2$.
+
+	If $\vv=a\vv_1(\pp) + b\vv_2(\pp)$, then
+	\begin{align*}
+		g_\pp(\vv,\vv)
+		&= a^2 \lambda_1(p) + b^2 \lambda_2(\pp) \\
+		&\geq  \min(\lambda_1,\lambda_2) \left.(a^2+b^2)\right. \\
+		&= \min(\lambda_1,\lambda_2) \, \vv\cdot\vv.
+		\tag{$*$}
+	\end{align*}
+	Now $\lambda_1,\lambda_2$ are continuous functions of $\pp$ and $\closure{B_r(\pp\p)}$ is compact, so there exists some $\qq_1 \in \closure{B_r(\pp\p)}$ with $\lambda_1(\qq_1) \leq \lambda_1(\rr)$ for all $\rr\in B_r(\pp)$. Similarly, there is some $\qq_2$ with $\lambda_2(\qq_2) \leq \lambda_2(\rr)$ for all $\rr\in B_r(\pp)$.
+
+	So take $\lambda=\min(\lambda_1(\qq_1),\lambda_2(\qq_2))$, then $g_\pp(\vv,\vv)≥\lambda \vv\cdot\vv$ for all $\pp\in B_r(\pp)$ (from $(*)$). Then
+	\begin{align*}
+		L_g(\gamma)
+		&= \int_0^1 \sqrt{g_{\gamma(t)}(\gamma\p(t),\gamma\p(t))} \dif{t} \\
+		&\geq \int_0^1 \sqrt{\lambda \gamma\p(t) \cdot \gamma\p(t)} \dif{t} \\
+		&= \sqrt{\lambda}\, L_\text{Euclidean}(\gamma) \\
+		&\geq \sqrt{\lambda}\,\left\vert \gamma(0)-\gamma(1) \right\vert.
+	\end{align*}
+	So we take $c=\sqrt{\lambda}$.
+\end{proof}
+
+\begin{proof} [Proof of proposition]
+\mbox{}
+\begin{enumerate}
+	\item For any $\gamma$, we have $L_\gamma(\gamma) \geq 0$, so
+	\begin{equation*}
+		d(\pp,\qq) = \inf_\gamma {L_g(\gamma)} \geq 0.
+	\end{equation*}
+	Pick $r>0$ with $\closure{B_r(\pp)} \subset U$, and choose $c>0$ as in the lemma.
+
+	Spose $\qq \neq \pp$. If $\qq\in\closure{B_r(\pp)}$, $\gamma(0)=\pp$, $\gamma(1)=\qq$, then the lemma tells us that
+	\begin{equation*}
+		L_g(\gamma)
+		\geq c \left\vert \gamma(0)-\gamma(1) \right\vert
+		= c\,d_\text{Euclidean}(\pp,\qq)
+	\end{equation*}
+	and so we have
+	\begin{equation*}
+		d(\pp,\qq) = \int_\gamma {L_g(\gamma)} \geq c\,d_\text{Euclidean}(\pp,\qq) > 0,
+	\end{equation*}
+	since $\pp \neq \qq$.
+
+	If $\qq\not\in \closure{B_r(\pp)}$, then by the intermediate value theorem, if $\gamma(0)=\pp$, $\gamma(1)=\qq$, then there exists some $t\in(0,1)$ with $\left\vert \pp-\gamma(t) \right\vert=\rr$. Then
+	\begin{equation*}
+		L_g(\gamma) \geq L_g(\gamma|_{[0,t]}) \geq c\left\vert \pp-\gamma(t) \right\vert = cr > 0,
+	\end{equation*}
+	so again $\inf L_g(\gamma) \geq cr > 0$.
+
+	\item There's a bijection between
+	\begin{equation*}
+		\left\{ \text{paths from $\pp$ to $\qq$} \right\} \longleftrightarrow \left\{ \text{paths from $\qq$ to $\pp$} \right\}
+	\end{equation*}
+	taking $\gamma(t) \mapsto \gamma(1-t) = \gamma^{-1}(t)$; that is, just traversing the paths in the opposite directions. So we have
+	\begin{equation*}
+		L_g(\gamma) = L_g(\gamma^{-1}) \implies d(\pp,\qq) = d(\qq,\pp).
+	\end{equation*}
+
+		\pagebreak
+
+	\item We want to show that $d(\pp,\qq)+d(\qq,\rr) \geq d(\pp,\rr)$. Pick:
+	\begin{itemize}
+		\shortskip
+		\item $\gamma_1$ with $\gamma_1(0)=\pp$, $\gamma_1(1)=\qq$, and $L_g(\gamma_1) \leq d(\pp,\qq)+\epsilon$ ($\epsilon>0$), and;
+		\item $\gamma_2$ with $\gamma_2(0)=\qq$, $\gamma_2(1)=\rr$, and $L_g(\gamma_2) \leq d(\qq,\rr)+\epsilon$.
+	\end{itemize}
+	% \missingfigure{Geo 10/1}
+	Define $\gamma$ by
+	\begin{equation*}
+		\gamma(t) =
+		\begin{cases}
+			\gamma_1(2t) & \text{if } t \leq 1/2, \\
+			\gamma_2(2t-1) & \text{if } t>1/2.
+		\end{cases}
+	\end{equation*}
+	Then $\gamma$ is piecewise smooth and
+	\begin{equation*}
+		L_g(\gamma)
+		= L_g(\gamma_1) + L_g(\gamma_2)
+		= d(\pp,\qq) + d(\qq,\rr) + 2\epsilon
+		\geq d(\pp,\rr),
+	\end{equation*}
+	and letting $\epsilon\to 0$ gives
+	\begin{equation*}
+		d(\pp,\qq) + d(\qq,\rr) \geq d(\pp,\rr). \qedhere
+	\end{equation*}
+\end{enumerate}
+\end{proof}
+
+So now this definitely defines a metric. Now we move to consider angles. If $\gamma_1,\gamma_2:[0,1]\to U$, with $\gamma_i(t_i) = \pp$, then let $\vv_i = \gamma\p_i(t_i)$.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5, rotate=22]
+	\draw plot [smooth] coordinates {(-0.8, -0.512) (-0.7, -0.343) (-0.6, -0.216) (-0.5, -0.125)
+		(-0.4, -0.064) (-0.3, -0.027) (-0.2, -0.008) (-0.1, -0.001) (0,0)
+		(0.1, 0.001) (0.2, 0.008) (0.3, 0.027) (0.4, 0.064) (0.5, 0.125)
+		(0.6, 0.216) (0.7, 0.343) (0.8, 0.512)}; %
+	
+	\draw (0.8,0.512) node [above right] {$\gamma_1$};
+
+	\begin{scope} [rotate=-72]
+		\draw plot [smooth] coordinates {(-0.8, -0.512) (-0.7, -0.343) (-0.6, -0.216) (-0.5, -0.125)
+			(-0.4, -0.064) (-0.3, -0.027) (-0.2, -0.008) (-0.1, -0.001) (0,0)
+			(0.1, 0.001) (0.2, 0.008) (0.3, 0.027) (0.4, 0.064) (0.5, 0.125)
+			(0.6, 0.216) (0.7, 0.343) (0.8, 0.512)}; %
+
+		\draw (0.8,0.512) node [right] {$\gamma_0$};
+	\end{scope}
+
+	\draw (0,0) node {$\bullet$};
+	\draw (0.05,0) node [above=3pt] {$\pp$};
+
+	\bigarrow [thick] (0,0) -- (0.5,0);
+	\bigarrow [thick] (0,0) -- ++ (-72:0.5);
+
+	\draw (0.2,0) arc (0:-72:0.2);
+	\draw (0.16,-0.14) node [right] {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+% \missingfigure{Geo 10/2}
+
+The angle $\theta$ between $\gamma_1$ and $\gamma_2$ at $\pp$ is defined to be
+\begin{equation*}
+	\cos\theta = \f{g_\pp(\vv_1,\vv_2)}{\left\vert \vv_1 \right\vert_g \left\vert \vv_2 \right\vert_g}, \text{ where } \left\vert \vv_i \right\vert_g = \sqrt{g_\pp(\vv_i,\vv_i)}.
+\end{equation*}
+If $g$ is induced by $\sigma:U\to\R^3$, then $\theta$ is the Euclidean angle between $\Gamma_1=\sigma\circ\gamma_1$ and $\Gamma_2=\sigma\circ\gamma_2$ at $\sigma(\pp)$.
+
+% subsection geometry_with_the_riemannian_metric (end)
+
+	\pagebreak
+
+\subsection{Isometries} % (fold)
+\label{sub:riemannian_isometries}
+
+Let $U_i\subset\R^2$. Suppose $\varphi:U_1\to U_2$ is bijective, and that $\varphi,\varphi^{-1}$ are smooth.
+
+If $g_2$ is an Riemannian metric on $U_2$, then there is an induced metric $g_2\p$ on $U_1$, given by
+\begin{equation*}
+	g\p_{2\pp}(\va,\vb) = g_{2\,\varphi(\pp)} (\ddif{\varphi}{\pp}(\va), \ddif{\varphi}{\pp}(\vb)).
+\end{equation*}
+In terms of matrices, we have
+\begin{equation*}
+	g_2\p = \dif{\varphi^\Trans} \mat{E_2 & F_2 \\ F_2 & G_2} \dif{\varphi},
+\end{equation*}
+where
+\begin{equation*}
+	g_2 = \mat{E_2 & F_2 \\ F_2 & G_2}.
+\end{equation*}
+
+\begin{definition}
+	If $\varphi$ is as above and $g_i$ is an Riemannian metric on $U_i$, we say that $\varphi$ is a \emph{Riemannian isometry} if $g_1 = g_2\p$; that is,
+	\begin{equation*}
+		g_1(\va,\vb) = g_2(\dif{\varphi(\va)}, \dif{\varphi(\vb)}).
+	\end{equation*}
+\end{definition}
+
+\begin{proposition}
+	If  $\varphi:U_1 \to U_2$ is a Riemannian isometry, then
+	\begin{enumerate}
+		\shortskip
+		\item $L_{g_1}(\gamma) = L_{g_2}(\varphi \circ \gamma)$.
+		\item $d_1(\pp,\qq) = d_2(\varphi(\pp),\varphi(\qq))$, where $d_i$ is the metric induced by $g_i$.
+		\item The angle between $\gamma_1$ and $\gamma_2$ at $\pp$ is the angle between $\varphi\circ \gamma_1$ and $\varphi\circ\gamma_2$ at $\varphi(\pp)$.
+		\item If $A\subset U_1$, then $\Area_1(A) = \Area_2(\varphi(A))$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\mbox{}
+\begin{enumerate}
+	\item First we have
+	\begin{equation*}
+		g_2((\varphi \circ \gamma)', (\varphi \circ \gamma)')
+		= g_2(\dif{\varphi(\gamma\p)}, \dif{\varphi(\gamma\p)})
+		= g_1(\gamma\p,\gamma\p).
+	\end{equation*}
+	Thus we have
+	\begin{equation*}
+		L_{g_2}(\varphi \circ \gamma)
+		= \int_0^1 \sqrt{g_2((\varphi \circ \gamma)', (\varphi\circ\gamma)')} \dif{t}
+		= \int_0^1 \sqrt{g_1(\gamma\p, \gamma\p)} \dif{t}
+		= L_{g_1}(\gamma).
+	\end{equation*}
+	\item There's a bijection
+	\begin{equation*}
+		\left\{\text{paths from $p$ to $q$ in $U_1$}\right\} \longleftrightarrow \left\{\text{paths from $\varphi(\pp)$ to $\varphi(\qq)$ in $U_2$}\right\}
+	\end{equation*}
+	taking $\gamma \mapsto \varphi\circ\gamma$. Since $L_{g_1}(\gamma) = L_{g_2}(\varphi \circ \gamma)$, the infinima are the same.
+	\item Similar to (i).
+	\item In matrix form,
+	\begin{equation*}
+		g_1 = \dif{\varphi^\Trans} g_2 \dif{\varphi} \implies \det g_1 = (\det \dif{\varphi})^2 \det g_2.
+	\end{equation*}
+	With this in hand, we have
+	\begin{align*}
+		\Area_1(A)
+		&= \iint_A \sqrt{\det g_1} \dif{A} \\
+		&= \iint_A \left\vert \det \dif{\varphi} \right\vert \sqrt{\det g_2} \dif{A} \\
+		&= \iint_{\varphi(A)} \sqrt{\det g_2} \dif{A} \\
+		&= \Area_2(\varphi(A)). \qedhere
+	\end{align*}
+\end{enumerate}
+\end{proof}
+
+This naturally leads us to consider conformal maps. \lecturemarker{11}{25 Feb} % Hopefully these are familiar from \emph{Complex Analysis}, although we'll look at them slightly differently. 
+
+\begin{definition}
+	If $g_1,g_2$ are Riemannian metrics on $U\subset \R^2$, then we say that $g_1$ and $g_2$ are \emph{conformal} if
+	\begin{equation*}
+		g_{1\pp} = \lambda(\pp)\,g_{2\pp},
+	\end{equation*}
+	where $\lambda:U\to\R^+$.
+\end{definition}
+
+Notice that if $g_1,g_2$ are conformal, then
+\begin{equation*}
+	\f{g_{1\pp}(\va,\vb)}{\left\vert \va \right\vert_{g_{1\pp}} \left\vert \vb \right\vert_{g_{1\pp}}}
+	= \f{\lambda(\pp)\,g_{2\pp}(\va,\vb)}{ \sqrt{\lambda(\pp)}\, \left\vert \va \right\vert_{g_{2\pp}} \sqrt{\lambda(\pp)}\,\left\vert \vb \right\vert_{g_{2\pp}}}
+	= \f{g_{2\pp}(\va,\vb)}{\left\vert \va \right\vert_{g_{2\pp}} \left\vert \vb \right\vert_{g_{2\pp}}},
+\end{equation*}
+so the angle between $\va, \vb$ is the same under $g_1$ and $g_2$. Conformal maps preserve angles.
+
+\begin{example}
+	Consider the Euclidean metric $g^E$, and the spherical metric $g^{S^2}$. These are conformal:
+	\begin{equation*}
+		g^E = \dif{x^2} + \dif{y^2} \qqand
+		g^{S^2} = \f{4\left( \dif{x^2} + \dif{y^2} \right)}{\left( 1+x^2+y^2 \right)^2}.
+	\end{equation*}
+\end{example}
+
+There's more than one definition. If $g_i$ is a metric on $U_i$, and $\phi:U_1\to U_2$, then we say that $\phi$ is conformal if $g_2\p$ defined by
+\begin{equation*}
+	g_2\p(\va,\vb) = g_2(d\phi(\va), d\phi(\vb))
+\end{equation*}
+is conformal to $g_1$.
+
+% \begin{example}
+% 	Consider the stereographic projection $\pi:S^{\,2}\backslash\{\NN\} \to \C$. This defines a conformal map.
+% \end{example}
+
+\begin{proposition}
+	If $f:U_1\to U_2$ is holomorphic with $f\p(w)\neq 0$ for all $w\in U_1$, then it is conformal to the Euclidean metric $g^E$ or the spherical metric $g^{S^2}$.
+\end{proposition}
+
+\begin{proof}
+	Let $z=x+iy$. Then $\zbar=x-iy$, and we have
+	\begin{equation*}
+		\dif{x^2} + \dif{y^2} = \dif{z} \dif{\zbar}.
+	\end{equation*}
+	If $z=f(w)$, then
+	\begin{equation*}
+		dz = \pd{f}{w} \dif{w} = f\p(w) \dif{w},
+	\end{equation*}
+	% since the second term is zero by the Cauchy-Riemann equations.
+	Similarly, we have
+	\begin{equation*}
+		\dif{\zbar} = f\p(\wbar) \dif{\wbar} = \overline{f\p(w)} \dif{\wbar}.
+	\end{equation*}
+	Combining these two results, we have
+	\begin{equation*}
+		\dif{z} \dif{\zbar} = \left.|f\p(w)|\right.^2 \dif{w} \dif{\wbar},
+	\end{equation*}
+	and so $\dif{z} \dif{\zbar}$ is conformal to $\dif w \dif{\wbar} = g^E$.
+\end{proof}
+
+\begin{corollary}
+	Mobius transformations are conformal with respect to $g^E$.
+\end{corollary}
+
+\vspace{-6pt}
+
+\emph{Converse.} If $f:U_1\to U_2$ is conformal, then either
+\begin{enumerate}
+	\shortskip
+	\item $f$ is orientation preserving, and hence holomorphic, or;
+	\item $f$ is orientiation reversing, and $f(z)=g(\zbar)$, where $g$ is holomorphic.
+\end{enumerate}
+
+\emph{Idea of proof.} Since $\pi$ is conformal, and isometries are conformal, we see that $\pi\circ A \circ\pi^{-1}$ is a conformal map $\C_\infty \to \C_\infty$. Every orientation preserving conformal map of $\C_\infty$ is a Mobius map, which is proved properly in \emph{Complex Analysis} or \emph{Complex Methods}.
+
+% subsection riemannian_isometries (end)

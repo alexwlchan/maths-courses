@@ -1,0 +1,94 @@
+\documentclass[twoside, numbers=noendperiod]{scrartcl}
+
+\usepackage[blacklinks]{drangreport}
+
+\usepackage{awlc-algebra}
+\usepackage{multirow}
+
+\newcommand{\xx}{\vec{x}}
+\newcommand{\yy}{\vec{y}}
+
+\newcommand{\closure}[1]{\overline{#1}}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Cl}{Cl}
+
+\newcommand{\Eucl}{\text{Eucl}}
+
+\newcommand{\Abar}{\overline{A}}
+\newcommand{\fbar}{\overline{f}}
+
+\newcommand{\xbar}{\overline{x}}
+\newcommand{\ybar}{\overline{y}}
+
+\newcommand{\boundary}{\del}
+
+\newcommand{\base}{\cal{B}}
+\newcommand{\cover}{\cal{U}}
+\newcommand{\subcover}{\cal{V}}
+
+\title{IB Metric \& Topological Spaces}
+
+\begin{document}
+
+\NotesTitle{IB}{Easter 2012}{Metric \& Topological Spaces}{Prof.~P.~M.~H.}{Wilson}
+{
+\section*{Course schedule} % (fold)
+\label{sub:course_schedule}
+
+\subsubsection*{Metrics} % (fold)
+\label{ssub:metrics}
+
+Definition and examples. Limits and continuity. Open sets and neighbourhoods. Characterizing limits and continuity using neighbourhoods and open sets. \hfill [3]
+
+% subsubsection metrics (end)
+
+\subsubsection*{Topology} % (fold)
+\label{ssub:topology}
+
+Definition of a topology. Metric topologies. Further examples. Neighbourhoods, closed sets, convergence and continuity. Hausdorff spaces. Homeomorphisms. Topological and non-topological properties. Completeness. Subspace, quotient and product topologies. \\
+\mbox{  } \hfill [3]
+
+% subsubsection topology (end)
+
+\subsubsection*{Connectedness} % (fold)
+\label{ssub:connectedness}
+
+Definition using open sets and integer-valued functions. Examples, including intervals. Components. The continuous image of a connected space is connected. Path-connectedness. Path-connected spaces are connected but not conversely. Connected open sets in Euclidean space are path-connected. \hfill [3]
+
+% subsubsection connectedness (end)
+
+\subsubsection*{Compactness} % (fold)
+\label{ssub:compactness}
+
+Definition using open covers. Examples: finite sets and $[0,1]$. Closed subsets of compact spaces are compact. Compact subsets of a Hausdorff space must be closed. The compact subsets of the real line. Continuous images of compact sets are compact. Quotient spaces. Continuous real-valued functions on a compact space are bounded and attain their bounds. The product of two compact spaces is compact. The compact subsets of Euclidean space. Sequential compactness. \hfill [3]
+
+% subsubsection compactness (end)
+
+% subsubsection modules (end)
+
+% subsection course_schedule (end)
+
+\subsection*{Appropriate books} % (fold)
+\label{sub:literature}
+
+{\shortskip
+W.A.~Sutherland \emph{Introduction to Metric and Topological Spaces}. Clarendon 1975 (£21.00 paperback).
+
+A.J.~White \emph{Real Analysis: an Introduction}. Addison-Wesley 1968 (out of print)
+
+B.~Mendelson \emph{Introduction to Topology}. Dover, 1990 (£5.27 paperback)}
+
+% subsection literature (end)
+}
+
+\TableofContents
+
+\input{mettop-chap-01}		% Metric spaces
+\input{mettop-chap-02}		% Topological spaces
+\input{mettop-chap-03}		% Connectedness
+\input{mettop-chap-04}		% Compactness
+
+\lecturenotesend
+
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass[twoside]{scrartcl}
+
+\usepackage[blacklinks]{drangreport}
+% \usepackage[caecilia]{drangreport}
+
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+
+\usepackage{awlc-algebra}
+
+\title{Linear Algebra}
+
+\let\Im\relax
+\DeclareMathOperator*{\Im}{Im}
+
+\newcommand{\herm}[1]{\overline{#1}^\Trans}
+
+\DeclareMathOperator*{\ch}{ch}
+\renewcommand{\chi}{\textstyle\ch}
+
+\begin{document}
+
+\NotesTitle{IB}{Michaelmas 2012}{Linear Algebra}{Prof.~I.}{Grojnowski}
+{
+{\Large\bfseries\sffamily{Course schedule}}
+
+Deﬁnition of a vector space (over $\R$ or $\C$), subspaces, the space spanned by a subset. Linear independence, bases, dimension. Direct sums and complementary subspaces. \hfill [3]
+
+Linear maps, isomorphisms. Relation between rank and nullity. The space of linear maps from $U$ to $V$, representation by matrices. Change of basis. Row rank and column rank. \hfill [4]
+
+Determinant and trace of a square matrix. Determinant of a product of two matrices and of the inverse matrix. Determinant of an endomorphism. The adjugate matrix. \hfill  [3]
+
+Eigenvalues and eigenvectors. Diagonal and triangular forms. Characteristic and minimal polynomials. Cayley-Hamilton Theorem over $\C$. Algebraic and geometric multiplicity of eigenvalues. Statement and illustration of Jordan normal form. \hfill  [4]
+
+Dual of a ﬁnite-dimensional vector space, dual bases and maps. Matrix representation, rank and determinant of dual map. \hfill  [2]
+
+Bilinear forms. Matrix representation, change of basis. Symmetric forms and their link with quadratic forms. Diagonalisation of quadratic forms. Law of inertia, classification by rank and signature. Complex Hermitian forms. \hfill  [4]
+
+Inner product spaces, orthonormal sets, orthogonal projection, $V=W\oplus W^\perp$. Gram-Schmidt orthogonalisation. Adjoints. Diagonalisation of Hermitian matrices. Orthogonality of eigenvectors and properties of eigenvalues. \hfill  [4]
+
+}
+
+\TableofContents
+
+\input{linalg-chap-01}		% Vector spaces
+\input{linalg-chap-02}		% Endomorhisms
+\input{linalg-chap-03}		% Jordan normal form
+\input{linalg-chap-04}		% Continuous random variables
+\input{linalg-chap-05}		% Inequalities
+\input{linalg-chap-06}		% Geometrical probability
+
+\end{document}

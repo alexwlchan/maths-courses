@@ -1,0 +1,190 @@
+%!TEX root = geometry.tex
+\stepcounter{lecture}
+\setcounter{lecture}{1}
+\appendix
+\sektion{Appendix: Review sheets}
+\label{app:review-sheets}
+
+\subsection{Euclidean geometry} % (fold)
+\label{sub:euclidean_geometry}
+
+Lines:
+\begin{itemize}
+	\shortskip
+	\item A line is the shortest path between two points.
+	\item Plane separation: the complement of a line is a disconnected topological space.
+	\item There is a unique line passing through two distinct points.
+	\item Two distinct lines intersect in at most one point.
+	\item Given a point $\xx$ and a line $L$ not containing $\xx$, there is a unique line passing through $\xx$ and parallel to $L$. %
+	\item Given a point $\xx$ and a line $L$ not containing $\xx$, there is a unique line passing through $\xx$ and perpendicular to $L$. %
+\end{itemize}
+
+Circles:
+\begin{itemize}
+	\shortskip
+	\item A line and a circle intersect in at most two points.
+	\item Two distinct circles intersect in at most two points.
+	\item The perimeter of a circle of radius $R$ is $2\pi R$.
+\end{itemize}
+
+Isometries:
+\begin{itemize}
+	\shortskip
+	\item If $F_1, F_2$ are orthogonal frames, then there is a unique isometry taking $F_1$ to $F_2$.
+	\item Any isometry which fixes three non-colinear points is the identity.
+	\item Any isometry can be written as the composition of at most three reflections.
+\end{itemize}
+
+Triangles:
+\begin{itemize}
+	\shortskip
+	\item The sum of the interior angles in a triangle is $\pi$.
+	\item If $A_1,A_2,A_3$ and $A_1\p,A_2\p,A_3\p$ are two sets of non-colinear points with $d(A_i,A_j) = d(A_i\p,A_j\p)$, then there is a unique $\phi\in\Isom(\R^2)$ with $\phi(A_i) = A_i\p$. %
+	\item If instead we have $d(A_1,A_j) = d(A_1\p,A_j\p)$ and $\angle A_2 A_1 A_3 = \angle A_2\p A_1\p A_3\p$, then there is a unique $\phi\in\Isom(\R^2)$ with $\phi(A_i) = A_i\p$. %
+\end{itemize}
+
+Trigonometry:
+\begin{itemize}
+	\item If $\triangle ABC$ has sides $a,b,c$ and opposite angles $\alpha,\beta,\gamma$, then
+	\begin{equation*}
+		\f{\sin \alpha}{a} = \f{\sin \beta}{b} = \f{\sin\gamma}{c}, \qquad
+		c^2 = a^2 + b^2 - 2ab \cos \gamma.
+	\end{equation*}
+\end{itemize}
+
+% subsection euclidean_geometry (end)
+
+	\pagebreak
+
+\subsection{Spherical/projective geometry} % (fold)
+\label{sub:spherical_p}
+
+Spherical lines:
+\begin{itemize}
+	\shortskip
+	\item A line is the shortest path between two points.
+	\item Plane separation: the complement of a line is a disconnected topological space.
+	\item There is a unique line passing through two distinct, non-antipodal points.
+	\item Two distinct lines intersect in two points.
+	\item Given a point $\xx$ and a line $L$ not containing $\xx$, there is a line passing through $\xx$ and perpendicular to $L$.
+\end{itemize}
+
+Projective lines:
+\begin{itemize}
+	\shortskip
+	\item A line is the shortest path between two points.
+	\item The complement of a line is connected.
+	\item There is a unique line passing through two distinct, points.
+	\item Two distinct lines intersect in exactly one point.
+	\item Given a point $\xx$ and a line $L$ not containing $\xx$, there is a line passing through $\xx$ and perpendicular to $L$.
+\end{itemize}
+
+Circles:
+\begin{itemize}
+	\shortskip
+	\item A line and a circle which is distinct from it intersect in at most two points.
+	\item Two distinct circles intersect in at most two points.
+	\item The perimeter of a circle of radius $R$ is $2\pi \sin R$.
+\end{itemize}
+
+Isometries:
+\begin{itemize}
+	\shortskip
+	\item If $F_1, F_2$ are orthogonal frames, then there is a unique isometry taking $F_1$ to $F_2$.
+	\item Any isometry which fixes three non-colinear points is the identity.
+	\item Any isometry can be written as the composition of at most three reflections.
+\end{itemize}
+
+Triangles:
+\begin{itemize}
+	\shortskip
+	\item The sum of the interior angles in a $\triangle ABC$ is $\pi+\Area(ABC)$.
+	\item If $A_1,A_2,A_3$ and $A_1\p,A_2\p,A_3\p$ are two sets of non-colinear points with $d(A_i,A_j) = d(A_i\p,A_j\p)$, then there is a unique $\phi\in\Isom(\R^2)$ with $\phi(A_i) = A_i\p$. %
+	\item If instead we have $d(A_1,A_j) = d(A_1\p,A_j\p)$ and $\angle A_2 A_1 A_3 = \angle A_2\p A_1\p A_3\p$, then there is a unique $\phi\in\Isom(\R^2)$ with $\phi(A_i) = A_i\p$. %
+\end{itemize}
+
+Trigonometry:
+\begin{itemize}
+	\item If $\triangle ABC$ has sides $a,b,c$ and opposite angles $\alpha,\beta,\gamma$, then
+	\begin{equation*}
+		\f{\sin \alpha}{\sin a} = \f{\sin \beta}{\sin b} = \f{\sin\gamma}{\sin c}, \qquad
+		\begin{array}{l}
+			\cos a = \ph \cos b \cos c + \sin \alpha \sin b \sin c, \\[3pt]
+			\cos\alpha = -\cos\beta \cos \gamma + \sin a \sin \beta\sin\gamma.
+		\end{array}
+	\end{equation*}
+\end{itemize}
+
+% subsection spherical_p (end)
+
+	\pagebreak
+
+\subsection{Hyperbolic geometry} % (fold)
+\label{sub:hyperbolic_geometry}
+
+Models:
+\begin{itemize}
+	\shortskip
+	\item Hyperboloid: % Originally "hyperboloid model"
+	$S = \{(x,y,z): x^2+y^2-z^2=-1, z<0\}$, with the Minkowski metric $\dif{x^2} + \dif{y^2} - \dif{z^2}$ on $\R^3$. Lines are intersections of $S$ with planes through the origin.
+	\item Unit disk model: $D = \left\{z \iC: \left\vert z \right\vert < 1\right\}$ with metric
+	\begin{equation*}
+		g^D = \f{4\left( \dif{x^2} + \dif{y^2} \right)}{\left( 1-x^2-y^2 \right)^2}.
+	\end{equation*}
+	Lines are Euclidean lines/circles perpendicular to $\boundary{D}$.
+	\item Upper half plane model: $H = \left\{z \iC: \Re (z)>0\right\}$ with metric
+	\begin{equation*}
+		g^H = \f{\dif{x^2} + \dif{y^2}}{y^2}.
+	\end{equation*}
+	Lines are Euclidean lines/circles perpendicular to $\boundary{H}$.
+\end{itemize}
+
+Lines:
+\begin{itemize}
+	\shortskip
+	\item A line is the shortest path between two points.
+	\item Plane separation: the complement of a line is a disconnected topogical space.
+	\item There is a unique line passing through two distinct points.
+	\item Two distinct lines intersect in at most one point.
+	\item Given $\xx$ and $L$ as previously, there is a unique line passing through $\xx$ perpendicular to $L$, and infinitely many lines passing through $\xx$ which do not intersect $L$.
+\end{itemize}
+
+Circles:
+\begin{itemize}
+	\shortskip
+	\item In either the upper half-plane or the unit disk models, circles are Euclidean circles (but their centres are not the Euclidean centres.)
+	\item A line and a circle, or two distinct circles, intersect in at most two points.
+	\item The perimeter of a circle of radius $R$ is $2\pi\sinh R$.
+\end{itemize}
+
+Isometries:
+\begin{itemize}
+	\shortskip
+	\item If $F_1, F_2$ are orthogonal frames, then there is a unique isometry taking $F_1$ to $F_2$.
+	\item Any isometry which fixes three non-colinear points is the identity.
+	\item Any isometry can be written as the composition of at most three reflections.
+\end{itemize}
+
+Triangles:
+\begin{itemize}
+	\shortskip
+	\item The sum of the interior angles in a $\triangle ABC$ is $\pi-\Area(ABC)$.
+	\item If $A_1,A_2,A_3$ and $A_1\p,A_2\p,A_3\p$ are two sets of non-colinear points with $d(A_i,A_j) = d(A_i\p,A_j\p)$, then there is a unique $\phi\in\Isom(\R^2)$ with $\phi(A_i) = A_i\p$. %
+	\item If instead we have $d(A_1,A_j) = d(A_1\p,A_j\p)$ and $\angle A_2 A_1 A_3 = \angle A_2\p A_1\p A_3\p$, then there is a unique $\phi\in\Isom(\R^2)$ with $\phi(A_i) = A_i\p$. %
+\end{itemize}
+
+Trigonometry:
+\begin{itemize}
+	\item If $\triangle ABC$ has sides $a,b,c$ and opposite angles $\alpha,\beta,\gamma$, then
+	\begin{equation*}
+		\f{\sin \alpha}{\sinh a} = \f{\sin \beta}{\sinh b} = \f{\sin\gamma}{\sinh c}, \qquad
+		\begin{array}{l}
+			\cosh a = \cosh b \cosh c - \cos \alpha \sinh b \sinh c, \\[3pt]
+			\cos\alpha = -\cos\beta \cos \gamma + \cosh a \sinh \beta\sinh\gamma.
+		\end{array}
+	\end{equation*}
+\end{itemize}
+
+\vfill
+
+% subsection hyperbolic_geometry (end)

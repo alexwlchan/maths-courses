@@ -1,0 +1,455 @@
+%!TEX root = met-top-spaces.tex
+\stepcounter{lecture}
+\setcounter{lecture}{2}
+\sektion{Topological spaces}
+
+\subsection{Introduction} % (fold)
+\label{sub:top_introduction}
+
+We've already discussed some of the properties of open subsets of metric spaces. We can abstract these for a definition of a \emph{topological space}.
+
+\begin{definition}
+	A \emph{topological space} $(X,\tau)$ consists of a set $X$ and a set (called the \emph{topology}) $\tau$ of subsets of $X$ (hence $\tau \subset \powerset(X)$, the power set of $X$). By definition, we call the elements of $\tau$ the \emph{open sets}, satisfying the three properties
+	\begin{enumerate}
+		\shortskip
+		\item $X,\emptyset \in \tau$;
+		\item If $U_i \in \tau$ for all $i\in I$, then $\bigcap_{i\in I} U_i \in \tau$;
+		\item If $U_1, U_2 \in \tau$, then $U_1 \cap U_2 \in \tau$ (or similarly for finite intersections).
+	\end{enumerate}
+	In this sense, a metric space $(X,\rho)$ gives rise to a topology, which we call the \emph{metric topology}.
+
+	Two metrics $\rho_1$ and $\rho_2$ on a set $X$ are called (topologically) \emph{equivalent} if the associated topologies are the same.
+\end{definition}
+
+\begin{exercise}
+	Show that Lipschitz equivalence implies equivalence.
+\end{exercise}
+
+\begin{example}
+	The discrete metrix on a set $X$ gives rise to the \emph{discrete topology}, in which \emph{all} subsets are open; that is, $\tau = \powerset(X)$.
+\end{example}
+
+\begin{examples}
+	[Non-metric topologies] \label{eg:non-metric-topologies} \mbox{}
+	\begin{enumerate}
+		\shortskip
+		\item Let $X$ be a set with at least two elements, and take $\tau=\{\emptyset, X\}$. This is the \emph{indiscrete topology}.
+		\item Let $X$ be any (infinite) set, and take
+		\begin{equation*}
+			\tau = \left\{\emptyset\right\} \cup \left\{Y \cup \text{$X$ such that $X\backslash Y$ is finite}\right\}.
+		\end{equation*}
+		Then $(X,\tau)$ is a topological space, and $\tau$ is the \emph{cofinite topology}.
+
+		If $X$ is $\R$ or $\C$, then this is called the \emph{Zariski topology}, and open sets are ``complements of zeroes of polynomials''. This, and similar Zariski topologies on $\Rn$ and $\Cn$, are very important in Part~II \emph{Algebraic Geometry}.
+		\item Let $X$ be any (uncountable) set, such as $\R$ or $\C$, and take
+		\begin{equation*}
+			\tau = \left\{\emptyset\right\} \cup \left\{Y \cup \text{$X$ such that $X\backslash Y$ is countable}\right\}.
+		\end{equation*}
+		This is the \emph{co-countable topology}.
+		\item Finally, we consider some finite topologies. Take $X=\{a,b\}$. Then there are four distinct topologies:
+		\begin{itemize}
+			\shortskip
+			\item Discrete (a metric topology);
+			\item Indiscrete;
+			\item $\{\emptyset, \{a\}, \{a,b\}\}$;
+			\item $\{\emptyset, \{b\}, \{a,b\}\}$.
+		\end{itemize}
+	\end{enumerate}
+\end{examples}
+
+	\pagebreak
+
+\begin{remark}
+	A subset $Y\subset X$ of a topological space $(X,\tau)$ is called \emph{closed} if $X\backslash Y$ is open, just as we defined in metric spaces.
+
+	We can describe a topology on a set $X$ by specifying the \emph{closed sets} in $X$; these will satisfy
+	\begin{enumerate}
+		\shortskip
+		\item Both $\emptyset$ and $X$ are closed;
+		\item If $F_i$, for $i\in I$, are closed, then so too is $\bigcap_{i\in I} F_i$.
+	\end{enumerate}
+	This description is sometimes more natural, such as with examples~(ii) and (iii) above.
+\end{remark}
+
+\begin{example}
+	The \emph{half-open interval topology} $\tau$ on $\R$ consists of the arbitrary unions of half-open intervals $[a,b)$, for $a<b$ and $a,b\iR$. Clearly, $\emptyset, R \in \tau$, and $\tau$ is closed under unions. To show that this is a topology, we must prove that it is also closed under finite intersections.
+
+	Suppose $U_1,U_2 \in \tau$. Then for any $P\in U_1 \cap U_2$, there is a half-open interval $[a,b)$ containing $P$ with $[a,b) \subset U_1 \cap U_2$, and thus $U_1 \cap U_2$ is open.
+
+	For consider: since $P\in U_1$, we have $P\in [a_1,b_1) \subset U$. Similarly, since $P\in U_2$, we have $P\in [a_2,b_2) \subset U_2$. Now let $a=\max\{a_1,a_2\}$ and $b=\min\{b_1,b_2\}$, and then $P\in [a,b) \subset U_1 \cap U_2$.
+
+	Thus this is indeed a topology.
+\end{example}
+
+\begin{definition}
+	If $P$ is a topological space $(X,\tau)$, then an \emph{open neighbourhood} of $P$ is any open set $U \in \tau$ such that $P \in U$.
+
+	A sequence of points $x_n$ converges to a limit $x$ (written $x_n \to x$) if, for any open neighbourhood $U\ni x$, there is some $N$ such that for all $n\geq N$, $x_n \in U$.
+
+	Given topological spaces $(X,\tau_1)$ and $(Y,\tau_2)$, a map $f:(X,\tau_1) \to (Y,\tau_2)$ is \emph{continuous} if, for any open set $U \subset Y$, the pre-image $f^{-1}(U)$ is open in $X$.
+
+	From this definition, we deduce that $f$ is continuous if and only if, for any closed set $F\subset Y$, the pre-image $f^{-1}(F)$ is closed in $X$.
+\end{definition}
+
+\begin{examples}
+	The identity map $(\R,\tau_\Eucl) \to (\R,\text{cofinite topology})$ is continuous, since closed sets in the cofinite topology (that is, finite sets in $\R$), are closed in the Euclidean topology.
+
+	However, the identity map $(\R,\tau_\Eucl) \to (\R,\text{co-countable topology})$ is not, since $\Q\subset\R$ is closed in the co-countable topology, but not in the Euclidean topology.
+\end{examples}
+
+\begin{definition}
+	A map $f:(X,\tau_1)\to(Y,\tau_2)$ is a \emph{homeomorphism} if
+	\begin{enumerate}
+		\shortskip
+		\item $f$ is bijective;
+		\item Both $f$ and $f^{-1}$ are continuous.
+	\end{enumerate}
+	In this case, the open subsets of $X$ correspond precisely (under the bijection $f$) with the open subsets of $Y$. This is an equivalence relation between the two topological spaces: from a topological point of view, the spaces are the ``same''.
+\end{definition}
+
+\begin{example}
+	Let $\tau_1$ and $\tau_2$ denote the Euclidean topology on $\R$ and $(-1,1) \subset \R$, respectively. Both are metric topologies. Now consider the function $f$, with inverse $g$, given by
+	\begin{equation*}
+		\fullfunction{f}{\R}{(-1,1)}{x}{x/(\left\vert x \right\vert+1)}
+		\qquad
+		\fullfunction{g}{(-1,1)}{\R}{y}{y/(\left\vert y \right\vert-1)}
+	\end{equation*}
+	Here, both $f$ and $g$ are continuous, and so $f$ (and hence $g$) are homeomorphisms.
+
+	This example shows that ``completeness'' is a property of the metric, and not just a ``topological property''. Note that $\R$ is complete with the Euclidean topology, while $(-1,1)$ is not. However, it also shows that, under the homeomorphism, we obtain a complete metric $\rho$ on $(-1,1)$ coming from $d_\Eucl$ on $\R$ which is topologicall equivalent to $d_\Eucl$ on $(-1,1)$.
+\end{example}
+
+\begin{definition}
+	We call a property on topological spaces a \emph{topological property} if, given two homeomorphic spaces $(X,\tau_1)$ and $(Y,\tau_2)$, one has the property if and only if the other has the property also. That is, $(X,\tau_1)$ has the property if and only if $(Y,\tau_2)$ has the property.
+\end{definition}
+
+Let us consider an important example of a topological property:
+
+\begin{definition}
+	A topological space $(X,\tau)$ is called \emph{Hausdorff} if, for any $P\neq Q$, $P,Q\in X$, there are disjoint open sets $U\ni P$ and $V\ni Q$; that is, we can separate points by open sets.
+\end{definition}
+
+Clearly this is a topological property. Let us consider some examples:
+
+\begin{examples}
+\mbox{}
+\begin{enumerate}
+	\shortskip
+	\item $\R$ with the cofinite topology is not Hausdorff, since any two non-empty open sets intersect non-trivially, and the same is true for examples~\ref{eg:non-metric-topologies}~(i) to (iii). But any metric space is clearly Hausdorff, which is why the topologies in examples~\ref{eg:non-metric-topologies} are non-metric.
+	\item The half-open interval topology on $\R$ is Hausdorff: if $a<b$, $a,b\iR$, then we have $[a,b) \cap [b,b+1) = \emptyset$. We will see on the examples sheet that this is \emph{not} a metric topology.
+\end{enumerate}
+\end{examples}
+
+% subsection top_introduction (end)
+
+	\pagebreak
+
+\subsection{Closed sets} % (fold)
+\label{sub:closed_sets}
+
+\begin{definition}
+	For any set $A\subset X$, we say that $x_0 \in X$ is an \emph{accumulation point} for $A$ if any open neighbourhood $U$ of $x_0$ has $U \cap A \neq \emptyset$. (Sometimes these are called \emph{limit points}.)
+\end{definition}
+
+\vspace{3pt}
+
+\begin{lemma}
+	A set is closed if and only if it contains all of its accumulation points; that is, if $x_0 \in X$ is an accumulation point for $A$, then $x_0 \in A$.
+\end{lemma}
+
+\begin{proof}
+	($\Rightarrow$) Suppose $A$ is closed and $x_0\not\in A$. Then take $U=X\backslash A$, an open neighbourhood of $x_0$. But then $U \cap A = \emptyset$, and so $x_0$ is not an accumulation point.
+	
+	($\Leftarrow$) Suppose $A$ is not closed, then $X\backslash A$ is not open. Then there exists $x_0\in X\backslash A$ such that no open neighbourhood $U$ of $x_0$ is contained in $X\backslash A$; that is, any open neighbourhood $U$ of $x_0$ has $U\cap A\neq \emptyset$. Then $x_0$ is an accumulation point of $A$.
+\end{proof}
+
+\vspace{3pt}
+
+\begin{remark}
+	Suppose we have a convergent sequence $x_n \to x \in X$, with $x_n \in A$ for all $n$. Then any open neighbourhood $U$ of $x_0$ contains all $x_n$ for $n \gg 0$. Thus $x$ is an accumulation point for $A$, and if $A$ is closed, we must have $x\in A$.
+\end{remark}
+
+\begin{definition}
+	Let $(X,\tau)$ be a topological space and $P\in X$. If there are nested open neighbourhoods of $P$, given by $N_1 \supset N_2 \supset N_3 \supset \cdots$, such that for any open neighbourhood $U$ of $P$, there exists an $m$ such that $N_i \subset U$ for all $i\leq m$, then we say that $(X,\tau)$ has \emph{countable bases of neighbourhoods} (or is \emph{first countable}).
+\end{definition}
+
+\begin{example}
+	Any metric space is first countable: given $P\in X$, we may take the open balls $B(P,1/n)$, for $n=1,2,3,\ldots$.
+\end{example}
+
+\begin{lemma}
+	Suppose $(X,\tau)$ is first countable, and we have a subset $A\subset X$. If all convergent subsequences $x_n \to x$, $x_n \in A$ for all $n$, have their limit $x\in A$, then $A$ is closed.
+\end{lemma}
+
+\begin{proof}
+	It is sufficient to prove that any accumulation point for $A$ is the limit of some sequence $x_n\in A$, for all $n$. This gives us $A$ closed.
+	
+	Suppose $x$ is an accumulation point for $A$, and let $N_1\supset N_2\supset N_3 \cdots$ be a base of open neighbourhoods for $x$. Then for each $i$, there exists $x_i\in A\cap N_i$. Hence we construct a sequence $x_i$, for $i=1,2,\ldots$.
+	
+	For any open neighbourhood $U$ of $x$, there is an $m$ such that $N_i\subset U$ for all $i\geq m$. Hence $x_i \in U$ for all $i\geq m$, which implies $x_n\to x$. Hence $x\in A$ by the assumption.
+\end{proof}
+
+On the first examples sheet, we will see a space which shows that we need the first countable condition here.
+
+% subsection closed_sets (end)
+
+	\pagebreak
+
+\subsection{Interiors and closures} % (fold)
+\label{sub:interiors_and_closures}
+
+Suppose $(X,\tau)$ is a topological space.
+\begin{itemize}
+	\shortskip
+	\item If $\left\{U_i\right\}_{i\in I}$ are open in $(X,\tau)$, then so is $\bigcup_{i\in I} U_i$;
+	\item If $\left\{F_i\right\}_{i\in I}$ are closed in $(X,\tau)$, then so is $\bigcap_{i\in I} F_i$;
+\end{itemize}
+as $X\backslash \bigcap_{i\in I} F_i = \bigcup_{i \in I} U_i \backslash F_i$ is open. This motivates the following definitions:
+
+\begin{definition}
+	Given any subset $A \subset X$, the \emph{interior of $A$}, denoted $\Int(A) = A^\circ$, is the union of all open subsets contained in $A$.
+	%
+	Then $\Int(A)$ is an open subset, $\Int(A) \subset A$, and in fact, it is the largest open subset contained in $A$. % (If $U$ is open and $U \subseteq A$, then $U\subseteq \Int(A)$.)
+
+	The \emph{closure of $A$}, denoted $\Cl(A)$ or $\Abar$, is the intersection of all closed sets which contain $A$.
+	%
+	Then $\Cl(A)$ is a closed subset of $X$ containing $A$; that is, $A \subset \Cl(A)$. In fact, $\Cl(A)$ is the \emph{smallest} closed subset containing $A$. % (If $F$ is closed and $F \supset A$, then $F\subset \Cl(A)$.)
+\end{definition}
+
+\begin{remarks}
+\mbox{}
+\begin{enumerate}
+	\shortskip
+	\item For any set $A$, we have $\Int(A) \subset A \subset \Cl(A)$.
+	\item Suppose $A,B \subseteq X$ and $A\subseteq B$. Then $\Int(A) \subseteq \Int(B)$ and $\Cl(A) \subseteq \Cl(B)$.
+\end{enumerate}
+\end{remarks}
+
+\begin{examples}
+	\mbox{}
+	\begin{enumerate}
+		\shortskip
+		\item Consider $\Q\subset\R$ with the Euclidean sopology. Since any non-empty open subset contains irrationals, we have $\Int(\Q) = \emptyset$. Also $\Cl(\Q)=\R$.
+		\item Consider $[0,1]$. It is easy to see that $\Int([0,1]) = (0,1)$. We simply remove the limit points.
+		% 
+		We can easily go the other way: $\Cl((0,1)) = [0,1]$.
+	\end{enumerate}
+\end{examples}
+
+\begin{definition}
+	The \emph{boundary} or \emph{frontier} of $A$ is $\boundary{A} = \Abar\backslash A^\circ$.
+
+	We say that a subset $A\subseteq X$ is \emph{dense} if $\Cl(A) = X$.
+\end{definition}
+
+\begin{proposition}
+	For any set $A\subset X$:
+	\begin{enumerate}
+		\shortskip
+		\item $\Int(\Cl(\Int(\Cl(A)))) = \Int(\Cl(A))$;
+		\item $\Cl(\Int(\Cl(\Int(A)))) = \Cl(\Int(A))$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\mbox{}
+\begin{enumerate}
+	\item Since $\Int(\Cl(A))$ is open and $\Int(\Cl(A)) \subseteq \Cl(\Int(\Cl(A)))$, taking interiors of both sides gives
+	\begin{equation*}
+		\Int(\Cl(A)) \subseteq \Int(\Cl(\Int(\Cl(A)))).
+	\end{equation*}
+	Now since $\Cl(A)$ is closed and $\Int(\Cl(A)) \subseteq \Cl(A)$, taking closures and then interiors of both sides gives
+	\begin{equation*}
+		\Int(\Cl(\Int(\Cl(A)))) \subseteq \Int(\Cl(A)).
+	\end{equation*}
+	\item Similar argument; see the first examples sheet. \qedhere
+\end{enumerate}
+\end{proof}
+
+Thus, if we start from an arbitrary set $A\subset X$ and take successive interiors and closures, then we may achieve \emph{at most seven} distinct sets:
+\begin{equation*}
+	A, \Int(A), \Cl(A), \Cl(\Int(A)), \Int(\Cl(A)), \Int(\Cl(\Int(A))), \Cl(\Int(\Cl(A))).
+\end{equation*}
+Indeed, there is a set $A\subset \R$ for which these seven sets are distinct (see the first examples sheet).
+
+% subsection interiors_and_closures (end)
+
+	\pagebreak
+
+\subsection{Base of open sets for a topology} % (fold)
+\label{sub:base_of_open_sets_for_a_topology}
+
+\begin{definition}
+	Given a topological space $(X,\tau)$, a collection $\base$ of open subsets $\{U_i\}_{i\in I}$ form a \emph{base} or \emph{basis} for the topology if \emph{any} open set is the union of open sets from $\base$.
+\end{definition}
+
+So we might ask, when does an arbitrary collection of subsets $\{U_i\}_{i\in I}$ form the base of some topology? It forms a base if, for all $i,j$, the intersection $U_i \cap U_j$ is the union of sets $U_k$ from the collection. If so, then we can define a topology by specifying that any \emph{open subset} is just a union of $U_i$ in the collection.
+
+\begin{example}
+	The half-open interval topology on $\R$ has a base consisting of intervals $[a,b)$ for $a<b$, $a,b\iR$.
+\end{example}
+
+This motivates the following definition:
+
+\begin{definition}
+	A topological space $(X,\tau)$ is called \emph{secound countable} if it has a countable base of open sets.
+\end{definition}
+
+Clearly, second countable implies first countable. Consider: for any $P\in X$ and an open set $U \ni P$, we have $U$ as a union of bases of open sets. These open sets $U_i$ satisfy $U_i \subset U$ and $P \in U_i$, which we require.
+
+% subsection base_of_open_sets_for_a_topology (end)
+
+\subsection{Subspace topology} % (fold)
+\label{sub:subspace_topology}
+
+\begin{definition}
+	If $(X,\tau)$ is a topological space and $Y\subset X$, then the \emph{subspace topology on $Y$} has open sets
+	\begin{equation*}
+		\eval[0]{\tau}_Y := \left\{U \cap Y: U\in\tau\right\}.
+	\end{equation*}
+	It is easy to see that this is a topology. Moreover, consider the inclusion map $i:Y \hookrightarrow X$, then $i$ is continuous (since $i^{-1}(U) = U\cap Y$), and the subspace topology is the ``smallest'' topology for which $i$ is continuous.
+\end{definition}
+
+\begin{proposition}
+\mbox{}
+\begin{enumerate}
+	\shortskip
+	\item If $\base$ is a base for a topology $\tau$, then
+	\begin{equation*}
+		\eval[0]{\base}_Y := \left\{U \cap Y: U \in\base\right\}
+	\end{equation*}
+	is a base for a subspace topology.
+	\item If $(X,\rho)$ is a metric space, and $\rho_1$ is the restriction of the metric to $Y$, then the subspace topology on $Y$ induced from the $\rho$-metric on $X$ is the same as the $\rho_1$-metric topology on $Y$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\mbox{}
+\begin{enumerate}
+	\item This is clear: for any open $U=\bigcap_\alpha U_\alpha$, if $U_\alpha\in\base$, then $U\cap Y = \bigcap_\alpha (U_\alpha \cap Y)$.
+	\item The base for the metric topology on $X$ is given by the open balls $B_\rho(x,\delta)$, for $x\in X$. If $x\in Y$, then $B_\rho(x,\delta) \cap Y = B_{\rho_1}(x,\delta) \subset Y$. In general, $B_\rho(x,\delta) \cap Y$ is the union of $\rho_1$-balls.
+
+	Consider: given $y\in B_\rho(x,\delta) \cap Y$, choose $\delta\p$ such that $B_\rho(y,\delta\p) \subseteq B_\rho(x,\delta)$. Then $B_{\rho_1}(y,\delta\p) = B_\rho(y,\delta\p) \cap Y \subseteq B_\rho(x,\delta) \cap Y$. Then $B_\rho(x,\delta) \cap Y$, a base for the subspace topology, is the union of open $\rho_1$-balls.
+	\qedhere
+\end{enumerate}
+\end{proof}
+
+% \begin{example}
+% 	Consider $(0,1]$. There is a base for the subspace consisting of open interval $(a,b)$, with $0<a<b<1$, and the half-open interval $(a,1]$ with $0<a<1$.
+% \end{example}
+
+% subsection subspace_topology (end)
+
+	\pagebreak
+
+\subsection{Quotient spaces} % (fold)
+\label{sub:quotient_spaces}
+
+\begin{definition}
+	Suppose $(X,\tau)$ is a topological space and $\sim$ is an equivalence relation on $X$. Let $Y=X/\sim$ be the quotient set, and $q:Y\to X$ taking $x\mapsto[x]$ be the quotient set.
+
+	Then the \emph{quotient topology} on $Y$ is given by
+	\begin{equation*}
+		\left\{U \subseteq Y: q^{-1}(U) \in \tau\right\},
+	\end{equation*}
+	the subsets of $U$ of the quotient set $Y$, for which the union of the equivalence classes in $X$ corresponding to points of $U$ is an open subset of $X$.
+\end{definition}
+
+\begin{remark}
+	Now $q$ is continuous, and the quotient topology is the ``largest'' topology on $Y$ for which this is true. It is easy to see that it does form a topology, since $\tau$ is a topology on $X$. \label{rmk:quot-topologies}
+
+	If $f:X\to Z$ is a continuous map of topological spaces such that $x\sim y$ implies $f(x)=f(y)$, then there is a unique factorisation, and $\fbar$, defined by $\fbar([x]) = f(x)$, is continuous. (As $q^{-1}(\fbar^{-1}(U)) = f^{-1}(U)$ is open in $X$, so $\fbar$ is continuous.)
+
+	\begin{equation*}
+		\xymatrix{
+			X \ar[rr]^q \ar[rrdd]_f & & X/\sim \ar@{-->}[dd]^{\exists\,!\fbar} \\
+			\\
+			& & Z
+		}
+	\end{equation*}
+\end{remark}
+
+\begin{examples}
+\mbox{}
+\begin{enumerate}
+	\item Define $\sim$ on $\R$ by $x\sim y$ if and only if $x-y\iZ$. Then the map
+	\begin{equation*}
+		\fullfunction{\phi}{R/\sim}{\bb{T} = \{z\iC: \left\vert z \right\vert=1\}}{[x]}{e^{2\pi ix}}
+	\end{equation*}
+	is both well-defined and a homeomorphism. (See examples sheet~1, question~15.)
+
+	\item Define the two-dimensional torus $T^{\,2}$ to be $\R^2/\sim$, where $(x_1,y_1) \sim (x_2,y_2)$ if and only if $x_1-x_2 \iZ$ and $y_1-y_2\iZ$. The topological comes from a metric on $T^{\,2}$ (examples sheet~1, question~18) and so is well-defined. (Note that we sometimes denote $T^{\,2}$ as $\R^2/\Z^2$).
+
+	\emph{Remark.} In general, we can get some rather nasty (non-Hausdorff, for example) topologies for an arbitrary equivalence relation.
+
+	\item \emph{Special case.} If $A\subset X$, then we can define $\sim$ on $X$ by $x \sim y$ if and only if $x=y$ or $x,y\in A$. The quotient space is sometimes written as $X/A$, in which we scrunch $A$ down to a point. (Note the conflict with example (ii).) Usually we take $A$ to be closed.
+
+	For example, if $D$ is the closed unit disc in $\C$, then the boundary is the unit circle $C$, and $D/C$ is homeomorphic to $S^{\,2}$, the unit sphere. (See examples sheet~2, question~13.)
+\end{enumerate}
+\end{examples}
+
+\begin{lemma}
+	Suppose $(X,\tau)$ is Hausdorff and $A \subset X$ is closed. Suppose further that for any $x\not\in A$, there are open sets $U,V$ with $U\cap V=\emptyset$, $U \supseteq A$ and $V \ni x$. Then $X/A$ is Hausdorff.
+\end{lemma}
+
+\begin{proof}
+	Given two points $\xbar \neq \ybar$ in $X\backslash A$, we have two possibilities:
+	\begin{enumerate}
+		\item Neither $\xbar$ nor $\ybar$ correspond to $A$. In this case, there are unique $x,y\in X$ corresponding to $\xbar$ and $\ybar$. Thus there are
+		\begin{itemize}
+			\shortskip
+			\item [] $U_x\supset A$, $V_x\ni x$ such that $U_x \cap V_x=\emptyset$;
+			\item [] $U_y\supset A$, $V_y\ni y$ such that $U_y \cap V_y=\emptyset$.
+		\end{itemize}
+		Since $X$ is Hausdorff, without loss of generality we may assume that $V_x \cap V_y = \emptyset$. Thus the correpsonding open sets $q(V_x)$ and $q(V_y)$ in $X/A$ separate $\xbar$ and $\ybar$.
+
+		\item We have $\xbar=q(x)$, where $x\in X\backslash A$, and $\ybar$ corresponding to $A$. Then there exist open sets $U\supset A$ and $V \ni x$ such that $U\cap V = \emptyset$. The corresponding open sets $q(U)$, $q(V)$ in $X/A$ separate $\xbar$ and $\ybar$. \qedhere
+	\end{enumerate}
+\end{proof}
+
+% subsection quotient_spaces (end)
+
+\subsection{Product topologies} % (fold)
+\label{sub:product_topologies}
+
+\begin{definition}
+	Given topological space $(X,\tau)$ and $(Y,\sigma)$, we define the \emph{product topology} $\tau\times \sigma$ on $X\times Y$ as follows: $W\subseteq X\times Y$ is open if and only if, for all $x,y\in X$, there exist open sets $U\subseteq X$ and $V\subseteq Y$ such that $x\in U$, $y\in V$ and $U\times V \subseteq W$.
+
+	In other words, $X\times Y$ has a base of open sets of the form $U\times V$, where $U$ is open in $X$ and $V$ is open in $Y$.
+\end{definition}
+
+Notice that $(U_1\times V_1) \cap (U_2 \times V_2) = (U_1 \cap U_2) \times (V_1 \cap V_2)$, and so this does indeed form the base of a topology. We can extend our definition to a product of countably many spaces:
+
+\begin{definition}
+	If $(X_i,\tau_i)_{i=1}^n$ are topological spaces, then the product topology on $\prod_{i=1}^n X_i$ is defined by having a base of open sets of the form $\prod_{i=1}^n U_i$, where $U_i$ is open in $X_i$, for $i=1,\ldots,n$.
+\end{definition}
+
+Again, this forms a topology.
+
+\begin{example}
+	Consider $\R$ with the usual topology. The product topology on $\R \times \R = \R^2$ is just the usual metric topology. Basic open sets in the product topology include the open rectangles $I_1 \times I_2$ (a product of open intervals $I_1$ and $I_2$ in $\R$), and these form a base for the usual topology on $\R^2$.
+\end{example}
+
+	\pagebreak
+
+\begin{lemma}
+	Given topological spaces $(X_1,\tau_1)$ and $(X_2,\tau_2)$, the projection maps $\pi_i: (X_1 \times X_2, \tau_1 \times \tau_2) \to (X_i,\tau_i)$ are continuous. Moreover, given a topological space $(Y,\tau)$ with continuous map $f_i:Y\to X_i$, there is a unique factorisation, and $f$ (in the diagram) is continuous.
+	\begin{equation*}
+		\xymatrix{
+			& & & & X_1 \\
+			Y \ar@{-->}[rr]^{\exists\,!f} \ar@/^1.5pc/[rrrru]^{f_1} \ar@/_1.5pc/[rrrrd]_{f_2} & &
+			{X_1 \times X_2} \ar[rru]^{\pi_1} \ar[rrd]_{\pi_2} \\
+			& & & & X_2
+		}
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	The first part is easy: we use $\pi_1^{-1}(U)=U\times X_2$ and $\pi_2^{-1}(V)=X_1\times V$.
+	
+	For the second part, define $f(y)=(f_1(y),f_2(y)) \in X_1\times X_2$. The fact that $f$ is unique, making the diagram commute, is obvious. For any basic open set $U\times V \subseteq X_1 \times X_2$, where $U$ is open in $X_1$ and $V$ is open in $X_2$, we have $f^{-1}(U \times V) = f_1^{-1}(U) \cap f_2^{-1}$ open in $Y$.
+
+	Further, since any open set $W$ in $X_1 \times X_2$ is the union of basic open sets, $f^{-1}(W)$ is the union of their inverse, and so $f^{-1}(W)$ is open in $W$. Thus $f$ is continuous.
+\end{proof}
+
+% subsection product_topologies (end)

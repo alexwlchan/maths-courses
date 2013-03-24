@@ -1,0 +1,1307 @@
+%!TEX root = linear-algebra.tex
+\stepcounter{lecture}
+\setcounter{lecture}{1}
+\sektion{Vector spaces}
+
+\subsection{Definitions} % (fold)
+\label{sub:definition}
+
+\lecturemarker{1}{5 Oct}
+We start by fixing a \wiki{Field_(mathematics)}{field}, $\F$. We say that $\F$ is a field if:
+\begin{itemize}
+	\shortskip
+	\item $\F$ is an abelian group under an operation called \emph{addition}, $(+)$, with additive identity 0;
+	\item $\F\backslash\{0\}$ is an abelian group under an operation called \emph{multiplication}, $(\cdot)$, with multiplicative identity 1; %
+	\item Multiplication is distributive over addition; that is, $a\left( b+c \right)=ab+ac$ for all $a,b,c\iF$.
+\end{itemize}
+Fields we've encountered before include the reals $\R$, the complex numbers $\C$, the ring of integers modulo $p$,  $\Z/p=\F_p$, the rationals $\Q$, as well as $\Q[\sqrt{3}\,] = \{a+b\sqrt{3}: a,b\iQ\}$.
+
+Everything we will discuss works over any field, but it's best to have $\R$ and $\C$ in mind, since that's what we're most familiar with.% (and we can draw pictures!)
+
+\begin{definition} % Vector space 
+A \wiki{Vector_space}{vector space} over $\F$ 
+is a tuple $(V,+,\cdot)$ 
+consisting of a set $V$, operations $+:V\times V\to V$ (\emph{vector addition}) and $\cdot:\F\times V \to V$ (\emph{scalar multiplication}) such that 
+%vector addition and scalar multiplication if it satisfies the following: %
+	% A  (or an \wiki{Vector_space}{$\F$-vector space})\todo{This definition is already quite cluttered, perhaps we can lose this parenthetical?} is a tuple $(V,+,\cdot)$ consisting of a set $V$, 
+	\begin{enumerate}
+		\item $(V,+)$ is an abelian group, that is:
+		\begin{itemize}
+			\shortskip
+%			\item $+:V\times V\to V$ takes $(v_1,v_2) \mapsto v_1+v_2 \in V$;
+			\item Associative: for all $v_1,v_2,v_3\in V$, $\left( v_1+v_2 \right)+v_3 = v_1+\left( v_2+v_3 \right)$;
+			\item Commutative: for all $v_1,v_2 \in V$, $v_1+v_2 = v_2+v_1$;
+			\item Identity: there is some (unique) $0\in V$ such that, for all $v\in V$, $0+v=v=v+0$;
+			\item Inverse: for all $v\in V$, there is some $u\in V$ with $u+v=v+u = 0$.
+			
+			This inverse is unique, and often denoted $-v$.
+		\end{itemize}
+		
+		\item Scalar multiplication satisfies
+%We have multiplication $\cdot$ by scalars on $V$.
+		\begin{itemize}
+			\shortskip
+%			\item $\cdot:\F\times V\to V$ takes $(\lambda,v) \mapsto \lambda v\in V$;
+			\item Associative: for all $\lambda_1,\lambda_2\iF$, $v\in V$, $\lambda_1 \cdot \left( \lambda_2 \cdot  v \right) = \left( \lambda_1 \lambda_2 \right) \cdot  v$; %
+			\item Identity: for all $v\in V$, the unit $1\iF$ acts by $1\cdot v = v$;
+			\item $\cdot$ distributes over $+_V$: for all $\lambda\iF$, $v_1,v_2\in V$, $\lambda\cdot\left( v_1+v_2 \right)= \lambda \cdot v_1 + \lambda \cdot v_2$; %
+			\item $+_{\F}$ distributes over $\cdot$:  for all $\lambda_1,\lambda_2\iF$, $v\in V$, $\left( \lambda_1+\lambda_2 \right)\cdot v = \lambda_1\cdot v + \lambda_2\cdot v$; %
+%			\item Inverses: for all $v\in V$, $\lambda\iF\backslash\{0\}$, we have some $\lambda^{-1}\iF\backslash\{0\}$ with $\lambda^{-1} \left( \lambda v \right) = \lambda \left( \lambda^{-1} v \right) = v$. %
+		\end{itemize}
+	\end{enumerate}
+	We usually say ``the vector space $V$'' rather than $(V,+,\cdot)$.
+\end{definition}
+
+	\pagebreak
+
+% Let's look at some examples:
+
+\begin{examples}
+\begin{enumerate}
+	\shortskip
+	\item $\{0\}$ is a vector space.
+	\item Vectors in the plane under vector addition form a vector space.
+	\item The space of $n$-tuples with entries in $\F$, denoted $\Fn = \left\{ \left( a_1,\ldots,a_n \right) : a_i \iF\right\}$ with component-wise addition \vspace{-2pt} %
+	\begin{equation*}
+		\left( a_1,\ldots,a_n \right)
+		+ \left( b_1,\ldots,b_n \right)
+		= \left( a_1+b_1,\ldots,a_n+b_n \right)
+	\end{equation*}
+	and scalar multiplication
+	\begin{equation*}
+		\lambda \cdot \left( a_1,\ldots,a_n \right)
+		= \left( \lambda a_1,\ldots,\lambda a_n \right).
+	\end{equation*}
+	Proving that this is a vector space is an exercise. It is also a special case of the next example.
+		
+	\item Let $X$ be any set, and $\F^X = \left\{f:X\to\F\right\}$ be the set of \emph{all} functions $X\to\F$. This is a vector space, with addition defined pointwise: %
+	\begin{equation*}
+		(f+g)(x)=f(x)+g(x)
+	\end{equation*}
+	and multiplication also defined pointwise:
+	\begin{equation*}
+		(\lambda\cdot f)(x)=\lambda f(x)
+	\end{equation*}
+	if $\lambda\iF$, $f,g\iF^X$, $x\in X$. If $X=\{1,\ldots,n\}$, then $\F^X=\F^n$ and we have the previous example.
+
+	\vspace{3pt}
+	
+	\begin{proof}
+		[Proof that $\F^X$ is a vector space]
+		\mbox{}
+		\begin{itemize}
+			\shortskip
+			\item As $+$ in $\F$ is commutative, we have
+			\begin{equation*}
+				(f+g)(x) = f(x) + g(x) = g(x) + f(x) = (g+f)(x),
+			\end{equation*}
+			so $f+g=g+f$. Similarly, $f$ in $\F$ associative implies $f + (g + h) = (f + g) + h$, and that $(-f)(x)=-f(x)$ and $0(x)=0$. % for all $x\in X$. %
+			
+			\item Axioms for scalar multiplication follow from the relationship between $\cdot$ and $+$ in $\F$. Check this yourself! \qedhere %
+		\end{itemize}
+	\end{proof}
+         
+         \item $\C$ is a vector space over $\R$.
+
+\end{enumerate} %
+\end{examples}
+
+\vspace{-1pt}
+
+\begin{lemma}
+	Let $V$ be a vector space over $\F$. %
+	\begin{enumerate}
+		\shortskip
+		\item For all $\lambda\iF$, $\lambda\cdot0=0$, and for all $v\in V$, $0\cdot v = 0$.
+		\item Conversely, if $\lambda\cdot v = 0$ and $\lambda\iF$ has $\lambda\neq 0$, then $v=0$. %
+	\item For all $v\in V$, $-1\cdot v=-v$.
+
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\mbox{}
+\begin{enumerate}
+	\shortskip
+	\item $\lambda\cdot 0 = \lambda \cdot \left( 0+0 \right)=\lambda\cdot 0 + \lambda\cdot 0 \implies \lambda\cdot 0 = 0$. %
+	
+	$0\cdot v = \left( 0+0 \right)\cdot v = 0\cdot v + 0\cdot v \implies 0\cdot v = 0$.
+	
+	\item As $\lambda\iF$, $\lambda\neq 0$, there exists $\lambda^{-1}\iF$ such that $\lambda^{-1}\lambda=1$, so $v=(\lambda^{-1}\lambda)\cdot v = \lambda^{-1}\left( \lambda\cdot v \right)$, hence if $\lambda\cdot v=0$, we get $v=\lambda^{-1}\cdot 0 = 0$ by (i). 
+
+	\item % From (i),
+	$0=0\cdot v = (1+(-1)) \cdot v = 1\cdot v + (- 1 \cdot v) = v + (-1\cdot v) \implies -1 \cdot v = -v$. \qedhere %
+\end{enumerate} %
+\end{proof}
+
+We will write $\lambda v $ rather than $\lambda \cdot v$ from now on, as the lemma means this will not cause any confusion.
+
+% subsection definition (end)
+
+	\pagebreak
+
+\subsection{Subspaces} % (fold)
+\label{sub:subspaces}
+
+\begin{definition}
+	Let $V$ be a vector space over $\F$. A subset $U\subseteq V$ is a \wiki{Linear_subspace}{vector subspace} (or just a \wiki{Linear_subspace}{subspace}), written $U\leq V$, if the following holds: %
+	\begin{enumerate}
+		\shortskip
+		\item $0\in U$;
+		\item If $u_1,u_2\in U$, then $u_1+u_2\in U$;
+		\item If $u\in U$, $\lambda\iF$, then $\lambda u\in U$.
+	\end{enumerate}
+	Equivalently, $U$ is a subspace if $U\subseteq V$, $U\neq \emptyset$ ($U$ is non-empty) and for all $u,v \in U$, $\lambda, \mu \iF$, $\lambda u + \mu v \in U$. %
+\end{definition}
+
+\begin{lemma}
+	If $V$ is a vector space over $\F$ and $U\leq V$, then $U$ is a vector space over $\F$ under the restriction of the operations $+$ and $\cdot$ on $V$ to $U$. (Proof is an exercise.) %
+\end{lemma}
+
+\vspace{-6pt}
+
+\begin{examples}
+	\begin{enumerate}
+		\item $\{0\}$ and $V$ are always subspaces of $V$.
+		\item $\left\{(r_1,\ldots,r_n,0,\ldots,0):r_i\iR\right\}\subseteq\R^{n+m}$ is a subspace of $\R^{n+m}$. %
+		\item The following are all subspaces of sets of functions:
+		\begin{align*}
+			C^1(\R)
+			&= \left\{f:\R\to\R \mid f \text{ continuous and differentiable}\right\} \\ %
+			&\subseteq C(\R) = \left\{f:\R\to\R \mid f \text{ continuous}\right\} \\
+			&\subseteq \R^\R = \left\{f:\R\to\R\right\}.
+		\end{align*}
+		Consider: $f, g$ continuous implies that $f+g$ is, and $\lambda f$ is, for $\lambda \iR$; the zero function is continuous, so $C(\R)$ is a subspace of $\R^\R$, similarly for $C^1(\R)$.
+
+		\item Let $X$ be any set, and write
+		\begin{equation*}
+			\F[X]
+			=(\F^X)_\text{fin}
+			= \left\{f:X\to \F\mid f(x)\neq 0 \text{ for only finitely many } x \in X\right\}. %
+		\end{equation*}
+		This is the set of \emph{finitely supported functions}, which is is a subspace of $\F^X$. Consider: if $f(x)=0$, then $\lambda\,f(x)=0$, so if $f\in(\F^X)_\text{fin}$, then so is $\lambda f$. Similarly,
+		\begin{equation*}
+			\left( f+g \right)^{-1}(\F\backslash\{0\}) \subseteq f^{-1}(\F\backslash\{0\}) \cup g^{-1}(\F\backslash\{0\}) %
+		\end{equation*}
+		and if these two are finite, then so is the LHS. Now consider the special case $X=\N$:
+		\begin{equation*}
+			\F[\N] = (\F^\N)_\text{fin}
+			= \left\{ (\lambda_0,\lambda_1,\ldots) \mid \text{only finitely many } \lambda_i \text{ are non-zero}\right\}. %
+		\end{equation*}
+		We write $x^i$ for the function which sends $i\mapsto 1$, $j\mapsto0$ if $j\neq i$; that is, for the tuple $(0,\ldots,0,1,0,\ldots)$ in the $i$th place. Thus %
+		\begin{equation*}
+			\textstyle \F[\N] = \left\{\sum \lambda_i \mid \text{only finitely many } \lambda_i \text{ non-zero}\right\}. %
+		\end{equation*}
+		We can do better than a vector space here: define multiplication by
+		\begin{equation*}
+			\textstyle \left( \sum \lambda_i \, x^i \right)
+			\textstyle \left( \sum \mu_{j} \, x^{j} \right)
+			\textstyle =  \sum \lambda_i \, \mu_{j} \cdot x^{i+j}.
+		\end{equation*}
+		This is still in $\F[\N]$. It is more usual to denote this by $\F[x]$, the polynomials in $x$ over $\F$ (and this is a formal definition of the \emph{polynomial ring}). %
+	\end{enumerate} %
+\end{examples}
+
+% subsection subspaces (end)
+
+\subsection{Bases} % (fold)
+\label{sub:bases}
+
+\lecturemarker{2}{8 Oct}
+\begin{definition}
+	Suppose $V$ is a vector space over $\F$, and $S\subseteq V$ is a subset of $V$. Then $v$ is a \wiki{Linear_combination}{linear combination} of elements of $S$ if there is some $n>0$ and $\lambda_1,\ldots,\lambda_n\iF$, $v_1,\ldots,v_n\in S$ such that $v=\lambda_1 v_1 + \cdots + \lambda_n v_n$ or if $v=0$. %
+	
+	We write $\left\langle S \right\rangle$ for the \wiki{Linear_span}{span} of $S$, the set of all linear combinations of elements of $S$. %
+\end{definition}
+
+Notice that it is important in the definition to use only finitely many elements -- infinite sums do not make sense in arbitrary vector spaces.
+
+We will see later why it is convenient notation to say that 0 is a linear combination of $n=0$ elements of $S$. 
+
+\begin{example}
+	$\left\langle \emptyset \right\rangle=\{0\}$. %
+\end{example}
+
+\begin{lemma}
+\mbox{}
+\begin{enumerate}
+	\shortskip
+	\item $\left\langle S \right\rangle$ is a subspace of $V$.
+	\item If $W\leq V$ is a subspace, and $S\subseteq W$, then $\left\langle S \right\rangle\leq W$; that is, $\left\langle S \right\rangle$ is the smallest subset of $V$ containing $S$. %
+\end{enumerate} %
+\end{lemma}
+
+\begin{proof}
+	(i) is immediate from the definition. (ii) is immediate, by (i) applied to $W$. %
+\end{proof}
+
+\begin{definition}
+	We say that $S$ \emph{spans} $V$ if $\left\langle S \right\rangle=V$. %
+\end{definition}
+
+\begin{example}
+	The set $\{(1,0,0),(0,1,0),(1,1,0),(7,8,0)\}$ spans $\left\{(x,y,0) : x,y\iR \right\}\leq \R^3$. %
+\end{example}
+
+\begin{definition}
+	Let $v_1,\ldots,v_n$ be a sequence of elements in $V$. We say they are \emph{linearly dependent} if there exist $\lambda_1,\ldots,\lambda_n\iF$, not all zero, such that %
+	\begin{equation*}
+		\sum_{i=1}^n \lambda_i \, v_i = 0,
+	\end{equation*}
+	which we call a \emph{linear relation} among the $v_i$. We say that $v_1,\ldots,v_n$ are \emph{linearly independent} if they are not linearly dependent; that is, if there is no linear relation among them, or equivalently if %
+	\begin{equation*}
+		\sum_{i=1}^n \lambda_i \, v_i = 0 \implies \lambda_i = 0 \text{ for all } i. %
+	\end{equation*}
+	We say that a subset $S\subseteq V$ is \emph{linearly independent} if every finite sequence of distinct elements in $S$ is linearly independent. %
+\end{definition}
+
+	\pagebreak
+
+Note that if $v_1,\ldots,v_n$ is linearly independent, then so is every reordering $v_{\pi(1)},\ldots,v_{\pi(n)}$.
+\begin{itemize}
+	\shortskip
+	\item If $v_1,\ldots,v_n$ are linearly independent, and $v_{i_1},\ldots,v_{i_k}$ is a subsequence, then the subsequence is also linearly independent. %
+	\item If some $v_i=\bf{0}$, then $1\cdot\bf{0}=\bf{0}$ is a linear relation, so $v_1,\ldots,v_n$ is not linearly independent. %
+	\item If $v_i=v_j$ for some $i\neq j$, then $1\cdot v_i + \left( -1 \right)v_j=0$ is a linear relation, so the sequence isn't linearly independent. %
+	\item If $\left\vert S \right\vert<\infty$, say $S=\{v_1,\ldots,v_n\}$, then $S$ is linearly independent if and only if $v_1,\ldots,v_n$ are linearly independent. %
+\end{itemize}
+
+\begin{example}
+	Let $V=\R^3$, $S=\left\{\mat{1 \\ 0 \\ 0}, \mat{0 \\ 1 \\ 0}\right\}$, and then
+	\begin{equation*}
+		\lambda_1\mat{1 \\ 0 \\ 0} + \lambda_2\mat{0 \\ 1 \\ 0} = \mat{\lambda_1 \\ \lambda_2 \\ 0} %
+	\end{equation*}
+	is zero if and only if $\lambda_1=\lambda_2=0$, and so $S$ is linearly independent. %
+\end{example}
+
+\begin{exercises}
+\mbox{}
+\begin{enumerate}
+	\item Show that $v_1,v_2\in V$ are linearly dependent if and only if $v_1=0$ \emph{or} $v_2=\lambda v_1$ for some $\lambda\iF$. %
+	\item Let $S=\left\{ \mat{1 \\ 0 \\1},\mat{1 \\ 2 \\0},\mat{2 \\1 \\ 0}\right\}$, then
+	\begin{equation*}
+		\lambda_1 \mat{1 \\ 0 \\ 1} + \lambda_2 \mat{1 \\ 2 \\ 0} + \lambda_3 \mat{2 \\ 1 \\ 0} = \underbrace{\mat{1 & 1 & 2 \\ 0 & 2 & 1 \\ 1 & 0 & 0}}_A \mat{\lambda_1 \\ \lambda_2 \\ \lambda_3}, %
+	\end{equation*}
+	so linear independence of $S$ is the same as $A\lambda=0 \implies \lambda=0$. Show that in this example, there are no non-zero solutions.
+
+	\item If $S\subseteq\Fn$, $S=\{v_1,\ldots,v_m\}$, then show that finding a relation of linear dependence $\sum_{i=1}^m \lambda_i \, v_i$ is equivalent to solving $A\lambda=0$, where $A=(v_1\;\ldots\;v_m)$ is an $n\times m$ matrix whose columns are the $v_i$. %
+	\item Hence show that every collection of four vectors in $\R^3$ has a relation of linear dependence. %
+\end{enumerate}
+\end{exercises}
+
+\begin{definition}
+	The set $S\subseteq V$ is a \wiki{Basis_(linear_algebra)}{basis} for $V$ if %
+	\begin{enumerate}
+		\shortskip
+		\item $S$ is linearly independent and;
+		\item $S$ spans $V$.
+	\end{enumerate}
+\end{definition}
+
+\vspace{3pt}
+
+\begin{remark}
+	This is slightly the wrong notion. We should order $S$, but we'll deal with this later. %
+\end{remark}
+
+\begin{examples}
+	\begin{enumerate}
+		\shortskip
+		\item By convention, the vector space $\{0\}$ has $\emptyset$ as a basis.
+		\item $S=\{e_1,\ldots,e_n\}$, where $e_i$ is a vector of all zeroes except for a one in the $i$th position, is a basis of $\Fn$ called the \emph{standard basis}. %
+
+		\item $\F[x] = \F[\N] = \left.(\F^\N)\right._\text{fin}$ has basis $\left\{1,x,x^2,\ldots\right\}$. %
+		
+		More generally, $\F[X]$ has $\left\{\delta_x \mid x\in X\right\}$ as a basis, where %
+		\begin{equation*}
+			\delta_x(y) =
+			\begin{cases}
+				1 & \text{if } x=y, \\ %
+				0 & \text{otherwise},
+			\end{cases}
+		\end{equation*}
+		so $\F[X]$ is, formally, the set of linear combinations of elements of $X$. %
+		
+		For amusement: $\F[\N]\leq \F^\N$, and $1,x,x^2,\ldots$ are linearly independent in $\F^\N$ as they are linearly independent in $\F[\N]$, but they do not span $\F^\N$, as $(1,1,1,\ldots)\not\in\F[\N]$. %
+		
+		Show that if a basis of $\F^\N$ exists, then it is uncountable.
+% (easy if $\left\vert \F \right\vert<\infty$). %
+	\end{enumerate}
+\end{examples}
+
+\begin{lemma}
+	A set $S$ is a basis of $V$ if and only if every vector $v\in V$ can be written uniquely as a linear combination of elements of $S$. %
+\end{lemma}
+
+\begin{proof}
+	($\Leftarrow$) Writing $v$ as a linear combination of elements of $S$ for every $v\in V$ means that $\left\langle S \right\rangle=V$. Uniquely means that, in particular, 0 can be written uniquely, and so $S$ is linearly independent. %
+	
+	($\Rightarrow$) If $v=\sum_{i=1}^n \lambda_i \,v_i=\sum_{i=1}^n \mu_i  v_i$, where $v_i \in S$ and $i=1,\ldots,n$, then $\sum_{i=1}^n \left( \lambda_i-\mu_i \right)v_i=0$, and since the $v_i$ are linearly independent, $\lambda_i=\mu_i$ for all $i$. %
+\end{proof}
+
+Observe: if $S$ is a basis of $V$,  $\left\vert S \right\vert=d$ and $\left\vert \F \right\vert=q<\infty$ (for example, $\F=\Z/p\Z$, and $q = p$), then the lemma gives $\left\vert V \right\vert=q^d$, which implies that $d$ is the same, regardless of choice of basis for $V$, that is every basis of $V$ has the same size. In fact, this is true when $\F = \R$ or indeed when $\F$ is arbitrary, which means we must give a proof without counting. We will now slowly show this, showing that the language of vector spaces reduces the proof to a statement about matrices -- Gaussian elimination (row reduction) -- we're already familiar with.
+
+\begin{definition}
+	$V$ is \emph{finite dimensional} if there exists a finite set $S$ which spans $V$. %
+\end{definition}
+
+\lecturemarker{3}{10 Oct}
+
+\begin{theorem}
+	Let $V$ be a vector space over $\F$, and let $S$ span $V$. \label{theorem:1-reduce-to-basis} If $S$ is finite, then $S$ has a subset which is a basis for $V$. In particular, if $V$ is finite dimensional, then $V$ has a basis. %
+\end{theorem}
+
+\begin{proof}
+	If $S$ is linearly independent, then we're done. Otherwise, there exists a relation of linear dependence, $\sum_{i=1}^n c_i \, v_i = 0$, where not all $c_i$ are zero (for $c_i\iF$). Suppose $c_{i_0}\neq 0$, then we get $c_{i_0} v_{i_0} = -\sum_{j\neq i_0} c_j v_{j}$, so $v_{i_0}=-\sum c_j v_j/c_{i_0}$, and hence we claim $\left\langle v_1,\ldots,v_m \right\rangle = \left\langle v_1,\ldots,v_{i_0-1},v_{i_0+1}, \ldots, v_m \right\rangle$ (proof is an exercise). So removing $v_{i_0}$ doesn't change the span. We repeat this process, continuing to remove elements until we have a basis. %
+\end{proof}
+
+\vspace{3pt}
+
+\begin{remark}
+	If $S=\{0\}$, say with $V=\{0\}$, then the proof says remove $0$ from the set $S$ to get $\emptyset$, which is why it is convenient to say that $\emptyset$ is a basis of $\{0\}$. %
+\end{remark}
+
+	\pagebreak
+
+\begin{theorem}
+	Let $V$ be a vector space over $\F$, and $V$ finite dimensional. \label{1:theorem-with-lemma} If $v_1,\ldots,v_r$ are linearly independent vectors, then there exist elements $v_{r+1},\ldots,v_n\in V$ such that $\{v_1,\ldots,v_r,v_{r+1},\ldots,v_n\}$ is a basis. %
+
+	That is, any linearly independent set can be extended to a basis of $V$. % 
+\end{theorem}
+
+\vspace{6pt}
+
+\begin{remark}
+	This theorem is true without the assumption that $V$ is finite dimensional -- any vector space has a basis. The proof is similar to what we give below, plus a bit of fiddling with the axiom of choice. The interesting theorems in this course are about finite dimensional vector spaces, so you're not missing much by this omission. %
+\end{remark}
+ 
+First, we prove a lemma.
+
+\begin{lemma}
+	Let $v_1,\ldots,v_m$ be linearly independent, and $v\in V$. Then $v\notin\left\langle v_1,\ldots,v_m \right\rangle$ if and only if $v_1,\ldots,v_m,v$ are linearly independent. \label{lem:lemma-proof-thm-2} %
+\end{lemma}
+
+\begin{proof}
+	($\Leftarrow$) If $v\in\left\langle v_1,\ldots,v_m \right\rangle$, then $v=\sum_{i=1}^m c_i v_i$ for some $c_i\iF$, so $\sum_{i=1}^m c_i v_i + (-1)\cdot v$ is a non-trivial relation of linear dependence. %
+	
+	($\Rightarrow$) Conversely, if $v_1,\ldots,v_m,v$ are linearly dependent, then there exist $c_i,b$ such that $\sum c_i v_i + bv=0$, with not all $c_i,b$ zero. Then if $b=0$, we get $\sum c_i v_i=0$, which is a non-trivial relation on the linearly independent $v_i$, which is not possible, so $b\neq 0$. So $v=-\sum c_i v_i/b$ and $v\in\left\langle v_1,\ldots,v_m \right\rangle$. %
+\end{proof}
+
+\begin{proof}
+	[Proof of theorem \ref{1:theorem-with-lemma}] Since $V$ is finite dimensional, there is a finite spanning set $S=\{w_1,\ldots,w_d\}$. Now, if $w_i \in \left\langle v_1,\ldots,v_r \right\rangle$ for all $i$, then $V=\left\langle w_1,\ldots,w_d \right\rangle\subseteq \left\langle v_1,\ldots,v_r \right\rangle$, so in this case $v_1,\ldots,v_r$ is already a basis. %
+	
+	Otherwise, there is some $w_i\not\in\left\langle v_1,\ldots,v_r \right\rangle$. But then the lemma implies that $v_1,\ldots,v_r,w_i$ is linearly independent.  We recurse, adding elements to $S$ until we have a basis.
+\end{proof}
+
+\begin{theorem}
+	Let $V$ be a vector space over $\F$. Let $S=\{v_1,\ldots,v_m\}$ span $V$ and $L=\{w_1,\ldots,w_n\}$ be linearly independent. Then $m\geq n$. %
+	
+	In particular, if $\frak{B}_1,\frak{B}_2$ are two bases of $V$, then $\left\vert \frak{B}_1 \right\vert = \left\vert \frak{B}_2 \right\vert$. %
+\end{theorem}
+
+\begin{proof}
+	As the $v_k$'s span $V$, we can write each $w_i$ as a linear combination of the $v_k$'s,  $w_i = \sum_{k=1}^m c_{ki}\, v_k$, for some $c_{ki}\iF$. Now we know the $w_i$'s are linearly independent, which means $\sum_i \lambda_i \,w_i = 0 \implies \lambda_i = 0$ for all $i$. But %
+	\begin{equation*}
+		\textstyle
+		\sum_i \lambda_i\, w_i
+		= \sum_i \lambda_i \left( \sum_k c_{ki}\, v_k \right)
+		= \sum_k \left( \sum_i c_{ki}\,\lambda_i \right) v_k.
+	\end{equation*}
+	We write $C=(c_{ki})$ for the $m\times n$ matrix formed by the coefficients $c_{ki}$. 
+Observe that the rules of matrix multiplication are such that the coefficient of $v_k$ in $\sum \lambda_i \, w_i$ is the $k$th entry of the column vector $C\lambda$. %
+	
+	If $m<n$, we learned in \emph{Vectors \& Matrices} that there is a non-trivial solution $\lambda\neq 0$. (We have $m$ linear equations in $n$ variables, so a non-zero solution exists; the proof is by row reduction.) This contradicts the $w_i$'s as linearly independent. So $m\geq n$. %
+	
+	Now, if $\frak{B}_1$ and $\frak{B}_2$ are bases, then apply this to $S=\frak{B}_1$, $L=\frak{B}_2$ to get $\left\vert \frak{B}_1 \right\vert\geq \left\vert \frak{B}_2 \right\vert$. Similarly apply this $S=\frak{B}_2$, $L=\frak{B}_1$ to get $\left\vert \frak{B}_2 \right\vert\geq \left\vert \frak{B}_1 \right\vert$, and so $\left\vert \frak{B}_1 \right\vert=\left\vert \frak{B}_2 \right\vert$. %
+\end{proof}
+
+\begin{definition}
+	Let $V$ be a vector space over a field $\F$. Then the \wiki{Dimension}{dimension} of $V$, denoted by $\dim V$, is the number of elements in a basis of $V$. %
+\end{definition}
+
+\begin{example}
+	$\dim \Fn=n$, as $e_1,\ldots,e_n$ is a basis, called \emph{the standard basis}, where $e_i$ is a vector that is $1$ in the $i$th place, and $0$ everywhere else (for $i=1,\ldots,n$).
+\end{example}
+
+\begin{corollary}
+	\mbox{}
+	\begin{enumerate}
+		\shortskip
+		\item If $S$ spans $V$, then $\left\vert S \right\vert\geq \dim V$, with equality if and only if $S$ is a basis. %
+		\item If $L=\{v_1,\ldots,v_k\}$ is linearly independent, then $\left\vert L \right\vert\leq \dim V$, with equality if and only if $L$ is a basis. %
+	\end{enumerate} %
+\end{corollary}
+
+\begin{proof}
+	Immediate. Theorem \ref{theorem:1-reduce-to-basis} implies (i) and theorem \ref{1:theorem-with-lemma} implies (ii). %
+\end{proof}
+
+\begin{lemma}
+	Let $W\leq V$, and $V$ be finite dimensional. Then $W$ is finite dimensional, and $\dim W\leq \dim V$. Moreover, $\dim W = \dim V$ if and only if $W=V$. %
+\end{lemma}
+
+\begin{proof}
+	The subtle point is to show that $W$ is finite dimensional. %
+	
+	Let $w_1,\ldots,w_r$ be linearly independent vectors in $W$. Then they are linearly independent when considered as vectors in $V$, so $r\leq \dim V$ by our theorem. If $\left\langle w_1,\ldots,w_r \right\rangle\neq W$, then there is some $w\in W$ with $w\not\in\left\langle w_1,\ldots,w_r \right\rangle$, and so by lemma \ref{lem:lemma-proof-thm-2}, $w_1,\ldots,w_r,w$ is linearly independent, and $r+1\leq \dim V$. %
+	
+	Continue in this way finding linearly independent vectors in $W$, and we must stop after at most $(\dim V)$ steps. When we stop, we have a finite basis of $W$, so $W$ is finite dimensional, and the rest of the theorem is immediate. %
+\end{proof}
+
+\begin{lemma}
+	Let $V$ be finite dimensional and $S$ any spanning set. Then there is a \emph{finite} subset $S\p$ of $S$ which still spans $V$, and hence a finite subset of that which is a basis. %
+\end{lemma}
+
+\begin{proof}
+	As $V$ is finite dimensional, there is a finite spanning set $\{v_1,\ldots,v_n\}$. Now, as $S$ spans $V$, we can write each $v_i$ as a \emph{finite} linear combination of elements of $S$. %
+	
+	But when you do this, you use only finitely many elements of $S$ for each $i$. Hence as there are only finitely many $v_i$ (there are $n$ of them!),  this only uses finitely many elements of $S$. We call this finite subset $S\p$. By construction, $V =  \left\langle v_1,\ldots,v_n \right\rangle \subseteq \left\langle S\p \right\rangle$. %
+\end{proof}
+
+% subsection bases (end)
+
+	\pagebreak
+
+\subsection{Linear maps and matrices} % (fold)
+\label{sub:linear_maps_and_matrices}
+
+\begin{definition}
+	Let $V$ and $W$ be vector spaces over $\F$, and $\varphi:V\to W$ a map. We say that $\varphi$ is \wiki{Linear_map}{linear} if %
+	\begin{enumerate}
+		\shortskip
+		\item $\varphi$ is a homomorphism of abelian groups; that is, $\varphi(0)=0$ and for all $v_1,v_2\in V$, we have $\varphi(v_1+v_2) = \varphi(v_1) + \varphi(v_2)$. %
+		\item $\varphi$ respects scalar multiplication; that is, $\varphi(\lambda v) = \lambda\,\varphi(v)$ for all $\lambda\iF, v\in V$. %
+	\end{enumerate}
+\end{definition}
+
+Combining these two conditions, we see that a map $\varphi$ is linear if and only if
+\begin{equation*}
+	\varphi(\lambda_1 \, v_1+\lambda_2 \, v_2)=\lambda_1\,\varphi(v_1)+\lambda_2\,\varphi(v_2) %
+\end{equation*}
+for all $\lambda_1,\lambda_2\iF$, $v_1,v_2\in V$.
+
+\begin{definition}
+	We write $\Lin(V,W)$ to be the set of linear maps from $V$ to $W$; that is,
+	\begin{equation*}
+		\Lin(V,W)=\left\{\varphi:V\to W \mid \varphi \text{ linear}\right\}
+	\end{equation*}
+	A linear map $\varphi:V\to W$ is an \emph{isomorphism} if there is a linear map $\psi:W\to V$ such that $\varphi\psi=1_W$ and $\psi\varphi=1_V$.
+\end{definition}
+
+Notice that if $\varphi$ is an isomorphism, then in particular $\varphi$ is a bijection on sets. The converse also holds:
+
+\begin{lemma}
+	A linear map $\varphi$ is an isomorphism if $\varphi$ is a bijection; that is, if $\varphi^{-1}$ exists as a map of sets. %
+\end{lemma}
+
+\begin{proof}
+	We must show that $\varphi^{-1}:W\to V$ is linear; that is, %
+	\begin{equation*}
+		\varphi^{-1}(a_1 w_1 + a_2 w_2) = a_1\,\varphi^{-1}(w_1) + a_2\,\varphi^{-1}(w_2). %
+		\tag{$*$}
+	\end{equation*}
+	But we have
+	\begin{equation*}
+		\varphi\left( a_1\,\varphi^{-1}(w_1) + a_2\,\varphi^{-1}(w_2) \right)
+		= a_1\, \varphi(\varphi^{-1}(w_1)) + a_2\,\varphi(\varphi^{-1}(w_2))
+		= a_1\,w_1 + a_2\,w_2, %
+	\end{equation*}
+	as $\varphi$ is linear. Now apply $\varphi^{-1}$ to get $(*)$.
+\end{proof}
+
+\begin{lemma}
+	If $\varphi:V\to W$ is a vector space isomorphism, then $\dim V=\dim W$. %
+\end{lemma}
+
+\begin{proof}
+	\datemarker{12 Oct} Let $b_1,\ldots,b_n$ be a basis of $V$. We claim that $\varphi(b_1),\ldots,\varphi(b_n)$ is a basis of $W$. First we check linear independence: Suppose %
+	\begin{equation*}
+		0
+		= \sum_{i=1}^n \lambda_i \,\varphi(b_i) %
+		= \varphi\left( \sum_{i=1}^n \lambda_i \,b_i \right). %
+	\end{equation*}
+	As $\varphi$ is injective, so $\sum \lambda_i \, b_i = 0$, and hence as the $b_i$ are linearly independent, $\lambda_i=0$ for $i=1,\ldots,n$. So $\varphi(b_i)$ are linearly independent. %
+	
+	Then we check they span: since $\varphi$ is surjective, for all $w\in W$, we have $w=\varphi(v)$ for some $v\in V$. But $v=\sum \lambda_i\,b_i$ for some $\lambda_i\iF$, as the $b_i$ span $V$. But then $w = \varphi(v) = \sum\lambda_i \,\varphi(b_i)$, and the $\varphi(b_i)$ span $W$. 
+
+Since they both have a basis of the same size, it follows that $\dim V=\dim W$. %
+\end{proof}
+
+\begin{definition}
+	If $b_1, \dots, b_n$ are a basis of $V$, and $v = \sum_i \lambda_i \, v_i$, we say $\lambda_1, \dots, \lambda_n$ are the \wiki{Coordinates}{coordinates} of $v$ with respect to the basis $b_1, \dots, b_n$.  %
+\end{definition}
+
+Here is another view of what the coordinates of a vector mean:
+
+\begin{proposition}
+	Let $V$ be a finite-dimensional vector space over $\F$, with $\dim V=n$. Then there is a bijection %
+	\begin{equation*}
+		\left\{\text{ordered bases } b_1,\ldots,b_n \text{ of } V\right\}
+		\isomto
+		\left\{\varphi:\Fn\isomto V \right\}.
+	\end{equation*}
+\end{proposition}
+
+The idea of the proposition is that coordinates of a vector with respect to a basis define a point in $\Fn$, and hence a choice of a basis is a choice of an isomorphism of our vector space $V$ with $\Fn$.
+
+\begin{proof}
+	Given an ordered basis $b_1,\ldots,b_n$ of $V$, call it $\frak B$, we can write every vector $v\in V$ as $v=\sum \lambda_i \,b_i$ for unique $\lambda_i,\ldots,\lambda_n\iF$. Define $\alpha_\frak{B}:V\to\Fn$ by %
+	\begin{equation*}
+		\alpha_\frak{B}(v)
+		= \mat{\lambda_1 \\ \vdots \\ \lambda_n}
+		= \sum_{i=1}^n \lambda_i \, e_i,
+	\end{equation*}
+	where $\{e_i\}$ is the standard basis of $\Fn$.
+
+	It is clear that $\alpha_\frak{B}$ is well-defined, linear and an isomorphism, and the inverse sends $\left( \lambda_1,\ldots,\lambda_n \right) \mapsto \sum \lambda_i \,b_i$. %
+
+	This defines a map $\left\{\text{ordered bases } \frak{B}\right\} \to \left\{\alpha:V\isomto \Fn\right\}$ taking $\frak{B} \mapsto \alpha_\frak{B}$. %
+
+	To see that this map is a bijection, suppose we are given $\alpha:V\to\Fn$ an isomorphism. Then $\alpha^{-1}:\Fn\to V$ is also an isomorphism, and we define $b_i = \alpha^{-1}(e_i)$. The proof of the previous lemma showed that $b_1, \dots, b_n$ is a basis of $V$. It is clear that for this ordered basis $\frak B$, $\alpha_{\frak{B}} = \alpha$. %
+\end{proof}
+
+Let $V$ and $W$ be finite dimensional vector spaces over $\F$, and choose bases $v_1,\ldots,v_n$ and $w_1,\ldots,w_m$ of $V$ and $W$, respectively. Then we have the diagram:
+\begin{equation*}
+	\xymatrix{
+		{\Fn} \ar[d]_{\isom} & {\Fm} \ar[d]^{\isom} \\
+		{V} \ar[r]_{\alpha} & {W}
+	}
+\end{equation*}
+Now, suppose $\alpha:V\to W$ is a linear map. As $\alpha$ is linear, and every $v\in V$ can be written as $v=\sum \lambda_i \, v_i$ for some $\lambda_1,\ldots,\lambda_n$, we have
+\begin{equation*}
+	\alpha(v)=\alpha\left( \sum_{i=1}^n \lambda_i \,v_i \right) = \sum_{i=1}^n \lambda_i \, \alpha(v_i), %
+\end{equation*}
+so $\alpha$ is determined by its values $\alpha(v_1),\ldots,\alpha(v_n)$. But then write each $\alpha(v_i)$ as a sum of basis elements $w_1,\ldots,w_m$
+\begin{equation*}
+	\alpha(v_j) = \sum_{i=1}^m a_{ij} \,w_i \qquad j=1,\ldots,m
+\end{equation*}
+for some $a_{ij}\iF$.
+
+Hence, if $\left( \lambda_1,\ldots,\lambda_n \right)$ are the coordinates of $v\in V$, with respect to a basis $v_1,\ldots,v_n$; that is, if $v=\sum \lambda_i \,v_i$, then
+\begin{equation*}
+	\alpha(v)
+	= \alpha\left( \sum_{j=1}^n \lambda_{j} \, v_j \right)
+	= \sum_{i,j} a_{ij} \,\lambda_{j} \,w_i;
+\end{equation*}
+that is,
+\begin{equation*}
+	\mat{
+		\sum a_{1j} \,\lambda_{j} \\[1.5pt]
+		\sum a_{2j} \,\lambda_{j} \\
+		\vdots \\ 
+		\sum a_{mj} \,\lambda_{j}} 
+	= A\mat{\lambda_1 \\[1.5pt] \lambda_2 \\ \vdots \\ \lambda_n} %
+\end{equation*}
+are the coordinates of $\alpha(v)$ with respect to $w_1,\ldots,w_m$.
+
+That is, by choosing bases $v_1,\ldots,v_n$ and $w_1,\ldots,w_m$ of $V$ and $W$, respectively, every linear map $\alpha:V\to W$ determines a matrix $A\in\Mat_{m,n}(\F)$.
+
+Conversely, given $A\in\Mat_{m,n}(\F)$, we can define
+\begin{equation*}
+	\alpha\left( \sum_{i=1}^n \lambda_i \, v_i \right)
+	= \sum_{i=1}^n \sum_{j=1}^m a_{ij} \, \lambda_{j} \, w_i, %
+\end{equation*}
+which is a \emph{well-defined} linear map $\alpha:V\to W$, and these constructions are inverse, and so we've proved the following theorem:
+
+\begin{theorem}
+	A choice of bases $v_1,\ldots,v_n$ and $w_1,\ldots,w_m$ of vector spaces $V$ and $W$ defines an isomorphism $\Lin(V,W) \isomto \Mat_{m,n}(\F)$. %
+\end{theorem}
+\vspace{3pt}
+
+\begin{remark}
+	Actually, $\Lin(V,W)$ is a vector space. The vector space structure is given by defining, for  $a,b\iF$, $\alpha,\beta\in \Lin(V,W)$, %
+	\begin{equation*}
+		\left( a\alpha+b\beta \right)(v) = a\,\alpha(v)+b\,\beta(v).
+	\end{equation*}
+	Also, $\Mat_{m,n}(\F)$ is a vector space over $\F$, and these maps $\Lin(V,W) \rightleftarrows \Mat_{m,n}(\F)$ are vector space isomorphisms. %
+
+	The choice of bases for $V$ and $W$ define isomorphisms with $\Fn$ and $\Fm$ respectively so that the following diagram commutes: %
+	\begin{equation*}
+		\xymatrix{
+			{\Fn} \ar[r]^{A} \ar[d]_{\isom} & {\Fm} \ar[d]^{\isom} \\
+			V \ar[r]_{\alpha} & {W}
+		}
+	\end{equation*}
+
+We say a diagram \emph{commutes} if every directed path through the diagram with the same start and end vertices leads to the same result by composition. This is convenient short hand language for a bunch of linear equations -- that the coordinates of the different maps that you get by composing maps in the different manners agree. %
+
+\end{remark}
+
+\begin{corollary}
+	$\dim \Lin(V,W) = \dim \Mat_{m,n} (\F) = nm = \dim V \dim
+	W$. %
+\end{corollary}
+
+\begin{lemma}
+	Let $\alpha:V\to W$, $\beta:W\to U$ be linear maps of vector spaces $U, V, W$. %
+	\begin{enumerate}
+		\shortskip
+		\item $\beta\alpha:V\to U$ is linear.
+		\item If\, $v_1,\ldots,v_n$ is a basis of $V$, \\
+		\phantom{If\,} $w_1,\ldots,w_m$ is a basis of $W$, \\
+		\phantom{If\,} $u_1,\ldots,u_r$ is a basis of $U$,
+		
+		and $A\in\Mat_{m,n}(\F)$ is the matrix of $\alpha$ with respect to the $v_i,w_{j}$ bases, and \\ %
+		\phantom{and} $B\in\Mat_{r,m}(\F)$ is the matrix of $\beta$ with respect to the $w_{j},u_k$ bases, %
+
+		then the matrix of $\beta\alpha:V\to U$ with respect to the $v_i,u_k$ bases is $BA$. %
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\mbox{}
+	\begin{enumerate}
+		\shortskip
+		\item Exercise.
+		\item We have from our earlier work
+		\begin{equation*}
+			\alpha(v_{j}) = \sum_{i=1}^m a_{ij} \,w_i
+			\qquad \text{and} \qquad
+			\beta(w_i) = \sum_{k=1}^r b_{ki} \,u_k.
+		\end{equation*}
+		Now we have
+		\begin{equation*}
+			(\beta\alpha)(v_{j})
+			= \beta\left( \sum_{i=1}^m a_{ij} \,w_i \right)
+			= \sum_{k=1}^r \sum_{i=1}^m a_{ij} \, b_{ki} \,u_k,
+		\end{equation*}
+		and so the coefficient of $u_k$ is $\sum_{i,k} b_{ki} \,a_{ij} = \left( BA \right)_{kj}$. \qedhere %
+	\end{enumerate} %
+\end{proof}
+
+\begin{definition}
+	A linear map $\varphi:V\to V$ is an \wiki{Automorphism}{automorphism} if it is an isomorphism. The set of automorphisms forms a group, and is denoted %
+	\begin{align*}
+		\GL(V)
+		&= \left\{\varphi:V\to V \mid \varphi \text{ a linear isomorphism}\right\} \\ %
+		&= \left\{\varphi\in \Lin(V,V) \mid \varphi \text{ an isomorphism}\right\}
+	\end{align*}
+\end{definition}
+
+\begin{example}
+	We write $\GL_n(\F) = \left\{\varphi:\Fn\to\Fn, \varphi \text{ isomorphism}\right\} = \GL(\Fn)$. %
+\end{example}
+
+\begin{exercise}
+	Show that if $\varphi:V\isomto W$ is an isomorphism, then it induces an isomorphism of groups $\GL(V) \isom \GL(W)$, so $\GL(V) \isom \GL_{\dim V}(\F)$. \lecturemarker{4}{15 Oct}
+\end{exercise}
+
+\begin{lemma}
+	Let $v_1,\ldots,v_n$ be a basis of $V$ and $\varphi:V\to V$ be % a linear map and
+	an isomorphism; that is, let $\varphi\in\GL(V)$. Then we showed that $\varphi(v_1),\ldots,\varphi(v_n)$ is also a basis of $V$ and hence %
+	\begin{enumerate}
+		\shortskip
+		\item If $v_1=\varphi(v_1),\ldots,v_n=\varphi(v_n)$, then $\varphi = \id_V$.  In other words, we get the same ordered basis if and only if $\varphi$ is the identity map. %
+		\item If $v\p_1,\ldots,v\p_n$ is another basis of $V$, then the linear map $\varphi:V\to V$ defined by %
+		\begin{equation*}
+			\textstyle\varphi\left( \sum \lambda_i \,v_i \right) = \sum \lambda_i \,v_i\p %
+		\end{equation*}
+		(that is, the map sending $v_i \mapsto v_i\p$) is an isomorphism.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Define its inverse $\psi:V\to V$ by $v\p_i \mapsto v_i$; that is, %
+	\begin{equation*}
+		\textstyle\psi\left( \sum \lambda_i\,v\p_i \right) = \sum \lambda_i \, v_i. %
+	\end{equation*}
+	Then it is clear $\varphi\psi = \psi\varphi = \id_V:V\to V$.
+\end{proof}
+
+	\pagebreak
+
+So (i) and (ii) say that:
+
+\begin{proposition}
+	$\GL(V)$ acts simply and transitively on the set of bases; that is, given $v_1\p,\ldots,v\p_n$ a basis, there is a unique $\varphi\in\GL(V)$ such that $\varphi(v_1)=v\p_1, \ldots, \varphi(v_n)=v\p_n$. %
+\end{proposition}
+
+\begin{corollary}
+	$\left\vert \GL_n(\F_p) \right\vert = \left( p^n-1 \right)\left( p^n-p \right) \cdots \left( p^n - p^{n-1} \right)$. %
+\end{corollary}
+
+\begin{proof}
+	% By the above, I
+	It is enough to count ordered bases of $\F_p^n$, which is done by proceeding as follows: %
+	\begin{itemize}
+		\shortskip
+		\item [] Choose $v_1$, which can be any non-zero element, so we have $p^n-1$ choices. %
+		\item [] Choose $v_2$, any non-zero element not a multiple of $v_1$, so $p^n-p$ choices. %
+		\item [] Choose $v_3$, any non-zero element not in $\left\langle v_1,v_2 \right\rangle$, so $p^n-p^2$ choices. %
+		\item [] $\qquad\!\vdots$
+		\item [] Choose $v_n$, any non-zero element not in $\left\langle v_1,\ldots,v_{n-1} \right\rangle$, so $p^n-p^{n-1}$ choices. \qedhere %
+	\end{itemize}
+\end{proof}
+
+\begin{example}
+	$\left\vert \GL_2(\F_p) \right\vert = p\left( p-1 \right)^2 \left( p+1 \right)$. %
+\end{example}
+
+\begin{remark}
+	We could express the same proof by saying that a matrix $A\in\Mat_n(\F_p)$ is invertible if and only if all of its columns are linearly independent, and the proof works by picking each column in turn. %
+\end{remark}
+
+\vspace{-3pt}
+
+Let $v_1,\ldots,v_n$ be a basis of $V$, and $\varphi\in\GL(V)$. Then  $v_i\p=\varphi(v_i)$ is a new basis of $V$. Let $A$ be the matrix of $\varphi$ with respect to the original basis $v_1,\ldots,v_n$ for both source and target $\varphi:V\to V$. Then
+\begin{equation*}
+	\varphi(v_i) = v\p_i = \textstyle \sum_j a_{ji}\,v_j,
+\end{equation*}
+so the columns of $A$ are the coordinates of the new basis in terms of the old.  We can also express this by saying the following diagram commutes:
+%Given $\varphi:V\to V$, we could also thus define $A$:
+\begin{equation*}
+	\xymatrix{
+		\Fn
+			\ar [r]^{\isom}
+			\ar@{.>} [d]_A
+		& V
+			\ar [d]^{\varphi}
+		& &
+		{e_i \mapsto v_i} \\
+		\Fn
+			\ar [r]_{\isom}
+		& V & &
+		{e_i \mapsto v_i}
+	}
+\end{equation*}
+Conversely, if $v_1,\ldots,v_n$ is a basis of $V$, and $v\p_1,\ldots,v\p_n$ is another basis, then we can define $\varphi : V \to V$ by $\varphi(v_i) = v_i'$, and we can express this by saying that the following diagram commutes.
+\begin{equation*}
+	\xymatrix{
+		\Fn
+			\ar [r]^{\isom}
+			\ar [rd]_{\isom}
+		&
+		V
+			\ar@{.>} [d]^{\varphi}
+		& &
+		{e_i}
+			\ar@{|->} [r]
+			\ar [rd]
+		&
+		{v_i}
+			\ar@{|.>} [d]^{\varphi}
+		\\ &
+		V
+		& & &
+		{v\p_i}
+	}
+\end{equation*}
+This is just language meant to clarify the relation between changing bases, and bases as giving isomorphisms with a fixed $\F^n$. If it instead confuses you, feel free to ignore it. In contrast, here is a practical and important question about bases and linear maps, which you can't ignore: 
+
+Consider a linear map $\alpha:V\to W$. Let $v_1,\ldots,v_n$ be a basis of $V$, $w_1,\ldots,w_n$ of $W$, and $A$ be the matrix of $\alpha$. If we have new bases $v\p_1,\ldots,v\p_n$ and $w\p_1,\ldots,w\p_n$, then we get a new matrix of $\alpha$ with respect to this basis. \emph{What is the matrix with respect to these new bases?} We write
+\begin{equation*}
+	\textstyle v\p_i =\sum_j p_{ji}\,v_j
+	\qquad
+	w\p_i = \sum_j q_{ji}\,w_j.
+\end{equation*}
+
+\begin{exercise}
+	Show that $w\p_i = \sum_j q_{ji}\,w_j $ if and only if $w_i = \sum_j \,(Q^{-1}) _{ji} \,w\p_j$, where $Q= (q_{ab})$.
+\end{exercise}
+
+Then we have
+\begin{equation*}
+	\alpha(v\p_i)
+	= \sum_j p_{ji}\,\alpha(v_j)
+	= \sum_{j,k} p_{ji} \, a_{kj} \, w_k
+	= \sum_{j,k,l} p_{ji}\,a_{kj} \, (Q^{-1})_{lk} \, w_l\p %
+	= \sum_l (Q^{-1}AP)_{li} \,w\p_l,
+\end{equation*}
+and we see that the matrix is $Q^{-1}AP$.
+
+Finally, a definition.
+
+\begin{definition}
+	\mbox{}
+	\begin{enumerate}
+		\shortskip
+		\item Two matrices $A, B \in \Mat_{m,n}(\F)$ are said to be \emph{equivalent} if they represent the same linear map $\F^n \to F^m$ with respect to different bases, that is there exist $P \in GL_n(\F), Q\in GL_m(\F)$ such that
+		\begin{equation*}
+			B = Q^{-1}AP.
+		\end{equation*}
+		\item The linear maps $\alpha:V\to W$ and $\beta:V\to W$ are \emph{equivalent} if their matrices look the same after an appropriate choice of bases; that is, if there exists an isomorphism $p\in\GL(V)$, $q\in\GL(W)$ such that the following diagram commutes: %
+		\begin{equation*}
+			\xymatrix{
+				V
+					\ar [r] ^\alpha
+				&
+				W \\
+				V
+					\ar [u] ^p
+					\ar [r] _\beta
+				&
+				W
+					\ar [u] _q
+			}
+		\end{equation*}
+		That is to say, if $q^{-1}\alpha p=\beta$.
+	\end{enumerate}
+\end{definition}
+
+% subsection linear_maps_and_matrices (end)
+
+	\pagebreak
+
+\subsection{Conservation of dimension: the rank-nullity theorem} % (fold)
+\label{sub:rank_nullity_theorem}
+
+\begin{definition}
+	For a linear map $\alpha:V\to W$, we define the \wiki{Kernel_(mathematics)}{kernel} to be the set of all elements that are mapped to zero %
+	\begin{equation*}
+		\ker \alpha = \left\{x\in V:\alpha(x) = 0\right\} = K \leq V
+	\end{equation*}
+	and the \wiki{Image_(mathematics)}{image} to be the points in $W$ which we can reach from $V$ %
+	\begin{equation*}
+		\Im \alpha = \alpha(V) = \left\{\alpha(v) : v\in V\right\} \leq W.
+	\end{equation*}
+	Proving that these are subspaces is left as an exercise.
+	
+	We then say that $r(\alpha)=\dim \Im \alpha$ is the \wiki{Rank_(linear_algebra)}{rank} and $n(\alpha)=\dim\ker\alpha$ is the \wiki{Nullity}{nullity}. %
+\end{definition}
+
+\begin{theorem}
+	[\wikirm{Rank\%E2\%80\%93nullity_theorem}{Rank-nullity theorem}] For a linear map $\alpha:V\to W$, where $V$ is finite dimensional, we have %
+	\begin{equation*}
+		r(\alpha) + n(\alpha) = \dim \Im \alpha + \dim \ker \alpha = \dim V.
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $v_1,\ldots,v_d$ be a basis of $\ker\alpha$, and extend it to a basis of $V$, say, $v_1,\ldots,v_d,v_{d+1},\ldots,v_n$. We show the following claim, which implies the theorem immediately: %
+	
+	\textbf{Claim.} $\alpha(v_{d+1}),\ldots,\alpha(v_n)$ is a basis of $\Im\alpha$. %
+	
+	\emph{Proof of claim.} Span: if $w\in\Im\alpha$, then $w=\alpha(v)$ for some $v\in V$. But $v_1,\ldots,v_n$ is a basis, so there are some $\lambda_1,\ldots,\lambda_n\iF$ with $v=\sum \lambda_i \,v_i$. Then %
+	\begin{equation*}
+		\alpha(v)
+		= \alpha\left( \sum \lambda_i \, v_i \right)
+		= \sum_{i=d+1}^n \lambda_i \, \alpha(v_i)
+	\end{equation*}
+	as $\alpha(v_1)=\cdots=\alpha(v_d)=0$; that is, $\alpha(v_{d+1}),\ldots,\alpha(v_n)$ span $\Im\alpha$. %
+	
+	Linear independence: we have
+	\begin{equation*}
+		\sum_{i=d+1}^n \lambda_i\,\alpha(v_i) = 0
+		\implies
+		\alpha\left( \sum_{i=d+1}^n \lambda_i \, v_i \right) = 0.
+	\end{equation*}
+	And hence $\sum_{i=d+1}^n \lambda_i\,v_i \in \ker\alpha$. But $\ker\alpha$ has basis $v_1,\ldots,v_d$, and so there are $\mu_1,\ldots,\mu_d\iF$ such that %
+	\begin{equation*}
+		\sum_{i=d+1}^n \lambda_i\,v_i = \sum_{i=1}^d \mu_i\,v_i.
+	\end{equation*}
+	But this is a relation of linear dependence on $v_1,\ldots,v_n$, which is a basis of $V$, so we must have %
+	\begin{equation*}
+		-\mu_1 = -\mu_2 = \cdots = -\mu_d = \underbrace{\lambda_{d+1} = \cdots = \lambda_n}_\text{hence linearly independent} = 0. \qedhere %
+	\end{equation*}
+\end{proof}
+
+\begin{corollary}
+	Let $\alpha:V\to W$ be a linear map between finite dimensional spaces $V$ and $W$. If $\dim V=\dim W$, then $\alpha:V\to W$ is an isomorphism if and only if $\alpha$ is injective, and if and only if $\alpha$ is surjective. %
+\end{corollary}
+
+\begin{proof}
+	The map $\alpha$ is injective if and only if $\dim\ker\alpha=0$, and so $\dim\Im\alpha = \dim V$ (which is $\dim W$ here), which is true if and only if $\alpha$ is surjective. %
+\end{proof}
+
+\begin{remark}
+	\lecturemarker{5}{17 Oct}If $v_1,\ldots,v_n$ is a basis for $V$, $w_1,\ldots,w_m$ is a basis for $W$ and $A$ is the matrix of the linear map $\alpha:V\to W$, then $\Im \alpha \isomto \left\langle \text{column space of } A \right\rangle$, $ \ker\alpha \isomto \ker A$, and the isomorphism is induced by the choice of bases for $V$ and $W$, that is by the isomorphisms $W\isomto \Fm$, $V\isomfrom\Fn$. %
+\end{remark}
+
+\begin{remark}
+	You'll notice that the rank-nullity theorem follows easily from our basic results about how linearly independent sets extend to bases. %
+	%, which have a well defined number of elements. 
+	You'll recall that these results in turn depended on row and column reduction of matrices. We'll now show that in turn they imply the basic results about row and column reduction -- the first third of this course is really just learning fancy language in which to rephrase Gaussian elimination. %
+
+	The language will be useful in future years, especially when you learn geometry. However it doesn't really help when you are trying to solve linear equations -- that is, finding the kernel of a linear transformation. For that, there's not much you can say other than: write the linear map in terms of a basis, as a matrix, and row and column reduce! %
+\end{remark}
+
+\begin{theorem}
+\vspace{-6pt}
+\begin{enumerate}
+	\item Let $A\in\Mat_{m,n}(\F)$. Then $A$ is equivalent to %
+	\renewcommand{\arraystretch}{0.25}
+	\begin{equation*}
+		B =
+		\mat{
+			1 & 0 & \cdots & \cdots & \cdots & 0 \\
+			0 & \ddots & 0 & \ddots & \ddots & \vdots \\
+			\vdots & 0 & 1 & 0 & \ddots & \vdots \\
+			\vdots & \ddots & 0 & 0 & \vdots & \vdots \\
+			\vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\[5.5pt]
+			0 & \cdots & \cdots & \cdots & \cdots & 0
+		}
+	\end{equation*}
+	that is, there exist invertible $P\in\GL_m(\F)$, $Q\in\GL_n(\F)$ such that $B=Q^{-1}AP$. %
+	\item The matrix $B$ is well defined. That is, if $A$ is equivalent to another matrix $B\p$ of the same form, then $B\p = B$. %
+	% The number of one's in the matrix $B$ is well defined. This means that if there are $r$ ones in $B$, and $A$ is also equivalent to a matrix $B'$ of the above form with $s$ one's, then $r=s$.
+	\drangarray
+\end{enumerate}
+\label{thm:to-be-restated}
+\end{theorem}
+
+Part (ii) of the theorem is clunkily phrased. We'll phrase it better in a moment by saying that the number of ones is the rank of $A$, and equivalent matrices have the same rank.
+
+
+\emph{Proof 1 of theorem \ref{thm:to-be-restated}.}
+	\begin{enumerate}
+		\item Let $V=\Fn$, $W=\Fm$ and $\alpha:V\to W$ be the linear map taking $x\mapsto Ax$. Define $d=\dim\ker\alpha$. Choose a basis $y_1,\ldots,y_d$ of $\ker\alpha$, and extend this to a basis $v_1,\ldots,v_{n-d}, y_1,\ldots,y_d$ of $V$. %
+		
+		Then by the proof of the rank-nullity theorem, $\alpha(v_i)=w_i$, for $1\leq i\leq n-d$, are linearly independent in $W$, and we can extend this to a basis $w_1,\ldots,w_m$ of $W$. But then with respect to these new bases of $V$ and $W$, the matrix of $\alpha$ is just $B$, as desired. %
+		\item The number of one's ($n-d$ here) in this matrix equals the rank of $B$. By definition, %
+		\begin{align*}
+			r(A)
+			&= \text{column rank of } A \\
+			&= \dim \Im \alpha \\
+			&= \dim(\text{subspace spanned by columns})
+		\end{align*}
+		So to finish the proof, we need a lemma.
+	\end{enumerate}
+
+\begin{lemma}
+	If $\alpha,\beta:V\to W$ are equivalent linear maps, then %
+	\begin{equation*}
+		\dim\ker\alpha = \dim\ker\beta
+		\qquad
+		\dim\Im\alpha = \dim\Im\beta
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	[Proof of lemma] Recall $\alpha,\beta:V\to W$ are equivalent if there are some $p,q\in\GL(V)\times \GL(W)$ such that $\beta=q^{-1}\alpha p$. %
+	\begin{equation*}
+		\xymatrix{
+			V
+				\ar [r] ^\alpha
+			&
+			W \\
+			V
+				\ar [u] ^p
+				\ar [r] _\beta
+			&
+			W
+				\ar [u] _q
+		}
+	\end{equation*}
+	\textbf{Claim.} $x\in\ker\beta \iff px\in\ker\alpha$.
+	
+	\emph{Proof.} $\beta(x)=q^{-1}\alpha p(x)$. As $q$ is an isomorphism, $q^{-1}(\alpha(p(x))) = 0 \iff \alpha(p(x)) = 0$; that is, the restriction of $p$ to $\ker\beta$ maps $\ker\beta$ to $\ker\alpha$; that is, $p:\ker\beta\isomto\ker\alpha$, and this is an isomorphism, as $p^{-1}$ exists on $V$. (So $p^{-1} y \in \ker\beta \iff y\in\ker\alpha$.) %
+	
+	Similarly, you can show that $q$ induces an isomorphism $q:\Im\beta \isomto \Im\alpha$. %
+\end{proof}
+
+Note that the rank-nullity theorem implies that in the lemma, if we know $\dim\ker\alpha = \dim\ker\beta$, then you know $\dim\Im\alpha = \dim\Im\beta$, but we didn't need to use this.
+
+\begin{theorem}
+	[Previous theorem restated] The $\GL(V)\times\GL(W)$ orbits on $\Lin(V,W)$ are in bijection with %
+	\begin{equation*}
+		\left\{r:0\leq r\leq \min(\dim V,\dim W)\right\}
+	\end{equation*}
+	under the map taking $\alpha:V \to W$ to $\rk(\alpha) = \dim\Im\alpha$. %
+	
+	Here $\GL(V) \times \GL(W)$ acts on $\Lin(V,W)$ by $(q,p)\cdot\beta = q\beta p^{-1}$. %
+\end{theorem}
+
+\textbf{Hard exercise.}
+
+\begin{enumerate}
+	\shortskip
+	\item What are the orbits of $\GL(V) \times \GL(W) \times \GL(U)$ on the set $\Lin(V,W) \times \Lin(W,U) = \left\{\alpha:V\to W,\beta:W\to V \text{ linear}\right\}$? %
+	
+	\item What are the orbits of $\GL(V) \times \GL(W)$ on $\Lin(V,W) \times \Lin(W,V)$? %
+\end{enumerate}
+
+\emph{You won't be able to do part (ii) of the exercise before the next chapter, when you learn Jordan normal form. It's worthwhile trying to do them then.}
+
+\begin{proof}
+	[Proof 2 of theorem \ref{thm:to-be-restated}] %
+	\mbox{}
+	\begin{enumerate}
+		\shortskip
+		\item [(ii)] As before, no theorems were used.
+		\item [(i)] We'll write an algorithm to find $P$ and $Q$ explicitly:
+		
+		Step 1: If top left $a_{11}\neq 0$, then we can clear all of the first column by row operations, and all of the first row by column operations. %
+
+		Let's remember what this means. 
+		
+Let $E_{ij}$ be the matrix with a 1 in the $(i,j)$'th position, and zeros elsewhere.
+		Recall that for $i\neq j$, $\left( I+\alpha E_{ij} \right)A$ is a new matrix, whose $i$th row is the $i$th row of $A$ + $\alpha\cdot\left( i\text{th row of } A \right)$. This is an elementary row operation. %
+		
+		Similarly $A\left( I+\alpha E_{ij} \right)$ is an elementary column operation. As an exercise, state this precisely, as we did for the rows. %
+		
+			\pagebreak
+		
+		We have
+		\begin{equation*}
+			E_m\p \,E_{m-1}\p \cdots E_1\p \,A \,E_1 \cdots E_n
+			=
+			\mat{
+				a_{11} & 0 \\
+				0 & A'
+			}
+		\end{equation*}
+		where
+		\begin{equation*}
+			E_i\p = I-\f{a_{i1}}{a_{11}} \, E_{i1}, \qquad
+			E_j = I- \f{a_{1j}}{a_{11}} \, E_{1j}.
+		\end{equation*}
+		Step 2: if $a_{11}=0$, either $A=0$, in which case we are done, or there is some $a_{ij}\neq 0$.
+		
+		Consider the matrix $s_{ij}$, which is the identity matrix with the $i$th row and the $j$th row swapped, for example $s_{12} = \mat{ 0 & 1 \\ 1 &  0}$. %
+		
+		\textbf{Exercise.} $s_{ij}\,A$ is the matrix $A$ with the $i$th row and the $j$th row swapped, $A s_{ij}$ is the matrix $A$ with the $i$th  and the $j$th column swapped. %
+
+		Hence $s_{i1} \, A s_{j1}$ has $(1,1)$ entry $a_{ij}\neq 0$.
+
+		Now go back to step 1 with this matrix instead of $A$.
+		
+		Step 3: multiply by the diagonal matrix with ones along the diagonal except for the $(1,)$, position, where it is
+$a_{11}^{-1}$. % in position $(1,1)$; otherwise identity 
+
+		Note it doesn't matter whether we multiply on the left or the right, we get a matrix of the form
+		\begin{equation*}
+			\mat{1 & 0 \\ 0 & A''}
+		\end{equation*}
+		Step 4: Repeat this algorithm for $A''$.
+
+		When the algorithm finishes, we end up with a diagonal matrix $B$ with some ones on the diagonal, then zeros, and we have written it as	a product %
+		\begin{equation*}
+			\underbrace{
+			\mat{\text{row opps} \\ \text{for col } n}
+			* \cdots *
+			\mat{\text{row opps} \\ \text{for col } 1}
+			}_Q
+			* A *
+			\underbrace{
+			\left[ \begin{array}{cc} \text{row opps} \\ \text{for row } 1 \end{array} \right]
+			* \cdots *
+			\left[ \begin{array}{cc} \text{row opps} \\ \text{for row } n \end{array} \right]
+			}_P
+			% = \mat{1 \\ & \ddots \\ & & 1 \\ & & & 0 \\ & & & & \ddots \\ & & & & & 0},
+		\end{equation*}
+		where each $*$ is either $s_{ij}$ or $1$ times an invertible diagonal matrix (which is mostly ones, but in the $i$'th place is $a_{ii}^{-1}$). %
+
+		But this is precisely writing this as a product $Q^{-1}AP$. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	Another direct proof of the rank-nullity theorem. %
+\end{corollary}
+
+\begin{proof}
+	(ii) showed that $\dim\ker A = \dim\ker B$ and $\dim\Im A = \dim\Im B$ if $A$ and $B$ are equivalent, by (i) of the theorem, it is enough to the show rank/nullity for $B$ in the special form above. But here is it obvious. %
+\end{proof}
+
+\begin{remark}
+	Notice that this proof really is just the Gaussian elimination argument you learned last year. We used this to prove the theorem ? on bases. So now that we've written the proof here, the course really is self contained. It's better to think that everything we've been doing as dressing up this algorithm in coordinate independent language. %
+
+In particular, we have given coordinate independent meaning to the kernel and column space of a matrix, and hence to its column rank. We should also give a coordinate independent meaning for the row space and row rank, for the transposed matrix $A^\Trans$, and show that column rank equals row rank. This will happen in chapter 4.
+\end{remark}
+
+% subsection rank_nullity_theorem (end)
+
+	\pagebreak
+
+\subsection{Sums and intersections of subspaces} % (fold)
+\label{sub:sums_and_intersections_of_subspaces}
+
+\begin{lemma}
+	Let $V$ be a vector space over $\F$, and $U_i\leq V$ subspaces. Then $U=\bigcap U_i$ is a subspace. %
+\end{lemma}
+
+\begin{proof}
+	\datemarker{19 Oct} Since $0\in U_i$ for all $i$, certainly $0\in \bigcap U_i$. And if $u,v\in U$, then $u,v\in U_i$ for all $i$, so $\lambda u+\mu v\in U_i$ for all $i$, and hence $\lambda u+\mu v\in U$. %
+\end{proof}
+
+By contrast, the union $U_1\cup U_2$ is not a subspace unless $U_1\subseteq U_2$ or $U_2\subseteq U_1$.
+
+\begin{definition}
+	Let $U_1,\ldots,U_r\leq V$ be subspaces. The \emph{sum of the $U_i$} is the subspace denoted %
+	\begin{align*}
+		   \sum_{i=1}^r U_i
+		&= U_1 + \cdots + U_r \\[-10pt]
+		&= \left\{u_1+u_2+\cdots+u_r \mid u_i \in U_i \right\} \\
+		&= \left\langle U_1,\ldots,U_r \right\rangle,
+	\end{align*}
+	which is the span of $\bigcup_{i=1}^r U_i$.
+\end{definition}
+
+\textbf{Exercise:} prove the two equalities in the definition.
+
+\begin{definition}
+	The set of $d$-dimensional subspaces of $V$, $\left\{U\mid U\leq V, \dim U=d\right\}$ is called the \wiki{Grassmannian}{Grassmannian of $d$-planes in $V$}, denoted $Gr_d(V)$. %
+\end{definition}
+
+\begin{example}
+	We have
+	\begin{equation*}
+		Gr_1(\F^2) = \left\{\text{lines } L \text{ in } \F^2\right\} = \F\cup\{\infty\},
+	\end{equation*}
+	as $L=\left\langle \lambda e_1 + \mu e_2 \right\rangle$. If $\lambda\neq 0$, we get $L=\left\langle e_1+\gamma e_2 \right\rangle$, where $\gamma=\mu/\lambda \in \F$. If $\lambda = 0$, then $L = \left\langle e_2 \right\rangle$, which we think of as $\infty$. %
+	
+	If $\F=\R$, then this is $\R\cup\{\infty\}$, the circle. If $\F=\C$ then this is $\C\cup\{\infty\}$, the Riemann sphere. %
+\end{example}
+
+\begin{theorem}
+	Suppose $U_1,U_2\leq V$ and $U_i$ finite dimensional. Then %
+	\begin{equation*}
+		\dim(U_1 \cap U_2) + \dim(U_1+U_2) = \dim U_1 + \dim U_2.
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	[Proof 1] Pick a basis $v_1,\ldots,v_d$ of $U_1\cap U_2$. Extend it to a basis $v_1,\ldots,v_d,w_1,\ldots,w_r$ of $U_1$ and a basis $v_1,\ldots,v_d,y_1,\ldots,y_s$ of $U_2$. %
+	
+	\textbf{Claim.} $\{v_1,\ldots,v_d,w_1,\ldots,w_r,y_1,\ldots,y_s\}$ is a basis of $U_1+U_2$. The claim implies the theorem immediately. %
+	
+	\emph{Proof of claim.} Span: an element of $U_1+U_2$ can be written $x+y$ for $x\in U_1$, $y\in U_2$, and so %
+	\begin{equation*}
+		\textstyle
+		x = \sum \lambda_i\,v_i + \sum \mu_j\,w_j \qquad
+		y = \sum \alpha_i\,v_i + \sum \beta_k\,y_k
+	\end{equation*}
+	Combining these two, we have
+	\begin{equation*}
+		\textstyle
+		  x+y
+		= \sum \left( \lambda_i + \alpha_i \right) v_i
+		+ \sum \mu_j\,w_j
+		+ \sum \beta_k\,y_k
+	\end{equation*}
+	Linear independence is obvious, but messy to write: if
+	\begin{equation*}
+		\textstyle
+		\sum \alpha_i\, v_i + \sum \beta_j\,w_j + \sum \gamma_k y_k = 0,
+	\end{equation*}
+	then
+	\begin{equation*}
+		\underbrace{\textstyle\sum \alpha_i\,v_i + \sum \beta_j\,w_j}_{\in U_1} = \underbrace{-\textstyle\sum \gamma_k y_k}_{\in U_2}, %
+	\end{equation*}
+	hence $\sum \gamma_k\,y_k \in U_1 \cap U_2$, and hence $\sum \gamma_k \, y_k = \sum \theta_i v_i$ for some $\theta_i$, as $v_1,\ldots,v_d$ is a basis of $U_1\cap U_2$. But $v_i,y_k$ are linearly independent, so $\gamma_k=\theta_i=0$ for all $i,k$. Thus $\sum \alpha_i\,v_i + \sum \beta_j\,w_j =0$, but as $v_i,w_j$ are linearly independent, we have $\alpha_i = \beta_j = 0$ for all $i,j$. %
+\end{proof}
+
+We can rephrase this by introducing more notation. Suppose $U_i\leq V$, and we say that $U=\sum U_i$ is a \wiki{Direct_sum}{direct sum} if every $u\in U$ can be written \emph{uniquely} as $u=u_1+\cdots+u_k$, for some $u_i\in U$.
+
+\begin{lemma}
+	$U_1+U_2$ is a direct sum if and only if $U_1\cap U_2 = \{0\}$. %
+\end{lemma}
+
+\begin{proof}
+	($\Rightarrow$) Suppose $v\in U_1\cap U_2$. Then
+	\begin{equation*}
+		v = \underset{\in U_1}{v} + 0 = 0+\underset{\in U_2}{v},
+	\end{equation*}
+	which is two ways of writing $v$, so uniqueness gives that $v=0$. %
+	
+	($\Leftarrow$) If $u_1+u_2=u\p_1+u\p_2$, for $u_i, u\p_i\in U_i$, then $\underset{\in U_1}{u_1-u_1\p} = \underset{\in U_2}{u_2-u_2\p}$. %
+	
+	This is in $U_1\cap U_2 = \{0\}$, and so $u_1=u_1\p$ and $u_2=u_2\p$, and sums are unique. %
+\end{proof}
+
+\begin{definition}
+	Let $U\leq V$. A \wiki{Direct_sum_of_modules\#Internal_direct_sum}{complement} to $U$ is a subspace $W\leq V$ such that $W+U=V$ and $W\cap U=\{0\}$. %
+\end{definition}
+
+\begin{example}
+	Let $V=\R^2$, and $U$ be the line spanned by $e_1$. Any line different from $U$ is a complement to $U$; that is, $W=\left\langle e_2+\lambda e_1 \right\rangle$ is a complement to $U$, for any $\lambda\iF$. % %
+\end{example}
+
+In particular, complements are \emph{not} unique. But they always exist:
+
+\begin{lemma}
+	Let $U\leq V$ and $U$ finite dimensional. Then a complement to $U$ exists. %
+\end{lemma}
+
+\begin{proof}
+	We've seen that $U$ is finite dimensional. Choose $v_1,\ldots,v_d$ as a basis of $V$, and extend it by $w_1,\ldots,w_r$ to a basis $v_1,\ldots,v_d,w_1,\ldots,w_r$ of $V$. %
+	
+	Then $W=\left\langle w_1,\ldots,w_r \right\rangle$ is a complement.
+\end{proof}
+
+\begin{exercise}
+	Show that if $W\p$ is another complement to $U$, then there exists a unique $\varphi:W\to U$ linear, such that $W\p=\left\{w+\varphi(w)\mid w\in W\right\}$, and conversely. In other words, show that there is a bijection from the set of complements of $U$ to $L(W,U)$. %
+\end{exercise}
+
+\begin{lemma}
+	If $U_1,\dots U_r \leq U$ are such that $U_1 + \dots U_r$ is a direct sum, show that $\dim (U_1 + \dots + U_r) = \dim U_1 + \dots +\dim U_r$. %
+\end{lemma}
+
+\begin{proof*}
+	Exercise. Show that a union of bases for $U_i$ is a basis for $\sum U_i$.
+\end{proof*}
+
+Now let $U_1,U_2\leq V$ be finite dimensional subspaces of $V$. Choose $W_1\leq U_1$ a complement to $U_1\cap U_2$ in $U_1$, and $W_2\leq U_2$ a complement to $U_1\cap U_2$ in $U_2$. Then
+
+\begin{corollary}
+	\begin{equation*}
+		U_1 + U_2 = (U_1 \cap U_2) + W_1 + W_2
+	\end{equation*}
+	is a direct sum, and the previous lemma gives another proof that
+	\begin{equation*}
+		\dim(U_1 + U_2) + \dim(U_1 \cap U_2) = \dim U_1 + \dim U_2.
+	\end{equation*}
+\end{corollary}
+
+Once more, let's look at this:
+
+\begin{definition}
+	Let $V_1,V_2$ be two vector spaces over $\F$. Then define $V_1\oplus V_2$, the \wiki{Direct_sum_of_modules}{direct sum of $V_1$ and $V_2$} to be the product set $V_1\times V_2$, with vector space structure %
+	\begin{equation*}
+		(v_1,v_2) + (w_1,w_2) = (v_1+w_1,v_2+w_2)
+		\qquad
+		\lambda\left( v_1,v_2 \right) = \left( \lambda v_1 , \lambda v_2 \right).
+	\end{equation*}
+\end{definition}
+
+\begin{exercises}
+	\mbox{} %
+	\begin{enumerate}
+		\item Show that $V_1\oplus V_2$ is a vector space. Consider the linear maps
+		\begin{itemize}
+			\shortskip
+			\item [] $i_1:V_1 \injto V_1\oplus V_2$ taking $v_1\mapsto(v_1,0)$
+			\item [] $i_2:V_2 \injto V_1\oplus V_2$ taking $v_2\mapsto(0,v_2)$
+		\end{itemize}
+		These makes $V_1\isom i(V_1)$ and $V_2 \isom i(V_2)$ subspaces of $V_1\oplus V_2$ such that $iV_1 \cap iV_2 = \{0\}$, and so $V_1\oplus V_2 = iV_1 + iV_2$, so it is a direct sum.%
+		
+		\item Show that $\underbrace{\F \oplus \cdots \oplus \F}_{n \text{ times}} = \Fn$. %
+	\end{enumerate}
+\end{exercises}
+
+Once more let $U_1,U_2\leq V$ be subspaces of $V$. Consider $U_1,U_2$ as vector spaces in their own right, and form $U_1\oplus U_2$, a new vector space. (This is no longer a subspace of $V$.)
+
+\begin{lemma}
+	Consider the linear map $U_1\oplus U_2 \xrightarrow{\pi} V$ taking $(u_1,u_2) \mapsto u_1+u_2$. %
+	\begin{enumerate}
+		\shortskip
+		\item This is linear.
+		\item $\ker\pi = \left\{(-w,w)\mid w\in U_1\cap U_2\right\}$.
+		\item $\Im\pi = U_1+U_2\leq V$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof*}
+	Exercise. %
+\end{proof*}
+
+\begin{corollary}
+	Show that the rank-nullity theorem implies %
+	\begin{equation*}
+		\underset{=\dim U_1\cap U_2}{\dim\ker\pi} + \underset{=\dim(U_1+U_2)}{\dim\Im\pi} = \dim(U_1\oplus U_2) = \dim U_1+\dim U_2. %
+	\end{equation*}
+\end{corollary}
+
+\vspace{-6pt}
+This is our slickest proof yet. All three proofs are really the same -- they ended up reducing to Gaussian elimination -- but the advantage of this formulation is we never have to mention bases. Not only is it the cleanest proof, it actually makes it easier to calculate. It is certainly helpful for part (ii) of the following exercise.
+
+\begin{exercise}
+	Let $V=\Rn$ and $U_1,U_2\leq \Rn$. Let $U_1$ have a basis $v_1,\ldots,v_r$ and $U_2$ have a basis $w_1,\ldots,w_s$. %
+	\begin{enumerate}
+		\shortskip
+		\item Find a basis for $U_1+U_2$.
+		\item Find a basis for $U_1\cap U_2$.
+	\end{enumerate}
+\end{exercise}
+
+% subsection sums_and_intersections_of_subspaces (end)
