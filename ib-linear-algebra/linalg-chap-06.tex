@@ -5,7 +5,7 @@
 
 \renewcommand{\Im}{\mathfrak{I}}
 
-\datemarker{19 Nov}
+\lecturemarker{20}{19 Nov}
 A non-degenerate quadratic form on a vector space over $\C$ doesn't behave like an inner product on $\R^2$. For example,
 \begin{equation*}
 	\text{if } Q {x_1 \choose x_2} = x_1^2 + x_2^2
@@ -199,7 +199,7 @@ Note that if $\F=\R$, then $\left\langle v,w \right\rangle/\left\vert w \right\v
 	\end{align*}
 \end{proof}
 
-\datemarker{21 Nov} Given $v_1,\ldots,v_n$ with $\left\langle v_i,v_j \right\rangle=0$ if $i\neq j$, we say that $v_1,\ldots,v_n$ are \emph{orthogonal}. If $\left\langle v_i,v_j \right\rangle=\delta_{ij}$, then we say that $v_1,\ldots,v_n$ are \emph{orthonormal}.
+\lecturemarker{21}{21 Nov} Given $v_1,\ldots,v_n$ with $\left\langle v_i,v_j \right\rangle=0$ if $i\neq j$, we say that $v_1,\ldots,v_n$ are \emph{orthogonal}. If $\left\langle v_i,v_j \right\rangle=\delta_{ij}$, then we say that $v_1,\ldots,v_n$ are \emph{orthonormal}.
 
 So $v_1,\ldots,v_n$ orthogonal and $v_i\neq 0$ for all $i$ implies that $\hat{v}_1,\ldots,\hat{v}_n$ are orthonormal, where $\hat{v}_i = v_i/\left\vert v_i \right\vert$.
 
@@ -372,6 +372,8 @@ If $v_1,\ldots,v_n$ is an orthonormal basis for $V$, and $A$ is the matrix of $\
 	
 In short, if $\F=\R$, then $A$ is symmetric, and if $\F=\C$, then $A$ is Hermitian.
 
+	\pagebreak
+
 \begin{theorem}
 	Let $\alpha:V\to V$ be self-adjoint. Then %
 	\begin{enumerate}
@@ -381,8 +383,6 @@ In short, if $\F=\R$, then $A$ is symmetric, and if $\F=\C$, then $A$ is Hermiti
 		\item There exists an orthogonal basis of eigenvectors for $\alpha$. In particular, $\alpha$ is diagonalisable. %
 	\end{enumerate}
 \end{theorem}
-
-	\pagebreak
 
 \vspace{-3pt}
 
@@ -435,6 +435,8 @@ In short, if $\F=\R$, then $A$ is symmetric, and if $\F=\C$, then $A$ is Hermiti
 \end{enumerate}
 \end{proof}
 
+	\pagebreak
+
 \begin{definition}
 	Let $V$ be an inner product space over $\C$. Then the \emph{group of isometries} of the form $\left\langle \cdot,\cdot \right\rangle$, denoted $U(V)$, is defined to be %
 	\begin{align*}
@@ -452,6 +454,7 @@ If $V=\Cn$, and $\left\langle \cdot,\cdot \right\rangle$ is the standard inner p
 	U_n = U(n) = U(\Cn)
 	= \left\{X\in GL_n(\C) \mid \overline{X}^\Trans \cdot X = I \right\}.
 \end{equation*}
+
 So an orthonormal basis (that is, a choice of isomorphism $V\isomto \Cn$) gives us an isomorphism $U(V) \isomto U_n$.
 
 \begin{theorem}

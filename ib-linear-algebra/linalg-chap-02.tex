@@ -3,6 +3,8 @@
 \setcounter{lecture}{2}
 \sektion{Endomorphisms}
 
+\lecturemarker{8}{22 Oct}
+
 In this chapter, unless stated otherwise, we take $V$ to be a vector space over a field $\F$, and $\alpha:V\to V$ to be a linear map.
 
 \begin{definition}
@@ -43,6 +45,8 @@ In the next two chapters we will determine the set of orbits. This is called the
 Contrast this with the properties of a linear map $\alpha : V \to W$ which don't depend on the choice of basis of both $V$ and $W$; that is, the determination of the $\GL(V)\times \GL(W)$ orbits on $\Lin(V,W)$. In chapter 1, we've seen that the only property of a linear map which doesn't depend on the choices of a basis is its rank -- equivalently that the set of orbits is isomorphic to $\{i \mid 0\leq i\leq \min(\dim V,\dim W)\}$.
 
 We begin by defining the determinant, which is a property of an endomorphism which doesn't depend on the choice of a basis.
+
+	\pagebreak
 
 \subsection{Determinants} % (fold)
 \label{sub:determinants}
@@ -233,8 +237,12 @@ Before proving this, we need some language.
 	We have seen that $\det:\Fn\times\cdots\times\Fn \to \F$ is a volume form. It is a volume form $f$ with $f(e_1,\ldots,e_n)=1$ (that is, $\det I=1$). %
 \end{example}
 
-\begin{remark} Let's explain the name `volume form'.
-Let $\F = \R$, and consider the volume of a rectangular box with a corner at $0$ and sides defined by $v_1, \dots, v_n$ in $\R^n$. The volume of this box is a function of $v_1,\dots,v_n$ that almost satisfies the properties above. It doesnt quite satisfy linearity, as the volume of a box with sides defined by $-v_1,v_2,\dots,v_n$ is the same as that of the box with sides defined by $v_1, \dots, v_n$, but this is the only problem. (Exercise: check that the other properties of a volume form are immediate for voluems of rectangular boxes.)  You should think of this as saying that a volume form gives a \emph{signed} version of the volume of a rectangular box (and the actual volume is the absoulute value). In any case, this explains the name. You've also seen this in multi-variable calculus, in the way that the determinant enters into the formula for what happens to integrals when you change coordinates.
+\begin{remark}
+	Let's explain the name ``volume form''.
+
+	Let $\F = \R$, and consider the volume of a rectangular box with a corner at $0$ and sides defined by $v_1, \dots, v_n$ in $\R^n$. The volume of this box is a function of $v_1,\dots,v_n$ that almost satisfies the properties above. It doesnt quite satisfy linearity, as the volume of a box with sides defined by $-v_1,v_2,\dots,v_n$ is the same as that of the box with sides defined by $v_1, \dots, v_n$, but this is the only problem. (Exercise: check that the other properties of a volume form are immediate for voluems of rectangular boxes.)
+
+	You should think of this as saying that a volume form gives a \emph{signed} version of the volume of a rectangular box (and the actual volume is the absoulute value). In any case, this explains the name. You've also seen this in multi-variable calculus, in the way that the determinant enters into the formula for what happens to integrals when you change coordinates.
 \end{remark}
 
 \begin{theorem}
@@ -242,7 +250,7 @@ Let $\F = \R$, and consider the volume of a rectangular box with a corner at $0$
 \end{theorem}
 
 \begin{proof*}
-	\datemarker{24 Oct}
+	\lecturemarker{9}{24 Oct}
 	It is immediate from the definition that volume forms are a vector space. Let $e_1,\ldots,e_n$ be a basis of $V$ with $n=\dim V$. Every element of $V^n$ is of the form %
 	\begin{equation*}
 		\left( \sum a_{i1} \,e_i, \sum a_{i2}\,e_i, \ldots, \sum a_{in}\,e_i \right),
@@ -356,7 +364,7 @@ Show that:
 \end{proof}
 
 \begin{corollary}
-	If $P\in\GL_n$, then
+	If $P\in\GL_n(\F)$, then
 	\begin{equation*}
 		\det(PAP^{-1})=\det P \det A \det P^{-1} = \det A.
 	\end{equation*}
@@ -446,12 +454,8 @@ Then $\det B=\lambda_k\neq 0$, but $AB$ is a matrix whose $k$th column is 0, so 
 
 This is a horrible and unenlightening proof that $\det A\neq 0$ implies the existence of $A^{-1}$. A good proof would write the matrix coefficients of $A^{-1}$ in terms of $\left( \det A \right)^{-1}$ and the matrix coefficients of $A$. We will now do this, after some showing some further properties of the determinant.
 
-%	\pagebreak
-\bigskip
-\bigskip
-
-
 We can compute $\det A$ by expanding along any column or row.
+\lecturemarker{10}{26 Oct}
 
 \begin{definition}
 	Let $A^{ij}$ be the matrix obtained from $A$ by deleting the $i$th row and the $j$th column. %
@@ -483,11 +487,11 @@ The proof is boring book keeping.
 	 	\det A
 		 = \det(v_1,\ldots,v_n)
 		&= \sum_{i=1}^n a_{ij} \det(v_1,\ldots,v_{j-1},e_i,v_{j+1},\ldots,v_n) \\
-		&= \sum_{i=1}^n \left( -1 \right)^{j-1} \det\left( e_i,v_1,\ldots,v_{j-1},v_{j+1}, \ldots, v_n \right). %
+		&= \sum_{i=1}^n \left( -1 \right)^{j-1} a_{ij} \det\left( e_i,v_1,\ldots,v_{j-1},v_{j+1}, \ldots, v_n \right). %
 	\end{align*}
-	as $\epsilon(1 \,2\,\ldots\,j) = (-1)^{j-1}$ (in class we drew a picture of this symmetric group element, and observed it had $j-1$ crossings.) Now $e_i=(0,\ldots,0,1,0,\ldots,0)^\Trans$, so we pick up $\left( -1 \right)^{i-1}$ as the sign of the permutation $(1 \,2\,\ldots\,i )$ that rotates the 1st through $i$th rows, and so get %
+	as $\epsilon(1 \,2\,\ldots\,j) = (-1)^{j-1}$ (in class we drew a picture of this symmetric group element, and observed it had $j-1$ crossings.) Now $e_i=(0,\ldots,0,1,0,\ldots,0)^\Trans$, so we pick up $\left( -1 \right)^{i-1}$ as the sign of the permutation $(1 \,2\,\ldots\,i )$ that rotates the 1st through $i$th rows, and so we get
 	\begin{equation*}
-		\sum_i \left( -1 \right)^{i+j-2} \det\mat{1 & * \\ 0 & A^{ij}} = \sum_i \left( -1 \right)^{i+j} \det A^{ij}. \qedhere %
+		\sum_i \left( -1 \right)^{i+j-2} a_{ij} \det\mat{1 & * \\ 0 & A^{ij}} = \sum_i \left( -1 \right)^{i+j} a_{ij} \det A^{ij}. \qedhere %
 	\end{equation*}
 \end{proof}
 

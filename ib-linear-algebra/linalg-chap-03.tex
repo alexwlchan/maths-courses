@@ -8,34 +8,34 @@ In this chapter, unless stated otherwise, we take $V$ to be a finite dimensional
 % This is what matrices look like up to conjugacy; that is, what $\alpha:V\to V$ looks like, given the freedom to choose a basis for $V$.
 % 
 % \begin{example}
-% 	Consider $V=\Fn$, $A\in\Mat_n(\F)$, which defines a linear map $x\mapsto Ax$. %
+% 	Consider $V=\Fn$, $A\in\Mat_n(\F)$, which defines a linear map $x\mapsto Ax$.
 % \end{example}
 
 \subsection{Eigenvectors and eigenvalues} % (fold)
 \label{sub:eigenvectors_and_eigenvalues}
 
 \begin{definition}
-	A non-zero vector $v\in V$ is an \emph{eigenvector} for $\alpha:V\to V$ if $\alpha(v)=\lambda v$, for some $\lambda\iF$. Then $\lambda$ is called the \emph{eigenvalue} associated with $v$, and the set %
+	A non-zero vector $v\in V$ is an \emph{eigenvector} for $\alpha:V\to V$ if $\alpha(v)=\lambda v$, for some $\lambda\iF$. Then $\lambda$ is called the \emph{eigenvalue} associated with $v$, and the set
 	\begin{equation*}
 		V_\lambda = \left\{v\in V:\alpha(v)=\lambda v\right\}
 	\end{equation*}
 	is called the \emph{eigenspace of $\lambda$ for $\alpha$}, which is a subspace of $V$.
 \end{definition}
 
-We observe that if $I : V \to V$ is the identity map, then
+We observe that if $\iota : V \to V$ is the identity map, then
 \begin{equation*}
-	V_\lambda = \ker(\lambda I-\alpha:V\to V).
+	V_\lambda = \ker(\lambda \iota-\alpha:V\to V).
 \end{equation*}
-So if $v\in V_\lambda$, then $v$ is a non-zero vector if and only if $\ker(\lambda I-\alpha)\neq \{0\}$, which is equivalent saying that $\lambda I-\alpha$ is \emph{not} invertible. Thus
+So if $v\in V_\lambda$, then we can choose $v$ to be a non-zero vector if and only if $\ker(\lambda \iota-\alpha)\neq \{0\}$, which is equivalent to saying that $\lambda \iota-\alpha$ is \emph{not} invertible. Thus
 \begin{equation*}
-	\det(\lambda I-\alpha) = 0,
+	\det(\lambda \iota-\alpha) = 0,
 \end{equation*}
 by the results of the previous chapter.
 
 \begin{definition}
-	If $b_1,\ldots,b_n$ is a basis of $V$, and $A\in\Mat_n(\F)$ is a matrix of $\alpha$, then %
+	If $b_1,\ldots,b_n$ is a basis of $V$, and $A\in\Mat_n(\F)$ is a matrix of $\alpha$, then
 	\begin{equation*}
-		\chi_\alpha(x) = \det(xI-\alpha) = \det(xI-A)
+		\chi_\alpha(x) = \det(x\iota-\alpha) = \det(xI-A)
 	\end{equation*}
 	is the \emph{characteristic polynomial} of $\alpha$.
 \end{definition}
@@ -51,53 +51,55 @@ The following properties follow from the definition:
 		  \vdots & \ddots & \ddots & \vdots \\
 		  -a_{n1} & \cdots & \cdots & x-a_{nn}} \in F[x].
 	\end{equation*}
-	Observe that $\chi_A(x)\in F[x]$ is a polynomial in $x$, equal to $x^n$ plus terms of smaller degree, and the coefficients %
+	Observe that $\chi_A(x)\in F[x]$ is a polynomial in $x$, equal to $x^n$ plus terms of smaller degree, and the coefficients
 	% of $\chi_\alpha(x)$
-	are polynomials in the matrix coefficients $a_{ij}$. %
+	are polynomials in the matrix coefficients $a_{ij}$.
 	
-	For example, if $A = \mat{a_{11} & a_{12} \\ a_{21} & a_{22}}$ then %
+	\lecturemarker{11}{29 Oct}
+
+	For example, if $A = \mat{a_{11} & a_{12} \\ a_{21} & a_{22}}$ then
 	\begin{align*}
 		\chi_A(x)
 		&= x^2 - x \left( a_{11}+a_{22} \right) + (a_{11}a_{22}-a_{12}a_{21}) \\
 		&= x^2 - x.\Tr A + \det A.
 	\end{align*}
 	
-	\item Conjugate matrices have the same characteristic polynomials. Explicitly: %
+	\item Conjugate matrices have the same characteristic polynomials. Explicitly:
 	\begin{align*}
 		  \chi_{PAP^{-1}}(x)
-		&= \det\left( xI - PAP^{-1} \right) \\
-		&= \det\left( P\left( xI-A \right)P^{-1} \right) \\
+		&= \det( xI - PAP^{-1}) \\
+		&= \det( P\left( xI-A \right)P^{-1}) \\
 		&= \det(xI-A) \\
 		&= \chi_A(x).
 	\end{align*}
 	
-	\item For $\lambda\iF$, $\chi_\alpha(\lambda) = 0$ if and only if $V_\lambda = \left\{v\in V: \alpha(v)=\lambda v\right\} \neq \{0\}$; that is, if $\lambda$ is an eigenvalue of $\alpha$. This gives us a way to find the eigenvalues of a linear map. %
+	\item For $\lambda\iF$, $\chi_\alpha(\lambda) = 0$ if and only if $V_\lambda = \left\{v\in V: \alpha(v)=\lambda v\right\} \neq \{0\}$; that is, if $\lambda$ is an eigenvalue of $\alpha$. This gives us a way to find the eigenvalues of a linear map.
 \end{enumerate}
 
 \begin{example}
-	If $A$ is upper-triangular with $a_{ii}$ in the $i$th diagonal entry, then %
+	If $A$ is upper-triangular with $a_{ii}$ in the $i$th diagonal entry, then
 	\begin{equation*}
-		\chi_A(x)=\left( x-a_{11} \right) \cdots \left( x-a_{nn} \right).
+		\chi_A(x) = \displaystyle\prod_{i=1}^n \left( x-a_{ii} \right).
 	\end{equation*}
-	It follows that the diagonal terms of an upper triangular matrix are its eigenvalues. %
+	It follows that the diagonal terms of an upper triangular matrix are its eigenvalues.
 \end{example}
 
 \begin{definition}
-	We say that $\chi_A(x)$ \emph{factors} if it factors into linear factors; that is, if %
+	We say that $\chi_A(x)$ \emph{factors} if it factors into linear factors; that is, if
 	\begin{equation*}
-		\chi_A(x) =\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}, %
+		\chi_A(x) = \displaystyle\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i},
 	\end{equation*}
 	for some $n_i\iN$, $\lambda_i\iF$ and $\lambda_i\neq \lambda_j$ for $i\neq j$.
 \end{definition}
 
 \begin{examples}
-	If we take $\F=\C$, then the fundamental theorem of algebra says that every polynomial $f\in\C[x]$ factors into linear terms. %
+	If we take $\F=\C$, then the fundamental theorem of algebra says that every polynomial $f\in\C[x]$ factors into linear terms.
 	
-	In $\R$, consider the rotation matrix %
+	In $\R$, consider the rotation matrix
 	\begin{equation*}
 		A=\mat{\cos\theta & \sin\theta \\ -\sin\theta & \cos\theta},
 	\end{equation*}
-	then we have characteristic polynomial
+	which has characteristic polynomial
 	\begin{equation*}
 		\chi_A(x) = x^2-2x\cos\theta+1,
 	\end{equation*}
@@ -105,49 +107,51 @@ The following properties follow from the definition:
 \end{examples}
 
 \begin{definition}
-	If $\F$ is any field, then there is some bigger field $\overline{\F}$, the \emph{algebraic closure of $\F$}, such that $\F \subseteq \overline{\F}$ and every polynomial in $\overline{F}[x]$ factors into linear factors. This is proved next year in the \emph{Galois theory} course. %
+	If $\F$ is any field, then there is some bigger field $\overline{\F}$, the \emph{algebraic closure of $\F$}, such that $\F \subseteq \overline{\F}$ and every polynomial in $\overline{\F}[x]$ factors into linear factors. This is proved in the Part~II course \emph{Galois Theory}.
 \end{definition}
 
 \begin{theorem}
-If $A$ is an $n\times n$ matrix over $\F$, then	$\chi_A(x)$ factors if and only if $A$  is conjugate to an upper triangular matrix. %
+	If $A$ is an $n\times n$ matrix over $\F$, then	$\chi_A(x)$ factors if and only if $A$  is conjugate to an upper triangular matrix.
 	
-	In particular, this means that if $\F=\overline{\F}$, such as $\F=\C$, then every matrix is conjugate to an upper triangular matrix. %
+	In particular, this means that if $\F=\overline{\F}$, such as $\F=\C$, then every matrix is conjugate to an upper triangular matrix.
 \end{theorem}
+
+\vspace{3pt}
 
 We can give a coordinate free formulation of the theorem: if $\alpha:V\to V$ is a linear map, then $\chi_\alpha(x)$ factors if and only if there is some basis $b_1,\ldots,b_n$ of $V$ such that the matrix of $\alpha$ with respect to the basis is upper triangular.
 
 \begin{proof}
 	($\Leftarrow$) If $A$ is upper triangular, then $\chi_A(x) = \prod (x-a_{ii})$, so done.
 	
-	($\Rightarrow$) Otherwise, set $V = \F^n$, and $\alpha (x) = Ax$. We induct on $\dim V$. If $\dim V=n=1$, then we have nothing to prove. %
+	($\Rightarrow$) Otherwise, set $V = \F^n$, and $\alpha (x) = Ax$. We induct on $\dim V$. If $\dim V=n=1$, then we have nothing to prove.
 	
-	As $\chi_\alpha(x)$ factors, there is some $\lambda\iF$ such that $\chi_\alpha(\lambda)=0$, so there is some $\lambda\iF$ with a non-zero eigenvector $b_1$. Extend this to a basis $b_1, \dots, b_n$ of $V$.  %
+	As $\chi_\alpha(x)$ factors, there is some $\lambda\iF$ such that $\chi_\alpha(\lambda)=0$, so there is some $\lambda\iF$ with a non-zero eigenvector $b_1$. Extend this to a basis $b_1, \dots, b_n$ of $V$. 
 	
-	Now conjugate $A$ by the change of basis matrix.  (In other words, write the linear map $\alpha$, $x \mapsto Ax$ with respect to this basis $b_i$ rather than the standard basis $e_i$). %
+	Now conjugate $A$ by the change of basis matrix.  (In other words, write the linear map $\alpha$, $x \mapsto Ax$ with respect to this basis $b_i$ rather than the standard basis $e_i$).
 
 	%With respect to this basis, the linear map $\alpha:V\to V$, $\alpha(A)=\widetilde{A}$ can be made to look like a matrix 
-	%with $a_{11}=\lambda$ and zeros in the rest of the first column, and an $(n-1)\times(n-1)$ matrix $A'$ in the lower right hand corner. Then %
+	%with $a_{11}=\lambda$ and zeros in the rest of the first column, and an $(n-1)\times(n-1)$ matrix $A'$ in the lower right hand corner. Then
 
 	We get a new matrix
 	\begin{equation*}
-		\widetilde{A} =  \mat{\lambda & * \\ 0 & A'},
+		\widetilde{A} =  \mat{\lambda & * \\ 0 & A\p},
 	\end{equation*}
 	and it has characteristic polynomial 
 	\begin{equation*}
 		  \chi_{\widetilde{A}}(x)
 		= \left( x-\lambda \right) \chi_{A'}(x).
 	\end{equation*}
-	So $\chi_\alpha(x)$ factors implies that $\chi_{A'}(x)$ factors.
+	So if $\chi_\alpha(x)$ factors, then so does $\chi_{A'}(x)$.
 	
-	Now, by induction, there is some matrix $P\in\GL_{n-1}(\F)$ such that $PA'P^{-1}$ is upper triangular. But now %
+	Now, by induction, there is some matrix $P\in\GL_{n-1}(\F)$ such that $PA'P^{-1}$ is upper triangular. But now
 	\begin{equation*}
 		  \mat{1 & \\  & P} \widetilde{A} \mat{1 & \\  & P^{-1}}
-		= \mat{\lambda & \\  & P{A'}P^{-1}},
+		= \mat{\lambda & \\  & P{A\p}P^{-1}},
 	\end{equation*}
 	proving the theorem.
 \end{proof}
 
-\emph{Aside:} what is the meaning of the matrix $A'$? We can ask this question more generally. Let $\alpha:V\to V$ be linear, and $W\leq V$ a subspace. Choose a basis $b_1,\ldots,b_r$ of $W$, extend it to be a basis of $V$ (add $b_{r+1},\ldots,b_n$).
+\emph{Aside:} what is the meaning of the matrix $A\p$? We can ask this question more generally. Let $\alpha:V\to V$ be linear, and $W\leq V$ a subspace. Choose a basis $b_1,\ldots,b_r$ of $W$, extend it to be a basis of $V$ (add $b_{r+1},\ldots,b_n$).
 
 Then $\alpha(W)\subseteq W$ if and only if the matrix of $\alpha$ with respect to this basis looks like
 \begin{equation*}
@@ -160,13 +164,13 @@ Then our question is: What is the meaning of the matrix $Y$?
 The answer requires a new concept, the \emph{quotient vector space}.
 
 \begin{exercise}
-	Consider $V$ as an abelian group, and consider the coset group $V/W=\left\{v+W:v\in V\right\}$. Show that this is a vector space, that $b_{r+1}+W,\ldots,b_n+W$ is a basis for it, and $\alpha:V\to V$ induces a linear map $\widetilde{\alpha}:V/W \to V/W$ by $\widetilde{\alpha}(v+W) = \alpha(v)+W$ (you need to check this is well-defined and linear), and that with respect to this basis, $Y$ is the matrix of $\widetilde{\alpha}$. %
+	Consider $V$ as an abelian group, and consider the coset group $V/W=\left\{v+W:v\in V\right\}$. Show that this is a vector space, that $b_{r+1}+W,\ldots,b_n+W$ is a basis for it, and $\alpha:V\to V$ induces a linear map $\widetilde{\alpha}:V/W \to V/W$ by $\widetilde{\alpha}(v+W) = \alpha(v)+W$ (you need to check this is well-defined and linear), and that with respect to this basis, $Y$ is the matrix of $\widetilde{\alpha}$.
 \end{exercise}
 
 \begin{remark}
-	Let $V=W\p\oplus W\pp$; that is, $W\p\cap W\pp = \{0\}$, $W\p+W\pp=V$, and suppose that  $\alpha(W\p) \subseteq W\p$ and $\alpha(W\pp)\subseteq W\pp$. We write this as $\alpha=\alpha'\oplus\alpha\pp$, where $\alpha':W\p\to W\p$, $\alpha\pp:W\pp\to W\pp$ are the restrictions of $\alpha$.  %
+	Let $V=W\p\oplus W\pp$; that is, $W\p\cap W\pp = \{0\}$, $W\p+W\pp=V$, and suppose that  $\alpha(W\p) \subseteq W\p$ and $\alpha(W\pp)\subseteq W\pp$. We write this as $\alpha=\alpha'\oplus\alpha\pp$, where $\alpha':W\p\to W\p$, $\alpha\pp:W\pp\to W\pp$ are the restrictions of $\alpha$. 
 
-	In this special case the matrix of $\alpha$ looks even more special then the above for any basis $b_1,\ldots,b_r$ of $W\p$ and $b_{r+1},\ldots,b_n$ of $W\pp$ -- we have $Z=0$ also. %
+	In this special case the matrix of $\alpha$ looks even more special then the above for any basis $b_1,\ldots,b_r$ of $W\p$ and $b_{r+1},\ldots,b_n$ of $W\pp$ -- we have $Z=0$ also.
 \end{remark}
 
 \begin{definition}
@@ -177,20 +181,20 @@ The answer requires a new concept, the \emph{quotient vector space}.
 \end{definition}
 
 \begin{lemma}
-	$\Tr(AB)=\Tr(BA)$. %
+	$\Tr(AB)=\Tr(BA)$.
 \end{lemma}
 
 \begin{proof}
-	$\Tr(AB) = \sum_i (AB)_{ii} = \sum_{i,j} a_{ij} b_{ji} = \sum_j (BA)_{jj} = \Tr(BA)$. %
+	$\Tr(AB) = \sum_i (AB)_{ii} = \sum_{i,j} a_{ij} b_{ji} = \sum_j (BA)_{jj} = \Tr(BA)$.
 \end{proof}
 \begin{corollary}
-	$\Tr(PAP^{-1}) = \Tr(P^{-1} PA) = \Tr(A)$. %
+	$\Tr(PAP^{-1}) = \Tr(P^{-1} PA) = \Tr(A)$.
 \end{corollary}
 \vspace{-6pt}
 So we define, if $\alpha:V\to V$ is linear, $\Tr(\alpha)=\Tr(A)$, where $A$ is a matrix of $\alpha$ with respect to some basis $b_1,\ldots,b_n$, and  this doesn't depend on the choice of a basis.
 
 \begin{proposition}
-	If $\chi_\alpha(x)$ factors as $\left( x-\lambda_1 \right) \cdots \left( x-\lambda_n \right)$ (repetition allowed), then %
+	If $\chi_\alpha(x)$ factors as $\left( x-\lambda_1 \right) \cdots \left( x-\lambda_n \right)$ (repetition allowed), then
 	\begin{enumerate}
 		\shortskip
 		\item $\Tr \alpha = \sum_i \lambda_i$;
@@ -199,17 +203,17 @@ So we define, if $\alpha:V\to V$ is linear, $\Tr(\alpha)=\Tr(A)$, where $A$ is a
 \end{proposition}
 
 \begin{proof}
-	As $\chi_\alpha$ factors, there is some basis $b_1,\ldots,b_n$ of $V$ such that the matrix of $A$ is upper triangular, the diagonal entries are $\lambda_1,\ldots,\lambda_n$, and we're done. %
+	As $\chi_\alpha$ factors, there is some basis $b_1,\ldots,b_n$ of $V$ such that the matrix of $A$ is upper triangular, the diagonal entries are $\lambda_1,\ldots,\lambda_n$, and we're done.
 \end{proof}
 
 \begin{remark}
-	This is true whatever $\F$ is. Embed $\F\subseteq\overline{\F}$ (for example, $\R\subseteq\C$), and $\chi_A$ factors as $\left( x-\lambda_1 \right) \cdots \left( x-\lambda_n \right)$. Now $\lambda_1,\ldots,\lambda_n \in \overline{\F}$, not necessarily in $\F$. %
+	This is true whatever $\F$ is. Embed $\F\subseteq\overline{\F}$ (for example, $\R\subseteq\C$), and $\chi_A$ factors as $\left( x-\lambda_1 \right) \cdots \left( x-\lambda_n \right)$. Now $\lambda_1,\ldots,\lambda_n \in \overline{\F}$, not necessarily in $\F$.
 	
-	Regard $A\in\Mat_n(\overline{\F})$, which doesn't change $\Tr A$ or $\det A$, and we get the same result. Note that $\sum_i \lambda_i$ and $\prod_i \lambda_i$ are in $\F$ even though $\lambda_i\not\iF$. %
+	Regard $A\in\Mat_n(\overline{\F})$, which doesn't change $\Tr A$ or $\det A$, and we get the same result. Note that $\sum_i \lambda_i$ and $\prod_i \lambda_i$ are in $\F$ even though $\lambda_i\not\iF$.
 \end{remark}
 
 \begin{example}
-	Take $A=\mat{\cos\theta & \sin\theta \\ -\sin\theta & \cos\theta}$. Eigenvalues are $e^{i\theta}$, $e^{-i\theta}$, so %
+	Take $A=\mat{\cos\theta & \sin\theta \\ -\sin\theta & \cos\theta}$. Eigenvalues are $e^{i\theta}$, $e^{-i\theta}$, so
 	\begin{equation*}
 		\Tr A = e^{i\theta}+e^{-i\theta} = 2\cos\theta
 		\qquad
@@ -221,10 +225,10 @@ So we define, if $\alpha:V\to V$ is linear, $\Tr(\alpha)=\Tr(A)$, where $A$ is a
 	\begin{align*}
 		   \chi_A(x)
 		&= \left( x-\lambda_1 \right) \cdots \left( x-\lambda_n \right) \\
-		&= x^n - \left( \sum_i \lambda_i \right) x^{n-1} + \left( \sum_{i<j} \lambda_i\,\lambda_j \right) x^{n-2} - \cdots + \left( -1 \right)^n \left( \lambda_1\ldots\lambda_n \right) \\ %
-		&= x^n - \Tr(A) x^{n-1} + e_2 x^{n-2} - \cdots  + \left( -1 \right)^{n-1} e_{n-1} + \left( -1 \right)^n \det A, %
+		&= x^n - \left( \sum_i \lambda_i \right) x^{n-1} + \left( \sum_{i<j} \lambda_i\,\lambda_j \right) x^{n-2} - \cdots + \left( -1 \right)^n \left( \lambda_1\ldots\lambda_n \right) \\
+		&= x^n - \Tr(A) x^{n-1} + e_2 x^{n-2} - \cdots  + \left( -1 \right)^{n-1} e_{n-1} + \left( -1 \right)^n \det A,
 	\end{align*}
-	where the coefficients $e_1=\Tr A$, $e_2,\ldots,e_{n-1}$, $e_n=\det A$ are functions of $\lambda_1,\ldots,\lambda_n$ called \emph{elementary symmetric functions} (which we see more of in \emph{Galois theory}). %
+	where the coefficients $e_1=\Tr A$, $e_2,\ldots,e_{n-1}$, $e_n=\det A$ are functions of $\lambda_1,\ldots,\lambda_n$ called \emph{elementary symmetric functions} (which we see more of in \emph{Galois theory}).
 	
 	Each of these $e_i$ depend only on the conjugacy class of $A$, as
 	\begin{equation*}
@@ -243,26 +247,26 @@ and $\chi_A(x) = \chi_B(x) =x^2$, but $A$ and $B$ are not conjugate.
 
 For an upper triangular matrix, the diagonal entries are the eigenvalues. What is the meaning of the upper triangular coefficients? 
 
-This example shows there is \emph{some} information in the upper triangular entries of an upper-triangular matrix, but the question is how much? We would like to always diagonalise $A$, but this example shows that it isn't always possible. Let's understand when it is possible. \datemarker{31 Oct}
+This example shows there is \emph{some} information in the upper triangular entries of an upper-triangular matrix, but the question is how much? We would like to always diagonalise $A$, but this example shows that it isn't always possible. Let's understand when it is possible. \lecturemarker{12}{31 Oct}
 
 % \begin{proposition}
 % \mbox{}
 % \begin{enumerate}
-% 	\item If $v_1,\ldots,v_k$ are eigenvectors with eigenvalues $\lambda_1,\ldots,\lambda_k$, and $\lambda_i\neq \lambda_j$ if $i\neq j$, then $v_1,\ldots,v_k$ are linearly independent. %
-% 	\item If $V_{\lambda_1},\ldots,V_{\lambda_r}$ are non-zero eigenspaces and $\lambda_i\neq \lambda_j$ for $i\neq j$, then $\sum_i V_{\lambda_i}$ is a direct sum. %
+% 	\item If $v_1,\ldots,v_k$ are eigenvectors with eigenvalues $\lambda_1,\ldots,\lambda_k$, and $\lambda_i\neq \lambda_j$ if $i\neq j$, then $v_1,\ldots,v_k$ are linearly independent.
+% 	\item If $V_{\lambda_1},\ldots,V_{\lambda_r}$ are non-zero eigenspaces and $\lambda_i\neq \lambda_j$ for $i\neq j$, then $\sum_i V_{\lambda_i}$ is a direct sum.
 % \end{enumerate}
 % \end{proposition}
 % 
 % \begin{proof}
-% 	(a) $\implies$ (b): if $0=v_1+\cdots+v_r$, with $v_i\in V_{\lambda_i}$, then we must show each $v_i=0$. But not, we get a relation a linear dependence among non-zero eigenvectors with distinct eigenvalues, contradicting (a). %
+% 	(a) $\implies$ (b): if $0=v_1+\cdots+v_r$, with $v_i\in V_{\lambda_i}$, then we must show each $v_i=0$. But not, we get a relation a linear dependence among non-zero eigenvectors with distinct eigenvalues, contradicting (a).
 % \end{proof}
 
 \begin{proposition}
-	If $v_1,\ldots,v_k$ are eigenvectors with eigenvalues $\lambda_1,\ldots,\lambda_k$, and $\lambda_i\neq \lambda_j$ if $i\neq j$, then $v_1,\ldots,v_k$ are linearly independent. % %
+	If $v_1,\ldots,v_k$ are eigenvectors with eigenvalues $\lambda_1,\ldots,\lambda_k$, and $\lambda_i\neq \lambda_j$ if $i\neq j$, then $v_1,\ldots,v_k$ are linearly independent.
 \end{proposition}
 
 \begin{proof}
-	[Proof 1] Induct on $k$. This is clearly true when $k=1$. Now if the result is false, then there are $a_i\iF$ s.t. $\sum_{i=1}^k a_i \, v_i=0$, with some $a_i\neq 0$, and without loss of generality, $a_1\neq 0$. (In fact, all $a_i\neq 0$, as if not, we have a relation of linearly dependence among $(k-1)$ eigenvectors, contradicting our inductive assumption.) %
+	[Proof 1] Induct on $k$. This is clearly true when $k=1$. Now if the result is false, then there are $a_i\iF$ such that $\sum_{i=1}^k a_i \, v_i=0$, with some $a_i\neq 0$, and without loss of generality, $a_1\neq 0$. (In fact, all $a_i\neq 0$, as if not, we have a relation of linearly dependence among $(k-1)$ eigenvectors, contradicting our inductive assumption.)
 	
 	Apply $\alpha$ to $\sum_{i=1}^k a_i \, v_i = 0$, to get
 	\begin{equation*}
@@ -274,14 +278,14 @@ This example shows there is \emph{some} information in the upper triangular entr
 	\end{equation*}
 	Subtract these two, and we get
 	\begin{equation*}
-		\sum_{i=2}^k \underbrace{\left( \lambda_i-\lambda_1 \right)}_{\neq 0} a_i \, v_i = 0, %
+		\sum_{i=2}^k \underbrace{\left( \lambda_i-\lambda_1 \right)}_{\neq 0} a_i \, v_i = 0,
 	\end{equation*}
-	a relation of linear dependence among $v_2,\ldots,v_k$, so $a_i=0$ for all $i$, by induction. %
+	a relation of linear dependence among $v_2,\ldots,v_k$, so $a_i=0$ for all $i$, by induction.
 \end{proof}
 
 \emph{Proof 2.} Suppose $\sum a_i \, v_i = 0$. Apply $\alpha$, we get $\sum \lambda_i \, a_i \, v_i = 0$; apply $\alpha^2$, we get $\sum \lambda_i^2 \, a_i \, v_i=0$, and so on, so $\sum_{i=1}^k \lambda_i^r \, a_i \, v_i = 0$ for all $r\geq 0$. In particular,
 \begin{equation*}
-	\mat{1 & \cdots & 1 \\ \lambda_1 & \cdots & \lambda_k \\ \vdots & & \vdots \\ \lambda_1^{k-1} & \cdots & \lambda_k^{k-1}} \mat{a_1 \,v_1 \\ \vdots \\ \vdots \\ a_k \,v_k} = 0. %
+	\mat{1 & \cdots & 1 \\ \lambda_1 & \cdots & \lambda_k \\ \vdots & & \vdots \\ \lambda_1^{k-1} & \cdots & \lambda_k^{k-1}} \mat{a_1 \,v_1 \\ \vdots \\ \vdots \\ a_k \,v_k} = 0.
 \end{equation*}
 
 \begin{lemma}
@@ -298,15 +302,15 @@ Note these two proofs are the same: the first version of the proof was surreptit
 	\pagebreak
 
 \begin{definition}
-	A map $\alpha$ is \emph{diagonalisable} if there is some basis for $V$ such that the matrix of $\alpha:V\to V$ is diagonal. %
+	A map $\alpha$ is \emph{diagonalisable} if there is some basis for $V$ such that the matrix of $\alpha:V\to V$ is diagonal.
 \end{definition}
 
 \begin{corollary}
-	The map $\alpha$ is diagonalisable if and only if $\chi_\alpha(x)$ factors into $\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, and $\dim V_{\lambda_i} = n_i$ for all $i$. %
+	The map $\alpha$ is diagonalisable if and only if $\chi_\alpha(x)$ factors into $\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, and $\dim V_{\lambda_i} = n_i$ for all $i$.
 \end{corollary}
 
 \begin{proof}
-	($\Rightarrow$) $\alpha$ is diagonalisable means that in some basis it is diagonal, with $n_i$ copies of $\lambda_i$ in the diagonal entries, hence the characteristic polynomial is as claimed. %
+	($\Rightarrow$) $\alpha$ is diagonalisable means that in some basis it is diagonal, with $n_i$ copies of $\lambda_i$ in the diagonal entries, hence the characteristic polynomial is as claimed.
 	
 	($\Leftarrow$) $\sum_i V_{\lambda_i}$ is a direct sum, by the proposition, so
 	\begin{equation*}
@@ -315,27 +319,27 @@ Note these two proofs are the same: the first version of the proof was surreptit
 		= \sum \dim V_{\lambda_i}
 		= \sum n_i,
 	\end{equation*}
-	and by our assumption, $n=\dim V$. Now in any basis which is the union of basis for the $V_{\lambda_i}$, the matrix of $\alpha$ is diagonal. %
+	and by our assumption, $n=\dim V$. Now in any basis which is the union of basis for the $V_{\lambda_i}$, the matrix of $\alpha$ is diagonal.
 \end{proof}
 
 \begin{corollary}
-	If $A$ is conjugate to an upper triangular matrix with $\lambda_i$ as the diagonal entries, and the $\lambda_i$ are distinct, then $A$ is conjugate to the diagonal matrix with $\lambda_i$ in the entries. %
+	If $A$ is conjugate to an upper triangular matrix with $\lambda_i$ as the diagonal entries, and the $\lambda_i$ are distinct, then $A$ is conjugate to the diagonal matrix with $\lambda_i$ in the entries.
 \end{corollary}
 
 \begin{example}
-	$\mat{1 & 7 \\ 0 & 2}$ is conjugate to $\mat{1 & 0 \\ 0 & 2}$. %
+	$\mat{1 & 7 \\ 0 & 2}$ is conjugate to $\mat{1 & 0 \\ 0 & 2}$.
 	
-	The upper triangular entries ``contain no information''. That is, they are an artefact of the choice of basis. %
+	The upper triangular entries ``contain no information''. That is, they are an artefact of the choice of basis.
 \end{example}
 
 \begin{remark}
-	If $\F=\C$, then the diagonalisable $A$ are dense in $\Mat_n(\C)=\C^{n^2}$ (exercise). In general, if $\F=\overline{\F}$, then diagonalisable $A$ are dense in $\Mat_n(\F)=\F^{n^2}$, in the sense of algebraic geometry. %
+	If $\F=\C$, then the diagonalisable $A$ are dense in $\Mat_n(\C)=\C^{n^2}$ (exercise). In general, if $\F=\overline{\F}$, then diagonalisable $A$ are dense in $\Mat_n(\F)=\F^{n^2}$, in the sense of algebraic geometry.
 \end{remark}
 
 \begin{exercise}
-	If $A=\mat{\lambda_1  &   \cdots & a_n \\ & \ddots & \vdots \\ 0 & & \lambda_n }$, then $Ae_i=\lambda e_i+\sum_{j<i} a_{ji} \, e_j$. %
+	If $A=\mat{\lambda_1  &   \cdots & a_n \\ & \ddots & \vdots \\ 0 & & \lambda_n }$, then $Ae_i=\lambda e_i+\sum_{j<i} a_{ji} \, e_j$.
 	
-	Show that if $\lambda_1,\ldots,\lambda_n$ are distinct, then you can ``correct'' each $e_i$ to an eigenvector $v_i$ just by adding smaller terms; that is, there are $p_{ji}\iF$ such that %
+	Show that if $\lambda_1,\ldots,\lambda_n$ are distinct, then you can ``correct'' each $e_i$ to an eigenvector $v_i$ just by adding smaller terms; that is, there are $p_{ji}\iF$ such that
 	\begin{equation*}
 		v_i = e_i + \sum_{j<i} p_{ji} e_j \text{ has } Av_i = \lambda_i v_i,
 	\end{equation*}
@@ -347,17 +351,17 @@ Note these two proofs are the same: the first version of the proof was surreptit
 
 	\pagebreak
 
-\subsection{Cayley-Hamilton theorem} % (fold)
+\subsection{Cayley-Hamilton theorem}  % (fold)
 \label{sub:cayley_hamilton_theorem}
 
 Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space over $\F$.
 
 \begin{theorem}
-	[Cayley-Hamilton theorem] Every square matrix over a commutative ring (such as $\R$ or $\C$) satisfies $\chi_A(A)=0$. %
+	[Cayley-Hamilton theorem] Every square matrix over a commutative ring (such as $\R$ or $\C$) satisfies $\chi_A(A)=0$.
 \end{theorem}
 
 \begin{example}
-	$A=\mat{2 & 3 \\ 1 & 2}$ and $\chi_A(x)=x^2-4x+1$, so $\chi_A(A) = A^2-4A+I$. Then %
+	$A=\mat{2 & 3 \\ 1 & 2}$ and $\chi_A(x)=x^2-4x+1$, so $\chi_A(A) = A^2-4A+I$. Then
 	\begin{equation*}
 		A^2 = \mat{7 & 12 \\ 4 & 7},
 	\end{equation*}
@@ -367,17 +371,24 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
 \begin{remark}
 	We have
 	\begin{equation*}
-		\chi_A(x) = \det(xI-A) = \det \mat{x-a_{11} & \cdots & -a_{1n} \\ \vdots & \ddots & \vdots \\ -a_{n1} & \cdots & x-a_{nn}} = x^n - e_1 x^{n-1} + \cdots \pm e_n, %
+		\chi_A(x) = \det(xI-A) = \det \mat{x-a_{11} & \cdots & -a_{1n} \\ \vdots & \ddots & \vdots \\ -a_{n1} & \cdots & x-a_{nn}} = x^n - e_1 x^{n-1} + \cdots \pm e_n,
 	\end{equation*}
-	so we don't get a proof by saying $\chi_\alpha(\alpha)=\det(\alpha-\alpha)=0$. This just doesn't make sense. However, you can make it make sense, and our second proof will do this.  %
+	so we don't get a proof by saying $\chi_\alpha(\alpha)=\det(\alpha-\alpha)=0$. This just doesn't make sense. However, you can make it make sense, and our second proof will do this. 
 \end{remark}
 
 \begin{proof}
-	[Proof 1] If $A=\mat{\lambda_1 & & * \\ & \ddots \\ 0 & & \lambda_n}$, then $\chi_A(x) = \left( x-\lambda_1 \right) \cdots \left( x-\lambda_n \right)$. %
-	
+	[Proof 1] If $A$ is upper triangular and can be written as
+	\begin{equation*}
+		A=\mat{\lambda_1 & & * \\ & \ddots \\ 0 & & \lambda_n}
+	\end{equation*}
+	then the characteristic polynomial is
+	\begin{equation*}
+		\chi_A(x) = \disp\prod_{i=1}^n \left( x-\lambda_i \right).
+	\end{equation*}
 	Now if $A$ were in fact diagonal, then
 	\begin{equation*}
-		\chi_A(A) = \left( A-\lambda_1 I \right) \cdots \left( A-\lambda_n I \right) = 
+		\chi_A(A) =
+		\disp\prod_{i=1}^n \left( A-\lambda_i I \right) = 
 		\mat{0 & & & 0 \\ & * \\ & & * \\ 0 & & & *}
 		\mat{* & & & 0 \\ & 0 \\ & & * \\ 0 & & & *}
 		\cdots
@@ -385,17 +396,22 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
                = 0
 	\end{equation*}
 	But even when $A$ is upper triangular, this is zero. 	
-	\begin{example} For example,
-		$\mat{0 & * & * \\ & * & * \\ & & *}
-		 \mat{* & * & * \\ & 0 & * \\ & & *}
-		 \mat{* & * & * \\ & * & * \\ & & 0}$ is still zero. %
+	\begin{example} The matrix
+		\begin{equation*}
+			\mat{0 & * & * \\ & * & * \\ & & *}
+			\mat{* & * & * \\ & 0 & * \\ & & *}
+			\mat{* & * & * \\ & * & * \\ & & 0}
+		\end{equation*}
+		is still zero.
 	\end{example}
 
-	Here is a nice way of writing this:
+		\pagebreak
 
-	Let $W_0=\{0\}$, $W_i = \left\langle e_1,\ldots,e_i \right\rangle\leq V$. Then if $A$ is upper trianglar, then $AW_i \subseteq W_i$, and even $\left( A-\lambda_i I \right)W_i \subseteq W_{i-1}$. So $\left( A-\lambda_n I \right)W_n \subseteq W_{n-1}$, and so %
+	Here is a nicer way of writing this:
+
+	Let $W_0=\{0\}$, $W_i = \left\langle e_1,\ldots,e_i \right\rangle\leq V$. If $A$ is upper triangular, then $AW_i \subseteq W_i$, and even $\left( A-\lambda_i I \right)W_i \subseteq W_{i-1}$. So $\left( A-\lambda_n I \right)W_n \subseteq W_{n-1}$, and so
 	\begin{equation*}
-		\left( A-\lambda_{n-1}I \right) \left( A-\lambda_n I \right) W_n \subseteq \left( A-\lambda_{n-1} I \right)W_{n-1} \subseteq W_{n-2}, %
+		\left( A-\lambda_{n-1}I \right) \left( A-\lambda_n I \right) W_n \subseteq \left( A-\lambda_{n-1} I \right)W_{n-1} \subseteq W_{n-2},
 	\end{equation*}
 	and so on, until
 	\begin{equation*}
@@ -403,9 +419,9 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
 	\end{equation*}
 	that is, $\chi_A(A)=0$.
 
-	Now if $\F=\overline{\F}$, then we can choose a basis for $V$ such that $\alpha:V\to V$ has an upper-triangular matrix with respect to this basis, and hence the above shows $\chi_A(x)=0$; that is, $\chi_A(A)=0$ for all $A\in\Mat_n(\overline{\F})$. %
+	If $\F=\overline{\F}$, then we can choose a basis for $V$ such that $\alpha:V\to V$ has an upper-triangular matrix with respect to this basis, and hence the above shows $\chi_A(A)=0$; that is, $\chi_A(A)=0$ for all $A\in\Mat_n(\overline{\F})$.
 	
-	Now, if $\F\subseteq\overline{\F}$, then as Cayley-Hamilton is true for all $A\in\Mat_n(\overline{\F})$, then it is certainly still true for $A\in\Mat_n(\F) \subseteq \Mat_n(\overline{\F})$. %
+	If $\F\subseteq\overline{\F}$, then as Cayley-Hamilton is true for all $A\in\Mat_n(\overline{\F})$, then it is certainly still true for $A\in\Mat_n(\F) \subseteq \Mat_n(\overline{\F})$.
 \end{proof}
 
 \begin{definition}
@@ -420,39 +436,39 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
 \end{definition}
 
 \begin{example}
-	Let $A=\mat{\lambda & & * \\ & \ddots \\ 0 & & \lambda}$. %
+	Let $A=\mat{\lambda & & * \\ & \ddots \\ 0 & & \lambda}$.
 	
-	Then $\left( \lambda I-A \right)e_i$ has stuff involving $e_1,\ldots,e_{i-1}$, so $\left( \lambda I-A \right)^{\dim V} e_i=0$ for all $i$, as in our proof of Cayley-Hamilton (or indeed, by Cayley-Hamilton). %
+	Then $\left( \lambda I-A \right)e_i$ has stuff involving $e_1,\ldots,e_{i-1}$, so $\left( \lambda I-A \right)^{\dim V} e_i=0$ for all $i$, as in our proof of Cayley-Hamilton (or indeed, by Cayley-Hamilton).
 	
 	Further, if $\mu\neq \lambda$, then
 	\begin{equation*}
-		\mu I-A = \mat{\mu-\lambda & & * \\ & \ddots \\ 0 & & \mu-\lambda},
+		\mu I-A = \mat{\mu-\lambda & & * \\ & \ddots \\ 0 & & \mu-\lambda}
 	\end{equation*}
 	and so
 	\begin{equation*}
-		\left( \mu I-A \right)^n = \mat{\left( \mu-\lambda \right)^n & & * \\ & \ddots \\ 0 & & \left( \mu-\lambda \right)^n} %
+		\left( \mu I-A \right)^n = \mat{\left( \mu-\lambda \right)^n & & * \\ & \ddots \\ 0 & & \left( \mu-\lambda \right)^n}
 	\end{equation*}
-	has non-zero diagonal terms, so zero kernel. Thus in this case, $V^\lambda=V$, $V^\mu = 0$ if $\mu\neq \lambda$, and in general $V^\mu=0$ if $\chi_\alpha(\mu)\neq 0$, that is, $\ker\left( A-\mu I \right)^N = \{0\}$ for all $N\geq 0$. %
+	has non-zero diagonal terms, and so trivial kernel. Thus in this case, $V^\lambda=V$, $V^\mu = 0$ if $\mu\neq \lambda$, and in general $V^\mu=0$ if $\chi_\alpha(\mu)\neq 0$, that is, $\ker\left( A-\mu I \right)^N = \{0\}$ for all $N\geq 0$.
 \end{example}
 
-\datemarker{2 Nov}
+	\pagebreak
 
 \begin{theorem}
-	If $\chi_A(x)=\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, with the $\lambda_i$ distinct, then %
+	If $\chi_A(x)=\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, with the $\lambda_i$ distinct, then \lecturemarker{13}{2 Nov}
 	\begin{equation*}
 		V \cong \bigoplus_{i=1}^r  V^{\lambda_i},
 	\end{equation*}
-	and $\dim V^{\lambda_i}=n_i$. In other word, choose any basis of $V$ which is the union of the bases of the $V^{\lambda_i}$. Then the matrix of $\alpha$ is block diagonal. Moreover, we can choose the basis of each $V^\lambda$ so that each diagonal block is upper triangular, with only one eigenvalue--- $\lambda$--on its diagonals. %
+	and $\dim V^{\lambda_i}=n_i$. In other word, choose any basis of $V$ which is the union of the bases of the $V^{\lambda_i}$. Then the matrix of $\alpha$ is block diagonal. Moreover, we can choose the basis of each $V^\lambda$ so that each diagonal block is upper triangular, with only one eigenvalue--- $\lambda$--on its diagonals.
 	
 	We say ``different eigenvalues don't interact''.
 \end{theorem}
-
+\vspace{3pt}
 \begin{remark}
-	If $n_1=n_2=\cdots=n_r=1$ (and so $r=n$), then this is our previous theorem that matrices with distinct eigenvalues are diagonalisable. %
+	If $n_1=n_2=\cdots=n_r=1$ (and so $r=n$), then this is our previous theorem that matrices with distinct eigenvalues are diagonalisable.
 \end{remark}
 
 \begin{proof}
-	Consider %
+	Consider
 	\begin{equation*}
 		h_{\lambda_i}(x)
 		= \prod_{j\neq i} \left( x-\lambda_j \right)^{n_j}
@@ -479,7 +495,7 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
 		\item $\sum_i W^{\lambda_i}=V$;
 		\item This sum is direct.
 	\end{enumerate}
-	Now, the $h_{\lambda_i}$ are coprime polynomials, so Euclid's algorithm implies that there are polynomials $f_i\in F[x]$ such that %
+	Now, the $h_{\lambda_i}$ are coprime polynomials, so Euclid's algorithm implies that there are polynomials $f_i\in F[x]$ such that
 	\begin{equation*}
 		\sum_{i=1}^r f_i\,h_{\lambda_i}=1,
 	\end{equation*}
@@ -493,7 +509,7 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
 	\end{equation*}
 	that is, $\sum_{i=1}^r W^{\lambda_i}=V$. This is (i).
 	
-	To see the sum is direct: if $0=\sum_{i=1}^r w_i$, $w_i\in W^{\lambda_i}$, then we want to show that each $w_i=0$. But $h_{\lambda_j}(w_i) = 0$, $i\neq j$ as $w_i\in\ker\left( A-\lambda_iI \right)^{n_i}$, so (i) gives %
+	To see the sum is direct: if $0=\sum_{i=1}^r w_i$, $w_i\in W^{\lambda_i}$, then we want to show that each $w_i=0$. But $h_{\lambda_j}(w_i) = 0$, $i\neq j$ as $w_i\in\ker\left( A-\lambda_iI \right)^{n_i}$, so (i) gives
 	\begin{equation*}
 		w_i =
 		\sum_{i=1}^r h_{\lambda_i}(A)\,f_j(A)\,w_i
@@ -502,7 +518,7 @@ Let $\alpha:V\to V$ be a linear map, and $V$ a finite dimensional vector space o
 	so apply $f_i(A)\,h_{\lambda_i}(A)$ to $\sum_{i=1}^r w_i=0$ and get $w_i=0$.
 \end{proof}
 
-Define
+Now define
 \begin{equation*}
 	\pi_i = f_i(A)\,h_{\lambda_i}(A) = h_{\lambda_i}(A)\,f_i(A).
 \end{equation*}
@@ -519,58 +535,58 @@ This tells us to understand what matrices look like up to conjugacy, it is enoug
 Before we continue investigating this, we digress and give another proof of Cayley-Hamilton.
 
 \begin{proof}
-	[Proof 2 of Cayley-Hamilton] Let $\varphi:V\to V$ be linear, $V$  finite dimensional over $\F$. Pick a basis $e_1,\ldots,e_n$ of $V$, so $\varphi(e_i) = \sum_j a_{ji}\,e_j$, and we have the matrix $A=(a_{ij})$. Consider %
+	[Proof 2 of Cayley-Hamilton] Let $\varphi:V\to V$ be linear, $V$  finite dimensional over $\F$. Pick a basis $e_1,\ldots,e_n$ of $V$, so $\varphi(e_i) = \sum_j a_{ji}\,e_j$, and we have the matrix $A=(a_{ij})$. Consider
 	\begin{equation*}
 		\varphi I - A^\Trans =
-		\mat{\varphi-a_{11} & \cdots & -a_{n1} \\ \vdots & \ddots & \vdots \\ -a_{1n} & \cdots & \varphi-a_{nn}} \in {\Mat}_n(\End(V)), %
+		\mat{\varphi-a_{11} & \cdots & -a_{n1} \\ \vdots & \ddots & \vdots \\ -a_{1n} & \cdots & \varphi-a_{nn}} \in {\Mat}_n(\End(V)),
 	\end{equation*}
 	where $a_{ij}\iF \injto \End(V)$ by regarding an element $\lambda$ as the operation of scalar multiplication $V \to V$, $v \mapsto \lambda v$.
 % on the $n\times n$ matrix of linear operations. 
-The elements of $\Mat_n(\End(V))$ act on $V^n$ by the usual formulas. So %
+	The elements of $\Mat_n(\End(V))$ act on $V^n$ by the usual formulas. So
 	\begin{equation*}
-		\left( \varphi I-A^\Trans \right)
+		(\varphi I-A^\Trans)
 		\mat{e_1 \\ \vdots \\ e_n}
 		=
 		\mat{0 \\ \vdots \\ 0}
 	\end{equation*}
 	by the definition of $A$.
 	
-	The problem is, it isn't clear how to define $\det:\Mat_n(\End(V)) \to \End(V)$, as the matrix coefficients (that is, elements of $\End(V)$) do not commute in general. But the matrix elements of the above matrix do commute, so this shouldn't be a problem. %
+	The problem is, it isn't clear how to define $\det:\Mat_n(\End(V)) \to \End(V)$, as the matrix coefficients (that is, elements of $\End(V)$) do not commute in general. But the matrix elements of the above matrix do commute, so this shouldn't be a problem.
 	
 	To make it not a problem, consider $\varphi I-A^\Trans\in\Mat_n(F[\varphi])$; that is, $F[\varphi]$ are polynomials in the symbol $\varphi$. This is a commutative ring and now $\det$ behaves as always:%
 	\begin{enumerate}
 		\shortskip
-		\item $\det(\varphi I-A^\Trans) = \chi_A(\varphi)\in F[\varphi]$ (by definition); %
-		\item $\adj(\varphi I-A^\Trans) \cdot (\varphi I-A^\Trans) = \det(\varphi I - A^\Trans) \cdot I \in \Mat_n(F[\varphi])$, as we've shown. %
+		\item $\det(\varphi I-A^\Trans) = \chi_A(\varphi)\in F[\varphi]$ (by definition);
+		\item $\adj(\varphi I-A^\Trans) \cdot (\varphi I-A^\Trans) = \det(\varphi I - A^\Trans) \cdot I \in \Mat_n(F[\varphi])$, as we've shown.
 	\end{enumerate}
 	This is true for any $B\in\Mat_n(R)$, where $R$ is a commutative ring.  Here $R=F[\varphi]$, $B=\varphi I-A^\Trans$.
 	
-	Make $F[\varphi]$ act on $V$, by $\sum_i a_i\,\varphi^i:v\mapsto \sum_i a_i\,\varphi^i(v)$, so %
+	Make $F[\varphi]$ act on $V$, by $\sum_i a_i\,\varphi^i:v\mapsto \sum_i a_i\,\varphi^i(v)$, so
 	\begin{equation*}
 		(\varphi I-A^\Trans) \mat{e_1 \\ \vdots \\ e_n} = \mat{0 \\ \vdots \\ 0}.
 	\end{equation*}
 	Thus
 	\begin{equation*}
 		0
-		= \adj(\varphi I-A^\Trans) \underbrace{(\varphi I-A^\Trans) \mat{e_1 \\ \vdots \\ e_n}}_{=0} %
+		= \adj(\varphi I-A^\Trans) \underbrace{(\varphi I-A^\Trans) \mat{e_1 \\ \vdots \\ e_n}}_{=0}
 		= \det(\varphi I-A^\Trans)\mat{e_1 \\ \vdots \\ e_n}
 		= \mat{\chi_A(\varphi)\,e_1 \\ \vdots \\ \chi_A(\varphi)\,e_n}.
 	\end{equation*}
-	So this says that $\chi_A(A)\,e_i = \chi_A(\varphi)\,e_i=0$ for all $i$, so $\chi_A(A):V\to V$ is the zero map, as $e_1,\ldots,e_n$ is a basis of $V$; that is, $\chi_A(A)=0$. %	
+	So this says that $\chi_A(A)\,e_i = \chi_A(\varphi)\,e_i=0$ for all $i$, so $\chi_A(A):V\to V$ is the zero map, as $e_1,\ldots,e_n$ is a basis of $V$; that is, $\chi_A(A)=0$.	
 \end{proof}
 
 This correct proof is as close to the nonsense tautological ``proof'' (just set $x $ equal to $A$) as you can hope for. You will meet it again several times in later life, where it is called \emph{Nakayama's lemma}.
 
 % subsection cayley_hamilton_theorem (end)
 
-	\pagebreak
+	% \pagebreak
 
-\subsection{Combinatorics of nilpotent matrices} % (fold)
+\subsection{Combinatorics of nilpotent matrices}  % (fold)
 \label{sub:combinatorics_of_nilpotent_matrices}
 
-\datemarker{5 Nov}
+\lecturemarker{14}{5 Nov}
 \begin{definition}
-	If $\varphi:V\to V$ can be written in block diagonal form; that is, if there are some $W\p,W\pp\leq V$ such that %
+	If $\varphi:V\to V$ can be written in block diagonal form; that is, if there are some $W\p,W\pp\leq V$ such that
 	\begin{equation*}
 		\varphi(W\p)\subseteq W\p
 		\qquad
@@ -578,7 +594,7 @@ This correct proof is as close to the nonsense tautological ``proof'' (just set 
 		\qquad
 		V=W\p\oplus W\pp
 	\end{equation*}
-	then we say that $\varphi$ is \emph{decomposable} and write %
+	then we say that $\varphi$ is \emph{decomposable} and write
 	\begin{equation*}
 		\varphi=\varphi\p\oplus\varphi\pp
 		\qquad
@@ -586,46 +602,51 @@ This correct proof is as close to the nonsense tautological ``proof'' (just set 
 		\qquad
 		\varphi\pp = \eval[1]{\varphi}_{W\pp}:W\pp\to W\pp
 	\end{equation*}
-	We say that $\varphi$ is the \emph{direct sum} of $\varphi\p$ and $\varphi\pp$.
-	
-	Otherwise, we say that $\varphi$ is \emph{decomposable}.
+	We say that $\varphi$ is the \emph{direct sum} of $\varphi\p$ and $\varphi\pp$. Otherwise, we say that $\varphi$ is \emph{decomposable}.
 \end{definition}
 
 \begin{examples}
 \mbox{}
 \begin{enumerate}
 	\item $\varphi=\mat{0 & 0 \\ 0 & 0} = (0:\F\to\F) \oplus (0:\F\to\F)$
-	\item $\varphi=\mat{0 & 1 \\ 0 & 0}:\F^2\to\F^2$ is indecomposable, because there is a unique $\varphi$-stable line $\left\langle e_1 \right\rangle$. %
-	\item If $\varphi:V\to V$, then $\chi_\varphi(x) = \prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, for $\lambda_i\neq \lambda_j$ if $i\neq j$. %
+	\item $\varphi=\mat{0 & 1 \\ 0 & 0}:\F^2\to\F^2$ is indecomposable, as $\left\langle e_1 \right\rangle$ is a unique $\varphi$-stable line.
+	\item If $\varphi:V\to V$, then $\chi_\varphi(x) = \prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, for $\lambda_i\neq \lambda_j$ if $i\neq j$.
 	
 	Then $V=\bigoplus_{i=1}^r V^{\lambda_i}$ decomposes $\varphi$ into pieces $\varphi_{\lambda_i} = \eval[1]{\varphi}_{V^{\lambda_i}}:V^{\lambda_i} \to V^{\lambda_i}$ such that each $\varphi_\lambda$ has only one eigenvalue, $\lambda$. 
 
-\emph{This decomposition is precisely the amount of information in} $\chi_\varphi(x)$. So to further understand what matrices are up to conjugacy, we will need new information.
+	\emph{This decomposition is exactly the amount of information in} $\chi_\varphi(x)$. So we need new information to further 
+	understand what matrices are up to conjugacy.
 
-
-Observe that $\varphi_\lambda$ is decomposable if and only if $\varphi_\lambda-\lambda I$ is, and $\varphi_\lambda-\lambda I$ has zero as its only eigenvalue.
-
-
+	Observe that $\varphi_\lambda$ is decomposable if and only if $\varphi_\lambda-\lambda I$ is, and the only eigenvalue of $\varphi_\lambda-\lambda I$ is zero.
 \end{enumerate}
 \end{examples}
-\begin{definition}
-	The map $\varphi$ is \emph{nilpotent} if $\varphi^{\dim V} = 0$ if and only if $\ker\varphi^{\dim V}=V$ if and only if $V^0=V$ if and only if $\chi_\varphi(x) = x^{\dim V}$. (The only eigenvalue is zero.) %
 
+\begin{definition}
+	The map $\varphi$ is \emph{nilpotent} if the following (equivalent) conditions apply:
+	\begin{itemize}
+		\shortskip
+		\item $\varphi^{\dim V} = 0$;
+		\item $\ker\varphi^{\dim V}=V$;
+		\item $V^0=V$;
+		\item $\chi_\varphi(x) = x^{\dim V}$, and the only eigenvalue is zero.
+	\end{itemize}
 \end{definition}
 
+	\pagebreak
+
 \begin{theorem}
-	Let $\varphi$ be nilpotent. Then $\varphi$ is indecomposable if and only if there is a basis $v_1,\ldots,v_n$ such that %
+	Let $\varphi$ be nilpotent. Then $\varphi$ is indecomposable if and only if there is a basis $v_1,\ldots,v_n$ such that
 	\begin{equation*}
 		\varphi(v_i) =
 		\begin{cases}
-			0 & \text{if } i=1, \\ %
+			0 & \text{if } i=1, \\
 			v_{i-1} & \text{if } i>1,
 		\end{cases}
 	\end{equation*}
 	that is, if the matrix of $\varphi$ is
 	\renewcommand{\arraystretch}{1.0}
 	\begin{equation*}
-		J_n = \mat{0 & 1 & ~ & 0 \\ & \ddots & \ddots \\ & & \ddots & 1 \\ 0 & ~ & ~ & 0} %
+		J_n = \mat{0 & 1 & ~ & 0 \\ & \ddots & \ddots \\ & & \ddots & 1 \\ 0 & ~ & ~ & 0}
 	\end{equation*}
 	\drangarray
 	This is the \emph{Jordan block of size $n$ with eigenvalue 0}.
@@ -633,68 +654,70 @@ Observe that $\varphi_\lambda$ is decomposable if and only if $\varphi_\lambda-\
 \end{theorem}
 
 \begin{definition}
-	The \emph{Jordan block of size $n$, eigenvalue $\lambda$}, is given by %
+	The \emph{Jordan block of size $n$, eigenvalue $\lambda$}, is given by
 	\begin{equation*}
 		J_n(\lambda) = \lambda I + J_n.
 	\end{equation*}
 \end{definition}
 
 \begin{theorem}
-	[Jordan normal form] Every matrix is conjugate to a direct sum of Jordan blocks. Morever, these are unique up to rearranging their order. %
+	[Jordan normal form] Every matrix is conjugate to a direct sum of Jordan blocks. Morever, these are unique up to rearranging their order.
 	\label{thm:jordan-2}
 \end{theorem}
 
 \begin{proof}
-Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, if we show that $J_n$ is indecomposable (and theorem \ref{thm:jordan-1} $\implies$ theorem~\ref{thm:jordan-2}, existence). %
+Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, if we show that $J_n$ is indecomposable (and theorem \ref{thm:jordan-1} $\implies$ theorem~\ref{thm:jordan-2}, existence).
 	
 
 	[Proof of Theorem \ref{thm:jordan-1}, $\Leftarrow$] 
 	Put $W_i=\left\langle v_1,\dots,v_i \right\rangle$.
-% and $\varphi(v_i) = \begin{cases} 0 & i=1, \\ v_{i-1} & i>1 \\ \end{cases}$. %
+% and $\varphi(v_i) = \begin{cases} 0 & i=1, \\ v_{i-1} & i>1 \\ \end{cases}$.
 	
-	Then $W_i$ is the \emph{only} subspace $W$ of $\dim i$ such that $\varphi(W)\subseteq W$, % a $\varphi$-invariant subspace of $V$ of $\dim i$, 
-	and $W_{n-i}$ is \emph{not} a complement to it, as $W_i \cap W_{n-i} = W_{\min(i,n-i)}$. %
+	Then $W_i$ is the \emph{only} subspace $W$ of $\dim i$ such that $\varphi(W)\subseteq W$, a $\varphi$-invariant subspace of $V$ of $\dim i$, 
+	and $W_{n-i}$ is \emph{not} a complement to it, as $W_i \cap W_{n-i} = W_{\min(i,n-i)}$.
 \end{proof}
 
 \begin{proof}
-	[Proof of Theorem \ref{thm:jordan-2}, uniqueness] Suppose $\alpha:V\to V$, $\alpha$ nilpotent and $\alpha=\bigoplus_{i=1}^r J_{k_i}$. Rearrange their order so that $k_i\geq k_j$ for $i\geq j$, and group them together, so $\bigoplus_{i=1}^r m_i J_i$. %
+	[Proof of Theorem \ref{thm:jordan-2}, uniqueness] Suppose $\alpha:V\to V$, $\alpha$ nilpotent and $\alpha=\bigoplus_{i=1}^r J_{k_i}$. Rearrange their order so that $k_i\geq k_j$ for $i\geq j$, and group them together, so $\bigoplus_{i=1}^r m_i J_i$.
 	
-	There are $m_i$ blocks of size $i$, and %
+	There are $m_i$ blocks of size $i$, and
 	\begin{equation*}
 		m_i = \#\left\{k_a \mid k_a = i\right\}. \tag{$*$}
 	\end{equation*}
 	\vspace{-9pt}
 	\begin{example}
-		If $(k_1,k_2,\dots) = (3,3,2,1,1,1)$, then $n=11$, and $m_1 = 3, m_2 =1, m_3 =2$, and $ m_a = 0 $ for $a > 3$. (It is customary to omit the zero entries when listing these numbers). %
+		If $(k_1,k_2,\dots) = (3,3,2,1,1,1)$, then $n=11$, and $m_1 = 3, m_2 =1, m_3 =2$, and $ m_a = 0 $ for $a > 3$. (It is customary to omit the zero entries when listing these numbers).
 	\end{example}
 
 	\begin{definition}
-		Let $\cal{P}_n = \{ (k_1,k_2, \dots, k_n) \in \N^n \mid k_1 \geq k_2 \geq \dots \geq k_n \geq 0, \sum k_i = n\}$ be the set of \emph{partitions of $n$}. This is isomorphic to the set $\{ m : \N \to \N \mid \sum_i im(i) = n \}$ as above. %
+		Let $\cal{P}_n = \{ (k_1,k_2, \dots, k_n) \in \N^n \mid k_1 \geq k_2 \geq \dots \geq k_n \geq 0, \sum k_i = n\}$ be the set of \emph{partitions of $n$}. This is isomorphic to the set $\{ m : \N \to \N \mid \sum_i im(i) = n \}$ as above.
 	\end{definition}
 
-	We represent $\bf{k}\in\cal{P}_n$ by a picture, with a row of length $k_j$ for each $j$ (equivalently, with $m_i$ rows of length $i$). For example, the above partition $(3,3,2,1,1,1)$ has picture %
+		\pagebreak
+
+	We represent $\bf{k}\in\cal{P}_n$ by a picture, with a row of length $k_j$ for each $j$ (equivalently, with $m_i$ rows of length $i$). For example, the above partition $(3,3,2,1,1,1)$ has picture
 	\begin{equation*}
 		\bf{k} =
 		\begin{array}{ccc}
 			X & X & X \\
-			X & X & X \\ %
+			X & X & X \\
 			X & X \\
 			X \\
 			X \\
 			X,
 		\end{array}
 	\end{equation*}
-	Now define $\bf{k}^\Trans$, if $\bf{k}\in\cal{P}_n$, the \emph{dual partition}, to be the partition attached to the transposed diagram. %
+	Now define $\bf{k}^\Trans$, if $\bf{k}\in\cal{P}_n$, the \emph{dual partition}, to be the partition attached to the transposed diagram.
 
 	In the above example $\bf{k}^\Trans = (6,3,2)$. 
 	
-	It is clear that $\bf{k}$ determines $\bf{k}^\Trans$. In formulas: %
+	It is clear that $\bf{k}$ determines $\bf{k}^\Trans$. In formulas:
 	\begin{equation*}
 		\bf{k}^\Trans = (m_1+m_2+m_3+\dots+m_n, m_2 + m_3 + \dots + m_n, \dots, m_n)
-%\left( \sum_{i=1}^n m_i, \sum_{i=2}^n m_i, \ldots, \sum_{i=n-1}^n m_i, m_n \right). %
+%\left( \sum_{i=1}^n m_i, \sum_{i=2}^n m_i, \ldots, \sum_{i=n-1}^n m_i, m_n \right).
 	\end{equation*}
 
-	Now, let $\alpha:V\to V$, and $\alpha=\bigoplus_{i=1}^r J_{k_i} = \bigoplus_{i=1}^r m_i J_i$ as before. Observe that %
+	Now, let $\alpha:V\to V$, and $\alpha=\bigoplus_{i=1}^r J_{k_i} = \bigoplus_{i=1}^r m_i J_i$ as before. Observe that
 	\begin{align*}
 		\dim\ker\alpha
 		&= \# \text{ of Jordan blocks}
@@ -711,18 +734,18 @@ Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, i
 		 = \sum_{k=1}^n \sum_{i=k}^n m_i
 		 = \sum_{i=1}^n (\bf{k}^\Trans)_i.
 	\end{align*}
-	That is, $\dim \ker\alpha,\ldots,\dim\ker\alpha^n$ determine the dual partition to the partition of $n$ into Jordan blocks, and hence determine it. %
+	That is, $\dim \ker\alpha,\ldots,\dim\ker\alpha^n$ determine the dual partition to the partition of $n$ into Jordan blocks, and hence determine it.
 	 
 	It follows that the decomposition $\alpha=\bigoplus_{i=1}^n m_i J_i$ is unique.
 \end{proof}
 \vspace{3pt}
 \begin{remark}
-	This is a practical way to compute JNF of a matrix $A$. First computer $\chi_A(x)=\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, then compute eigenvalues with $\ker(A-\lambda_iI), \ker\left( A-\lambda_iI \right)^2,\ldots,\ker\left( A-\lambda_iI \right)^n$. %
+	This is a practical way to compute JNF of a matrix $A$. First computer $\chi_A(x)=\prod_{i=1}^r \left( x-\lambda_i \right)^{n_i}$, then compute eigenvalues with $\ker(A-\lambda_iI), \ker\left( A-\lambda_iI \right)^2,\ldots,\ker\left( A-\lambda_iI \right)^n$.
 \end{remark}
 
 \vspace{3pt}
 \begin{corollary}
-	The number of nilpotent conjugacy classes is equal to the size of $\cal{P}_n$. %
+	The number of nilpotent conjugacy classes is equal to the size of $\cal{P}_n$.
 \end{corollary}
 \vspace{-6pt}
 \begin{exercises}
@@ -730,19 +753,19 @@ Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, i
 \begin{enumerate}
 	\shortskip
 	\item List all the partitions of $\{1,2,3,4,5\}$; show there are $7$ of them.
-	\item Show that the size of $\cal{P}_n$ is the coefficient of $x^n$ in %
+	\item Show that the size of $\cal{P}_n$ is the coefficient of $x^n$ in
 	\begin{align*}
 		\prod_{i\geq 1} \f{1}{1-x^i}
-		&= (1 + x + x^2 + x^3 + \cdots)(1+x^2 + x^4 + x^6 + \cdots)(1 + x^3 + x^6 + x^9 + \cdots)\cdots \\[-9pt] %
+		&= (1 + x + x^2 + x^3 + \cdots)(1+x^2 + x^4 + x^6 + \cdots)(1 + x^3 + x^6 + x^9 + \cdots)\cdots \\[-9pt]
 		&= \prod_{k\geq 1} \sum_{i=0}^\infty x^{ki}
 	\end{align*}
 \end{enumerate}
 \end{exercises}
 
-\datemarker{7 Nov}
+	\pagebreak
 
 \begin{theorem}
-	[Jordan Normal Form] Every matrix is conjugate to a direct sum of Jordan blocks %
+	[Jordan Normal Form] Every matrix is conjugate to a direct sum of Jordan blocks \lecturemarker{15}{7 Nov}
 	\begin{equation*}
 		J_n(\lambda) = \mat{\lambda & 1 & & 0 \\
 		& \ddots & \ddots \\
@@ -752,13 +775,13 @@ Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, i
 \end{theorem}
 
 \begin{proof}
-	It is enough to show this when $\varphi:V\to V$ has a single generalised eigenspace with eigenvalue $\lambda$, and now replacing $\varphi$ by $\varphi-\lambda I$, we can assume that $\varphi$ is nilpotent. %
+	It is enough to show this when $\varphi:V\to V$ has a single generalised eigenspace with eigenvalue $\lambda$, and now replacing $\varphi$ by $\varphi-\lambda I$, we can assume that $\varphi$ is nilpotent.
 	
-	Induct on $n=\dim V$. The case $n=1$ is clear. %
+	Induct on $n=\dim V$. The case $n=1$ is clear.
 	
 	\newcommand{\ooplus}{\underset{\underset{\underset{\bigoplus}}{}}{,}}
 	
-	Consider $V\p=\Im\varphi=\varphi(V)$. Then $V\p\neq V$, as $\varphi$ is nilpotent, and $\varphi(V\p)\subseteq \varphi(V) = V\p$, and $\varphi\mid V\p:V\p\to V\p$ is obviously nilpotent, so induction gives the existence of a basis %
+	Consider $V\p=\Im\varphi=\varphi(V)$. Then $V\p\neq V$, as $\varphi$ is nilpotent, and $\varphi(V\p)\subseteq \varphi(V) = V\p$, and $\varphi\mid V\p:V\p\to V\p$ is obviously nilpotent, so induction gives the existence of a basis
 	\begin{equation*}
 		\underbrace{e_1,\ldots,e_{k_1}}_{J_{k_1}}
 		\oplus
@@ -770,47 +793,47 @@ Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, i
 	\end{equation*}
 	such that $\varphi\mid V\p$ is in JNF with respect to this basis.
 	
-		\pagebreak
-	
-	Because $V\p=\Im\varphi$, it must be that the tail end of these strings is in $\Im\varphi$; that is, there exist $b_1,\ldots,b_r\in V\backslash V\p$ such that $\varphi(b_i) = e_{k_1 + \cdots+ k_i}$, as $e_{k_1 + \cdots + k_i}\not\in\varphi(V\p)$. Notice these are linearly independent, as if $\sum \lambda_i \, b_i=0$, then %
+	Because $V\p=\Im\varphi$, it must be that the tail end of these strings is in $\Im\varphi$; that is, there exist $b_1,\ldots,b_r\in V\backslash V\p$ such that $\varphi(b_i) = e_{k_1 + \cdots+ k_i}$, as $e_{k_1 + \cdots + k_i}\not\in\varphi(V\p)$. Notice these are linearly independent, as if $\sum \lambda_i \, b_i=0$, then
 	\begin{equation*}
 		\sum \lambda_i \, \varphi(b_i) = \sum \lambda_i \, e_{k_1+\cdots+k_i} = 0.
 	\end{equation*}
-	But $e_{k_1},\ldots,e_{k_1+\ldots+k_r}$ are linearly independent, hence $\lambda_1=\cdots=\lambda_r=0$. Even better: $\{e_j,b_i \mid j\leq k_1+\ldots+k_r, 1\leq i\leq r\}$ are linearly independent. (Proof: exercise.) %
+	But $e_{k_1},\ldots,e_{k_1+\ldots+k_r}$ are linearly independent, hence $\lambda_1=\cdots=\lambda_r=0$. Even better: $\{e_j,b_i \mid j\leq k_1+\ldots+k_r, 1\leq i\leq r\}$ are linearly independent. (Proof: exercise.)
 	
-	Finally, extend $\underbrace{e_1,e_{k_1+1},\ldots,e_{k_1+\ldots+k_{r-1}+1}}_\text{basis of $\ker\varphi\cap\Im\varphi$}$ to a basis of $\ker\varphi$, by adding basis vectors. %
+	Finally, extend $\underbrace{e_1,e_{k_1+1},\ldots,e_{k_1+\ldots+k_{r-1}+1}}_\text{basis of $\ker\varphi\cap\Im\varphi$}$ to a basis of $\ker\varphi$, by adding basis vectors.
 	
-	Denote these by $q_1,\ldots,q_s$. \textbf{Exercise.} Show $\{e_j,b_i,q_k\}$ are linearly independent. % \hfill $(**)$ %
+	Denote these by $q_1,\ldots,q_s$. \textbf{Exercise.} Show $\{e_j,b_i,q_k\}$ are linearly independent. \hfill $(**)$
 	
-	Now, the rank-nullity theorem shows that $\dim \Im \varphi + \dim \ker \varphi = \dim V$. But $\dim \Im\varphi $ is the number of the $e_i$, that is $k_1 + \dots + k_r$, and $\dim \ker \varphi$ is the number of Jordan blocks, which is $r + s$, ($r$ is the number of blocks of size greater than one, $s$ the number of size one), which is the number of $b_i$ plus the number of $q_k$. %
+	Now, the rank-nullity theorem shows that $\dim \Im \varphi + \dim \ker \varphi = \dim V$. But $\dim \Im\varphi $ is the number of the $e_i$, that is $k_1 + \dots + k_r$, and $\dim \ker \varphi$ is the number of Jordan blocks, which is $r + s$, ($r$ is the number of blocks of size greater than one, $s$ the number of size one), which is the number of $b_i$ plus the number of $q_k$.
 
 %	\begin{equation*}
 %		\underset{\substack{\text{number of } e_i\text{'s} \\ = k_1 + \ldots + k_r}}{\dim \Im \varphi}
 %		+
-%		\underset{\substack{\text{number of blocks of size bigger than 1 } = r \\ + \text{number of blocks of size 1 } = q \\ \text{number of } b_i\text{'s} \\ + \text{number of } q_k\text{'s}}}{\dim \ker \varphi} = \dim V. %
+%		\underset{\substack{\text{number of blocks of size bigger than 1 } = r \\ + \text{number of blocks of size 1 } = q \\ \text{number of } b_i\text{'s} \\ + \text{number of } q_k\text{'s}}}{\dim \ker \varphi} = \dim V.
 %	\end{equation*}
 
-	So this shows that $e_j,b_i,q_k$ are a basis of $V$, and hence with respect to this basis, %
+	So this shows that $e_j,b_i,q_k$ are a basis of $V$, and hence with respect to this basis,
 	\begin{equation*}
-		\varphi = J_{k_1+1} \oplus \cdots \oplus J_{k_r+1} \oplus \underbrace{J_1 \oplus \cdots \oplus J_1}_{s \text{ times}} \qedhere %
+		\varphi = J_{k_1+1} \oplus \cdots \oplus J_{k_r+1} \oplus \underbrace{J_1 \oplus \cdots \oplus J_1}_{s \text{ times}} \qedhere
 	\end{equation*}
 \end{proof}
 
 % subsection combinatorics_of_nilpotent_matrices (end)
 
-\subsection{Applications of JNF} % (fold)
+	\pagebreak
+
+\subsection{Applications of JNF}  % (fold)
 \label{sub:applications_of_jnf}
 
 \begin{definition}
-	Suppose $\alpha:V\to V$. The \emph{minimum polynomial of $\alpha$} is a monic polynomial $p(x)$ of smallest degree such that $p(\alpha)=0$. %
+	Suppose $\alpha:V\to V$. The \emph{minimum polynomial of $\alpha$} is a monic polynomial $p(x)$ of smallest degree such that $p(\alpha)=0$.
 \end{definition}
 
 \begin{lemma}
-	If $q(x)\in F[x]$ and $q(\alpha)=0$, then $p\divides q$. %
+	If $q(x)\in F[x]$ and $q(\alpha)=0$, then $p\divides q$.
 \end{lemma}
 
 \begin{proof}
-	Write $q=pa+r$, with $a,r\in F[x]$ and $\deg r < \deg p$. Then %
+	Write $q=pa+r$, with $a,r\in F[x]$ and $\deg r < \deg p$. Then
 	\begin{equation*}
 		0 = q(\alpha) = p(\alpha)\,a(\alpha) + r(\alpha) = r(\alpha)
 		\implies r(\alpha)=0,
@@ -818,11 +841,11 @@ Observe that theorem~\ref{thm:jordan-2} $\implies$ theorem~\ref{thm:jordan-1}, i
 	which contradicts $\deg p$ as minimal unless $r=0$.
 \end{proof}
 
-As $\chi_\alpha(\alpha)=0$, $p(x) \divides \chi_\alpha(x)$, and in particular, it exists. (And by our lemma, is unique.) Here is a cheap proof that  the minimum polynomial %
+As $\chi_\alpha(\alpha)=0$, $p(x) \divides \chi_\alpha(x)$, and in particular, it exists. (And by our lemma, is unique.) Here is a cheap proof that  the minimum polynomial
 exists, which doesn't use Cayley Hamilton.
 
 \begin{proof}
-	$I, \alpha, \alpha^2,\dots,\alpha^{n^2}$ are $n^2 +1$ linear functions in $\End V$, a vector space of dimension $n^2$. Hence there must be a relation of linear dependence, $\sum_0^{n^2} a_i \, \alpha^i = 0$, so $q(x) = \sum_0^{n^2} a_i \, x^i$ is a polynomial with $q(\alpha) = 0$. %
+	$I, \alpha, \alpha^2,\dots,\alpha^{n^2}$ are $n^2 +1$ linear functions in $\End V$, a vector space of dimension $n^2$. Hence there must be a relation of linear dependence, $\sum_0^{n^2} a_i \, \alpha^i = 0$, so $q(x) = \sum_0^{n^2} a_i \, x^i$ is a polynomial with $q(\alpha) = 0$.
 \end{proof}
 
 Now, lets use JNF to determine the minimial polynomial.
@@ -875,9 +898,9 @@ This is an infinite sum, and we must show it converges. This means that each mat
 \begin{example}
 	For a diagonal matrix:
 	\begin{equation*}
-		\exp\mat{\lambda_1 & & 0 \\ & \ddots \\ 0 & & \lambda_n} = \mat{e^{\lambda_1} & & 0 \\ & \ddots \\ 0 & & e^{\lambda_n}} %
+		\exp\mat{\lambda_1 & & 0 \\ & \ddots \\ 0 & & \lambda_n} = \mat{e^{\lambda_1} & & 0 \\ & \ddots \\ 0 & & e^{\lambda_n}}
 	\end{equation*}
-	and convergence is usual convergence of $\exp$. %
+	and convergence is usual convergence of $\exp$.
 \end{example}
 
 \begin{exercises}
@@ -901,7 +924,7 @@ Consider the linear ODE
 for $A\in\Mat_n(\C)$, $\bf{y}=(y_1(t), y_2(t), \dots, y_n(t))^T$, $y_i(t)\in C^\infty(\C)$.
 
 \begin{example}
-	Consider %
+	Consider
 	\begin{equation*}
 		\od[n]{z}{t} + c_{n-1} \od[n-1]{z}{t} + \cdots + c_0 z = 0,  \tag{$**$}
 	\end{equation*}
@@ -913,10 +936,10 @@ $$\mat{0 & 1 &    &   &   \\
       -c_0 & -c_1 & \dots & & -c_{n-1}
 }.$$
 To see this, consider what 
-	$A\bf{y} = \bf{y}\p$ means.  Set $z=y_1$, then $y_2=y_1\p=z\p$, $y_3=y_2\p=z\pp$, \ldots, $y_n=y_{n-1}\p = \od[n-1]{z}{t}$ and $(**)$ is the last equation. %
+	$A\bf{y} = \bf{y}\p$ means.  Set $z=y_1$, then $y_2=y_1\p=z\p$, $y_3=y_2\p=z\pp$, \ldots, $y_n=y_{n-1}\p = \od[n-1]{z}{t}$ and $(**)$ is the last equation.
 \end{example}
 	
-	There is a unique solution of $\od{\bf{y}}{t} = A\bf{y}$ with fixed initial conditions $y(0)$, by a theorem of analysis. On the other hand: %
+	There is a unique solution of $\od{\bf{y}}{t} = A\bf{y}$ with fixed initial conditions $y(0)$, by a theorem of analysis. On the other hand:
 
 
 \begin{exercise}
@@ -924,7 +947,7 @@ To see this, consider what
 	\begin{equation*}
 		\od{}{t}\left( \exp(At)\,y(0) \right)=A\exp(At)\,y(0)
 	\end{equation*}
-	Hence it is the unique solution with value $y(0)$. %
+	Hence it is the unique solution with value $y(0)$.
 	
 	Compute this when $A=\lambda I + J_n$ is a Jordan block of size $n$.
 \end{exercise}

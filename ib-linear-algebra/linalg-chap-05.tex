@@ -3,7 +3,7 @@
 \setcounter{lecture}{5}
 \sektion{Bilinear forms}
 
-\datemarker{12 Nov}
+\lecturemarker{17}{12 Nov}
 \begin{definition}
 	Let $V$ be a vector space over $\F$. A \emph{bilinear form} on $V$ is a multilinear form $V\times V\to\F$; that is, $\psi:V\times V\to\F$ such that %
 	\begin{align*}
@@ -197,7 +197,7 @@ To continue, we need some notation. For an arbitrary $\psi\in\Bil(V)$, $U\leq V$
 	But $v-\lambda w\in\left\langle w \right\rangle^\perp \iff \psi(w,v-\lambda w) = 0 \iff \psi(w,v) = \lambda\,\psi(w,w)$; that is, set %
 	\begin{equation*}
 		\lambda = \f{\psi(w,v)}{\psi(w,w)}.
-		\datemarker{14 Nov}
+		\lecturemarker{18}{14 Nov}
 	\end{equation*}
 	Now let $W=\left\langle w \right\rangle^\perp$, and $\psi\p = \psi\mid_W: W \times W \to \F$ the restriction of $\psi$. This is symmetric bilinear, so by induction there is some basis $v_2,\ldots,v_n$ of $W$ such that $\psi(v_i,v_j) = \lambda_i \, \delta_{ij}$ for $\lambda_i \iF$. %
 
@@ -279,7 +279,9 @@ We need to show this is well defined, and not an artefact of the basis chosen.
 	then $p=p\p$ and $q=q\p$.
 \end{theorem}
 
-\emph{Warning.} $\Tr(P^\Trans AP) \neq \Tr(A)$, so we can't prove it that way.
+\emph{Warning.} In general, $\Tr(P^\Trans AP) \neq \Tr(A)$, so we can't prove it that way.
+
+	\vspace{3pt}
 
 \begin{definition}
 	Let $Q:V\to\R$ be a quadratic form on $V$,  where $V$ is a vector space over $\R$, and $U\leq V$.
@@ -291,16 +293,16 @@ We need to show this is well defined, and not an artefact of the basis chosen.
 	We define negative (semi) definite to mean $-Q$ is positive (semi) definite. %
 \end{definition}
 
-\vspace{-3pt}
+	\pagebreak
 
 \begin{proof}
-	[Proof of theorem] Let $P=\left\langle v_1,\ldots,v_p \right\rangle$. So if $v=\sum_{i=1}^p \lambda_i v_i \in P$, $Q(v)=\sum_i \lambda_i^2\geq 0$, and $Q(v)=0 \iff v=0$, so $Q$ is positive definite on $P$. %
+	[Proof of theorem] Let $P=\left\langle v_1,\ldots,v_p \right\rangle$. So if $v=\sum_{i=1}^p \lambda_i v_i \in P$, $Q(v)=\sum_i \lambda_i^2 v_i^2 \geq 0$, and $Q(v)=0 \iff v=0$, so $Q$ is positive definite on $P$. %
 	
 	Let $U=\left\langle v_{p+1},\ldots,v_{p+q},\ldots,v_n \right\rangle$, so $Q$ is negative semi-definite on $U$. And now let $P\p$ be any positive definite subspace. %
 	
-	\textbf{Claim.} $P\p\cap U=\{0\}$.
+	Now we claim that $P\p\cap U=\{0\}$.
 	
-	\emph{Proof of claim.} If $v\in P\p$, then $Q(v)\geq 0$; if $v\in U$, $Q(u)\leq 0$. so if $v\in P\p\cap U$, $Q(v)=0$. But if $P\p$ is positive definite, so $v=0$. Hence %
+	Consider: if $v\in P\p$, then $Q(v)\geq 0$; if $v\in U$, $Q(u)\leq 0$. So if $v\in P\p\cap U$, then $Q(v)=0$. But $P\p$ is positive definite, so $v=0$. Hence %
 	\begin{equation*}
 		\dim P\p+\dim U = \dim(P\p+U) \leq \dim V = n,
 	\end{equation*}
@@ -414,7 +416,7 @@ We begin with a basis independant meaning of the rank of an arbitrary bilinear f
 \end{proposition}
 
 \begin{proof}
-	\datemarker{16 Nov}
+	\lecturemarker{19}{16 Nov}
 	Define a linear map $\Bil(V) \to \Lin(V,V^*)$, $\psi\mapsto\psi_L$ with $\psi_L(v)(w) = \psi(v,w)$. First we check that this is well-defined: $\psi(v,\cdot)$ linear implies $\psi_L(v) \in V^*$, and $\psi(\cdot,w)$ linear implies $\psi_L(\lambda v + \lambda\p v\p) = \lambda\,\psi_L(v) + \lambda\p\,\psi_L(v\p)$; that is, $\psi_L$ is linear, and $\psi_L\in \Lin(V,V^*)$. %
 	
 	It is clear that the map is injective (as $\psi\not\equiv 0$ implies there are some $v,w$ such that $\psi(v,w)\neq 0$, and so $\psi_L(v)(w)\neq 0$) and hence an isomorphism, as $\Bil(V)$ and $\Lin(V,V^*)$ are both vector spaces of dimension $\left( \dim V \right)^2$. %
@@ -474,7 +476,7 @@ We begin with a basis independant meaning of the rank of an arbitrary bilinear f
 	\begin{equation*}
 		\ker = \left\{v\in V : \psi(v,w)=0 \;\forall w\in W\right\} = W^\perp,
 	\end{equation*}
-	so rank-nullity gives
+	so the rank-nullity theorem gives
 	\begin{equation*}
 		\dim V = \dim W^\perp + \dim\Im.
 	\end{equation*}
@@ -521,6 +523,8 @@ We begin with a basis independant meaning of the rank of an arbitrary bilinear f
 \newcommand{\arrmat}[1]{\fbox{$\begin{array}{cc} #1 \end{array}$}}
 \newcommand{\arrrmat}[1]{\fbox{$\begin{array}{ccc} #1 \end{array}$}}
 
+	\pagebreak
+
 \begin{theorem}
 	Let $\psi\in\Bil^-(V)$ be an \emph{anti}-symmetric bilinear form. Then there is some basis $v_1,\ldots,v_n$ of $V$ such that the matrix of $\psi$ is %
 	\begin{equation*}
@@ -552,10 +556,12 @@ We begin with a basis independant meaning of the rank of an arbitrary bilinear f
 \vspace{3pt}
 
 So we've shown that there is an isomorphism
-	\begin{equation*}
-		\Bil^-(V)/\GL(V) \isomto \left\{2i : 0\leq i \leq \f{1}{2}\dim V\right\}. %
-	\end{equation*}
-	taking $\psi\mapsto\rk\psi$. %
+\begin{equation*}
+	\Bil^-(V)/\GL(V) \isomto \left\{2i : 0\leq i \leq \f{1}{2}\dim V\right\}. %
+\end{equation*}
+taking $\psi\mapsto\rk\psi$.
+
+\vspace{3pt}
 
 \begin{remark}
 	A non-degenerate anti-symmetric form  $\psi$ is usually called a \emph{symplectic form}.	
@@ -565,8 +571,10 @@ So we've shown that there is an isomorphism
 	If $U\leq L$, then $U^\perp\geq L^\perp = L$, and so $U\subseteq U^\perp$. Such a subspace is called \emph{isotropic}. %
 \end{remark}
 
+	\pagebreak
+
 \begin{definition}
-	If $\psi\in\Bil(V)$, the \emph{isometries} of $\psi$ are %
+	If $\psi\in\Bil(V)$, then the \emph{isometries} of $\psi$ are %
 	\begin{align*}
 		\Isom\psi
 		&= \left\{g\in\GL(V) : g\psi = \psi\right\} \\

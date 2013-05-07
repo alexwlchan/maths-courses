@@ -167,7 +167,7 @@ We will write $\lambda v $ rather than $\lambda \cdot v$ from now on, as the lem
 		\item The following are all subspaces of sets of functions:
 		\begin{align*}
 			C^1(\R)
-			&= \left\{f:\R\to\R \mid f \text{ continuous and differentiable}\right\} \\ %
+			&= \left\{f:\R\to\R \mid f \text{ continuously differentiable}\right\} \\ %
 			&\subseteq C(\R) = \left\{f:\R\to\R \mid f \text{ continuous}\right\} \\
 			&\subseteq \R^\R = \left\{f:\R\to\R\right\}.
 		\end{align*}
@@ -240,7 +240,7 @@ We will see later why it is convenient notation to say that 0 is a linear combin
 \end{definition}
 
 \begin{example}
-	The set $\{(1,0,0),(0,1,0),(1,1,0),(7,8,0)\}$ spans $\left\{(x,y,0) : x,y\iR \right\}\leq \R^3$. %
+	The set $\{(1,0,0),(0,1,0),(1,1,0),(7,8,0)\}$ spans $\left\{(x,y,0)\right\}\leq \R^3$. %
 \end{example}
 
 \begin{definition}
@@ -514,7 +514,7 @@ Notice that if $\varphi$ is an isomorphism, then in particular $\varphi$ is a bi
 \end{lemma}
 
 \begin{proof}
-	\datemarker{12 Oct} Let $b_1,\ldots,b_n$ be a basis of $V$. We claim that $\varphi(b_1),\ldots,\varphi(b_n)$ is a basis of $W$. First we check linear independence: Suppose %
+	\lecturemarker{4}{12 Oct} Let $b_1,\ldots,b_n$ be a basis of $V$. We claim that $\varphi(b_1),\ldots,\varphi(b_n)$ is a basis of $W$. First we check linear independence: Suppose %
 	\begin{equation*}
 		0
 		= \sum_{i=1}^n \lambda_i \,\varphi(b_i) %
@@ -683,7 +683,7 @@ We say a diagram \emph{commutes} if every directed path through the diagram with
 \end{example}
 
 \begin{exercise}
-	Show that if $\varphi:V\isomto W$ is an isomorphism, then it induces an isomorphism of groups $\GL(V) \isom \GL(W)$, so $\GL(V) \isom \GL_{\dim V}(\F)$. \lecturemarker{4}{15 Oct}
+	Show that if $\varphi:V\isomto W$ is an isomorphism, then it induces an isomorphism of groups $\GL(V) \isom \GL(W)$, so $\GL(V) \isom \GL_{\dim V}(\F)$. \lecturemarker{5}{15 Oct}
 \end{exercise}
 
 \begin{lemma}
@@ -846,7 +846,7 @@ Finally, a definition.
 \label{sub:rank_nullity_theorem}
 
 \begin{definition}
-	For a linear map $\alpha:V\to W$, we define the \wiki{Kernel_(mathematics)}{kernel} to be the set of all elements that are mapped to zero %
+	For a linear map $\alpha:V\to W$, we define the \emph{kernel} to be the set of all elements that are mapped to zero %
 	\begin{equation*}
 		\ker \alpha = \left\{x\in V:\alpha(x) = 0\right\} = K \leq V
 	\end{equation*}
@@ -854,13 +854,11 @@ Finally, a definition.
 	\begin{equation*}
 		\Im \alpha = \alpha(V) = \left\{\alpha(v) : v\in V\right\} \leq W.
 	\end{equation*}
-	Proving that these are subspaces is left as an exercise.
-	
-	We then say that $r(\alpha)=\dim \Im \alpha$ is the \wiki{Rank_(linear_algebra)}{rank} and $n(\alpha)=\dim\ker\alpha$ is the \wiki{Nullity}{nullity}. %
+	Proving that these are subspaces is left as an exercise. We then say that $r(\alpha)=\dim \Im \alpha$ is the \emph{rank} and $n(\alpha)=\dim\ker\alpha$ is the \emph{nullity}. %
 \end{definition}
 
 \begin{theorem}
-	[\wikirm{Rank\%E2\%80\%93nullity_theorem}{Rank-nullity theorem}] For a linear map $\alpha:V\to W$, where $V$ is finite dimensional, we have %
+	[Rank-nullity theorem] For a linear map $\alpha:V\to W$, where $V$ is finite dimensional, we have %
 	\begin{equation*}
 		r(\alpha) + n(\alpha) = \dim \Im \alpha + \dim \ker \alpha = \dim V.
 	\end{equation*}
@@ -874,7 +872,7 @@ Finally, a definition.
 	\emph{Proof of claim.} Span: if $w\in\Im\alpha$, then $w=\alpha(v)$ for some $v\in V$. But $v_1,\ldots,v_n$ is a basis, so there are some $\lambda_1,\ldots,\lambda_n\iF$ with $v=\sum \lambda_i \,v_i$. Then %
 	\begin{equation*}
 		\alpha(v)
-		= \alpha\left( \sum \lambda_i \, v_i \right)
+		= \alpha\left( \sum_{i=1}^n \lambda_i \, v_i \right)
 		= \sum_{i=d+1}^n \lambda_i \, \alpha(v_i)
 	\end{equation*}
 	as $\alpha(v_1)=\cdots=\alpha(v_d)=0$; that is, $\alpha(v_{d+1}),\ldots,\alpha(v_n)$ span $\Im\alpha$. %
@@ -889,7 +887,7 @@ Finally, a definition.
 	\begin{equation*}
 		\sum_{i=d+1}^n \lambda_i\,v_i = \sum_{i=1}^d \mu_i\,v_i.
 	\end{equation*}
-	But this is a relation of linear dependence on $v_1,\ldots,v_n$, which is a basis of $V$, so we must have %
+	But this is a relation of linear dependence on $v_1,\ldots,v_n$, a basis of $V$, so we must have %
 	\begin{equation*}
 		-\mu_1 = -\mu_2 = \cdots = -\mu_d = \underbrace{\lambda_{d+1} = \cdots = \lambda_n}_\text{hence linearly independent} = 0. \qedhere %
 	\end{equation*}
@@ -904,10 +902,8 @@ Finally, a definition.
 \end{proof}
 
 \begin{remark}
-	\lecturemarker{5}{17 Oct}If $v_1,\ldots,v_n$ is a basis for $V$, $w_1,\ldots,w_m$ is a basis for $W$ and $A$ is the matrix of the linear map $\alpha:V\to W$, then $\Im \alpha \isomto \left\langle \text{column space of } A \right\rangle$, $ \ker\alpha \isomto \ker A$, and the isomorphism is induced by the choice of bases for $V$ and $W$, that is by the isomorphisms $W\isomto \Fm$, $V\isomfrom\Fn$. %
-\end{remark}
+	\lecturemarker{6}{17 Oct}If $v_1,\ldots,v_n$ is a basis for $V$, $w_1,\ldots,w_m$ is a basis for $W$ and $A$ is the matrix of the linear map $\alpha:V\to W$, then $\Im \alpha \isomto \left\langle \text{column space of } A \right\rangle$, $ \ker\alpha \isomto \ker A$, and the isomorphism is induced by the choice of bases for $V$ and $W$, that is by the isomorphisms $W\isomto \Fm$, $V\isomfrom\Fn$. %
 
-\begin{remark}
 	You'll notice that the rank-nullity theorem follows easily from our basic results about how linearly independent sets extend to bases. %
 	%, which have a well defined number of elements. 
 	You'll recall that these results in turn depended on row and column reduction of matrices. We'll now show that in turn they imply the basic results about row and column reduction -- the first third of this course is really just learning fancy language in which to rephrase Gaussian elimination. %
@@ -1005,7 +1001,7 @@ Note that the rank-nullity theorem implies that in the lemma, if we know $\dim\k
 
 \begin{enumerate}
 	\shortskip
-	\item What are the orbits of $\GL(V) \times \GL(W) \times \GL(U)$ on the set $\Lin(V,W) \times \Lin(W,U) = \left\{\alpha:V\to W,\beta:W\to V \text{ linear}\right\}$? %
+	\item What are the orbits of $\GL(V) \times \GL(W) \times \GL(U)$ on the set $\Lin(V,W) \times \Lin(W,U) = \left\{\alpha:V\to W,\beta:U\to V \text{ both linear}\right\}$? %
 	
 	\item What are the orbits of $\GL(V) \times \GL(W)$ on $\Lin(V,W) \times \Lin(W,V)$? %
 \end{enumerate}
@@ -1111,7 +1107,7 @@ In particular, we have given coordinate independent meaning to the kernel and co
 \end{lemma}
 
 \begin{proof}
-	\datemarker{19 Oct} Since $0\in U_i$ for all $i$, certainly $0\in \bigcap U_i$. And if $u,v\in U$, then $u,v\in U_i$ for all $i$, so $\lambda u+\mu v\in U_i$ for all $i$, and hence $\lambda u+\mu v\in U$. %
+	\lecturemarker{7}{19 Oct} Since $0\in U_i$ for all $i$, certainly $0\in \bigcap U_i$. And if $u,v\in U$, then $u,v\in U_i$ for all $i$, so $\lambda u+\mu v\in U_i$ for all $i$, and hence $\lambda u+\mu v\in U$. %
 \end{proof}
 
 By contrast, the union $U_1\cup U_2$ is not a subspace unless $U_1\subseteq U_2$ or $U_2\subseteq U_1$.

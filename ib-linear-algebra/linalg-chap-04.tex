@@ -4,7 +4,7 @@
 \sektion{Duals}
 This chapter really belongs after chapter 1 -- it's just definitions and intepretations of row reduction.
 
-\datemarker{9 Nov}
+\lecturemarker{16}{9 Nov}
 \begin{definition}
 	Let $V$ be a vector space over a field $\F$. Then %
 	\begin{equation*}
@@ -67,7 +67,7 @@ This chapter really belongs after chapter 1 -- it's just definitions and intepre
 \begin{definition}
 	Let $V$ and $W$ be vector space over $\F$, and $\alpha$ a linear map $V\to W$, $\alpha\in \Lin(V,W)$. Then we define $\alpha^*:W^*\to V^* \in \Lin(W^*,V^*)$, by setting $\alpha^*(\theta) = \theta\alpha:V\to\F$. %
 	
-	(Note: $\alpha$ linear, $\theta$ linear implies $\theta\alpha$ linear, and so $\alpha^*\theta\in V^*$ as claimed, if $\theta\in W^*$.) %
+	(Note: $\alpha$ linear, $\theta$ linear implies $\theta\alpha$ linear, and so $\alpha^*(\theta)\in V^*$ as claimed, if $\theta\in W^*$.) %
 \end{definition}
 
 \begin{lemma}
@@ -225,7 +225,7 @@ Now observe that $\left.(A^\Trans)\right.^\Trans = A$. What does this mean?
 \end{proof}
 
 \begin{lemma}
-	Let $U_1,U_2\leq V$, and $V$ finite dimensional. Then %
+	Let $U_1,U_2\leq V$, and $V$ be finite dimensional. Then %
 	\begin{enumerate}
 		\shortskip
 		\item $U_1^{\circ\circ} \isomto {}^\circ\!(U_1^\circ) \isomto U_1$ under the isomorphism $V\isomto V^{**}$. %
@@ -233,4 +233,7 @@ Now observe that $\left.(A^\Trans)\right.^\Trans = A$. What does this mean?
 		\item $(U_1\cap U_2)^\circ = U_1^\circ + U_2^\circ$.
 	\end{enumerate}
 \end{lemma}
-\begin{proof} Exercise! \end{proof}
+
+\begin{proof*}
+	Exercise!
+\end{proof*}
