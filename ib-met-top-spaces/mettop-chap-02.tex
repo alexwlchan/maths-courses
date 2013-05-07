@@ -13,7 +13,7 @@ We've already discussed some of the properties of open subsets of metric spaces.
 	\begin{enumerate}
 		\shortskip
 		\item $X,\emptyset \in \tau$;
-		\item If $U_i \in \tau$ for all $i\in I$, then $\bigcap_{i\in I} U_i \in \tau$;
+		\item If $U_i \in \tau$ for all $i\in I$, then $\bigcup_{i\in I} U_i \in \tau$;
 		\item If $U_1, U_2 \in \tau$, then $U_1 \cap U_2 \in \tau$ (or similarly for finite intersections).
 	\end{enumerate}
 	In this sense, a metric space $(X,\rho)$ gives rise to a topology, which we call the \emph{metric topology}.
@@ -116,7 +116,7 @@ We've already discussed some of the properties of open subsets of metric spaces.
 	\end{equation*}
 	Here, both $f$ and $g$ are continuous, and so $f$ (and hence $g$) are homeomorphisms.
 
-	This example shows that ``completeness'' is a property of the metric, and not just a ``topological property''. Note that $\R$ is complete with the Euclidean topology, while $(-1,1)$ is not. However, it also shows that, under the homeomorphism, we obtain a complete metric $\rho$ on $(-1,1)$ coming from $d_\Eucl$ on $\R$ which is topologicall equivalent to $d_\Eucl$ on $(-1,1)$.
+	This example shows that ``completeness'' is a property of the metric, and not just a ``topological property''. Note that $\R$ is complete with the Euclidean topology, while $(-1,1)$ is not. However, it also shows that, under the homeomorphism, we obtain a complete metric $\rho$ on $(-1,1)$ coming from $d_\Eucl$ on $\R$ which is topologically equivalent to $d_\Eucl$ on $(-1,1)$.
 \end{example}
 
 \begin{definition}
@@ -355,6 +355,8 @@ Clearly, second countable implies first countable. Consider: for any $P\in X$ an
 	the subsets of $U$ of the quotient set $Y$, for which the union of the equivalence classes in $X$ corresponding to points of $U$ is an open subset of $X$.
 \end{definition}
 
+\vspace{3pt}
+
 \begin{remark}
 	Now $q$ is continuous, and the quotient topology is the ``largest'' topology on $Y$ for which this is true. It is easy to see that it does form a topology, since $\tau$ is a topology on $X$. \label{rmk:quot-topologies}
 
@@ -376,9 +378,9 @@ Clearly, second countable implies first countable. Consider: for any $P\in X$ an
 	\begin{equation*}
 		\fullfunction{\phi}{R/\sim}{\bb{T} = \{z\iC: \left\vert z \right\vert=1\}}{[x]}{e^{2\pi ix}}
 	\end{equation*}
-	is both well-defined and a homeomorphism. (See examples sheet~1, question~15.)
+	is both well-defined and a homeomorphism. (See Examples Sheet~1, Question~15.)
 
-	\item Define the two-dimensional torus $T^{\,2}$ to be $\R^2/\sim$, where $(x_1,y_1) \sim (x_2,y_2)$ if and only if $x_1-x_2 \iZ$ and $y_1-y_2\iZ$. The topological comes from a metric on $T^{\,2}$ (examples sheet~1, question~18) and so is well-defined. (Note that we sometimes denote $T^{\,2}$ as $\R^2/\Z^2$).
+	\item Define the two-dimensional torus $T^{\,2}$ to be $\R^2/\sim$, where $(x_1,y_1) \sim (x_2,y_2)$ if and only if $x_1-x_2 \iZ$ and $y_1-y_2\iZ$. The topology comes from a metric on $T^{\,2}$ (examples sheet~1, question~18) and so is well-defined. (Note that we sometimes denote $T^{\,2}$ as $\R^2/\Z^2$).
 
 	\emph{Remark.} In general, we can get some rather nasty (non-Hausdorff, for example) topologies for an arbitrary equivalence relation.
 
